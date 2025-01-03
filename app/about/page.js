@@ -1,18 +1,15 @@
+import OurTeam from "@/components/about/our-team";
+import WhoWeAre from "@/components/about/whoweare";
 import { ContactForm } from "@/components/footer/contact-form";
 import { Footer } from "@/components/footer/homeFooter/footer";
-import React from "react";
 
-const AboutPage = () => {
+export default function AboutPage() {
   return (
-    <div>
-      <main className=" bg-black">
-        <div className="container mx-auto py-16">
-          <ContactForm />
-        </div>
-        <Footer />
-      </main>
-    </div>
+    <main className="bg-black pt-16">
+      <WhoWeAre />
+      <OurTeam />
+      <ContactForm backColor={"black"} />
+      <Footer backColor={"black"} isAbout={true} />
+    </main>
   );
-};
-
-export default AboutPage;
+}
