@@ -8,16 +8,12 @@ import Hero from "@/components/home/hero";
 export default function Home() {
   return (
     <main className="bg-black ">
-      <Hero/>
+      <Hero />
       <VideoBanner />
       <WhoWeAre />
       <FeatureCards />
-      <main className=" bg-[#D2042D]">
-        <div className="container mx-auto py-16">
-          <ContactForm />
-        </div>
-        <Footer />
-      </main>
+      <ContactForm backColor={"#D2042D"}/>
+      <Footer backColor={"#D2042D"} isAbout={false}/>
     </main>
   );
 }
