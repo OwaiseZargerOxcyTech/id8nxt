@@ -7,12 +7,14 @@ export default function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   return (
-    <nav className="bg-black text-white fixed top-0 left-0 w-full z-50">
+    <nav className="bg-black text-white w-full z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
         {/* Logo */}
         <div className="flex-shrink-0">
           <Link href="/">
             <p className="text-xl font-bold">ID8NXT</p>
+            {/* <img src="https://id8nxt.com/wp-content/uploads/2023/08/id8Nxt_logo.png" alt="logo"/> */}
+
           </Link>
         </div>
 

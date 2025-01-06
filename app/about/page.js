@@ -6,7 +6,7 @@ import { Footer } from "@/components/footer/homeFooter/footer";
 
 export default function AboutPage() {
   return (
-    <main className="bg-black pt-16">
+    <main>
       <HeroSection />
       <WhoWeAre />
       <OurTeam />

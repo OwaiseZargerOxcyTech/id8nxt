@@ -46,24 +46,24 @@ export default function HeroSection() {
     <>
       <section 
         ref={sectionRef}
-        className="relative h-screen w-full overflow-hidden bg-black"
+        className="relative h-screen w-full overflow-hidden bg-gradient-to-b from-black via-gray-900 to-black"
       >
         <div 
           ref={containerRef}
           className="relative z-10 flex h-full w-full items-center justify-start px-4"
         >
           <div className="text-left">
-            <h1 className="mb-6 ml-20 text-4xl font-light text-white md:text-6xl lg:text-7xl">
+            <h1 className="mb-6 ml-20 text-4xl font-light text-white md:text-6xl lg:text-9xl">
               Creatively Led.
               <br />
               Results Driven.
             </h1>
-            <p className="text-lg ml-20 text-gray-300 md:text-xl">
+            <p className="text-lg ml-20 text-gray-200 md:text-xl">
               Transforming visions into remarkable realities
             </p>
           </div>
         </div>
-        <div className="absolute inset-0">
+        <div className="absolute right-0 bottom-60">
           <img
             ref={imageRef}
             src="https://png.pngtree.com/png-vector/20240129/ourmid/pngtree-png-david-michelangelo-aesthetic-photo-david-michelangelo-sculpture-png-ai-generated-png-image_11565027.png"
