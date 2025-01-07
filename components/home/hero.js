@@ -27,7 +27,7 @@ export default function Hero() {
         ScrollTrigger.create({
           trigger: section,
           start: "top top",
-          end: nextSection ? "bottom top" : "+=50%", // If next section exists, pin till next section
+          end: nextSection ? "bottom top" : "+=90%", // If next section exists, pin till next section
           scrub: true,
           pin: true, 
           pinSpacing: false, 
@@ -74,7 +74,7 @@ export default function Hero() {
       {/* Section 1 */}
       <section
         ref={addToSectionsRef}
-        className="relative w-full h-screen flex items-center overflow-hidden bg-gradient-to-b from-black via-gray-900 to-black"
+        className="relative w-full h-screen flex items-center overflow-hidden bg-[url('/images/home/home-hero-bg-1.png')]"
       >
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/40"></div>
         <div className="section-content relative w-full">
@@ -110,7 +110,7 @@ export default function Hero() {
       {/* Section 2 */}
       <section
         ref={addToSectionsRef}
-        className="relative w-full h-screen flex items-center overflow-hidden"
+        className="relative w-full h-screen flex items-center overflow-hidden bg-[url('/images/home/home-hero-bg-2.png')]"
       >
         <div className="section-content relative w-full">
           <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
