@@ -39,8 +39,8 @@ export default function ProductAnimationCarousel() {
     );
 
     // Additional initial positions
-    gsap.set(leftPanelRef.current, { y: "40%" });
-    gsap.set(rightPanelRef.current, { y: "-40%" });
+    gsap.set(leftPanelRef.current, { y: "20%" });
+    gsap.set(rightPanelRef.current, { y: "-20%" });
 
     // Create a timeline for simultaneous animations
     const tl = gsap.timeline();
@@ -61,7 +61,7 @@ export default function ProductAnimationCarousel() {
       centerPanelRef.current,
       {
         opacity: 1,
-        duration: 2,
+        duration: 1,
         ease: "power2.inOut",
       },
       0

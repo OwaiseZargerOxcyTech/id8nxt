@@ -20,61 +20,87 @@ export default function Hero() {
     const ctx = gsap.context(() => {
       const sections = sectionsRef.current;
 
-      sections.forEach((section, index) => {
-        const nextSection = sections[index + 1];
-
-        // Pin the section to keep it in view
-        ScrollTrigger.create({
-          trigger: section,
-          start: "top top",
-          end: nextSection ? "bottom top" : "+=50%", // If next section exists, pin till next section
-          scrub: true,
-          pin: true,
-          pinSpacing: false, 
-        });
-
-        // Animations within each section
-        const content = section.querySelector(".section-content");
-        const image = section.querySelector(".section-image");
-
-        // Parallax effect for images
-        if (image) {
-          gsap.to(image, {
-            scale: 1.1,
-            scrollTrigger: {
-              trigger: section,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: 1,
-            },
-          });
-        }
-
-        // Content fade out while scrolling to next section
-        if (content && nextSection) {
-          gsap.to(content, {
-            y: "-50%",
+      // Initial animation for Section 1
+      const section1Timeline = gsap.timeline({scrollTrigger: {
+        trigger: sections[0],
+        start: "top center",
+        end: "bottom center",
+        toggleActions: "play reverse play reverse", 
+      },});
+      section1Timeline
+        .from(sections[0], {
+          backgroundPositionY: 200,
+          duration: 0.5,
+          ease: "power3.out",
+        })
+        .from(
+          sections[0].querySelectorAll(".section-image, .section-text"),
+          {
+            y: 400,
             opacity: 0,
-            scrollTrigger: {
-              trigger: nextSection,
-              start: "top bottom",
-              end: "top top",
-              scrub: true,
-            },
-          });
-        }
+            duration: 1,
+            ease: "power3.out",
+            stagger: 0.2,
+          },
+          "-=0.3"
+        );
+
+      // Section 2 animations triggered by scroll
+      const section2Timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: sections[1],
+          start: "top center",
+          end: "bottom center",
+          toggleActions: "play reverse play reverse", 
+        },
       });
+
+      section2Timeline
+        .from(sections[1], {
+          backgroundPositionY: 200,
+          duration: 0.5,
+          ease: "power3.out",
+        })
+        .from(
+          sections[1].querySelectorAll(".section-image, .section-text"),
+          {
+            y: 400,
+            opacity: 0,
+            duration: 1,
+            ease: "power3.out",
+            stagger: 0.2,
+          },
+          "-=0.3"
+        );
+
+      // Create scroll-triggered animation for section transitions
+      sections.forEach((section, index) => {
+        gsap.to(section, {
+          yPercent: -100,
+          ease: "none",
+          scrollTrigger: {
+            trigger: section,
+            start: "bottom bottom",
+            end: "bottom top",
+            scrub: true,
+            pin: true,
+            pinSpacing: false,
+            toggleActions: "play reverse play reverse",
+          },
+        });
+      });
+
     }, containerRef);
 
     return () => ctx.revert(); // Cleanup GSAP context
   }, []);
 
   return (
-    <div ref={containerRef} className="bg-black min-h-screen">
+    <div ref={containerRef} className="bg-black">
       {/* Section 1 */}
       <section
         ref={addToSectionsRef}
-        className="relative w-full h-screen flex items-center overflow-hidden bg-[url('/images/home/home-hero-bg-1.png')]"
+        className="relative w-full h-screen flex items-center overflow-hidden bg-[url('/images/home/home-hero-bg-1.png')] bg-cover bg-center "
       >
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/40"></div>
         <div className="section-content relative w-full">
@@ -99,7 +125,7 @@ export default function Hero() {
                 specialize in boosting businesses by focusing on their brand,
                 using strategies, and harnessing digital tools.
               </p>
-              <button className="absolute top-30 right-0  border-b border-red-500 text-white px-4 py-2 rounded hover:bg-red-500/20 transition duration-300">
+              <button className="absolute top-30 right-0 border-b border-red-500 text-white px-4 py-2 rounded hover:bg-red-500/20 transition duration-300">
                 View Portfolio
               </button>
             </div>
@@ -110,7 +136,7 @@ export default function Hero() {
       {/* Section 2 */}
       <section
         ref={addToSectionsRef}
-        className="relative w-full h-screen flex items-center overflow-hidden bg-[url('/images/home/home-hero-bg-2.png')]"
+        className="relative w-full h-screen flex items-center overflow-hidden bg-[url('/images/home/home-hero-bg-2.png')] bg-cover bg-center"
       >
         <div className="section-content relative w-full">
           <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
@@ -136,7 +162,7 @@ export default function Hero() {
               />
             </div>
             <div className="relative md:top-96 md:right-12 section-text z-20">
-              <p className="text-white/80  text-lg text-right">
+              <p className="text-white/80 text-lg text-right">
                 We offer branding, print, and digital marketing services across
                 India.
               </p>
@@ -145,7 +171,7 @@ export default function Hero() {
               </button>
             </div>
           </div>
-        </div>{" "}
+        </div>
       </section>
     </div>
   );
