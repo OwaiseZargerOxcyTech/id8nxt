@@ -3,8 +3,9 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 export default function Hero() {
   const containerRef = useRef(null);
@@ -17,66 +18,86 @@ export default function Hero() {
   };
 
   useLayoutEffect(() => {
+    const scrolling = {
+      enabled: true,
+      events: ["scroll", "wheel", "touchmove", "pointermove"],
+      prevent: e => e.preventDefault(),
+      disable() {
+        if (scrolling.enabled) {
+          scrolling.enabled = false;
+          window.addEventListener("scroll", gsap.ticker.tick, { passive: true });
+          scrolling.events.forEach(e => window.addEventListener(e, scrolling.prevent, { passive: false }));
+        }
+      },
+      enable() {
+        if (!scrolling.enabled) {
+          scrolling.enabled = true;
+          window.removeEventListener("scroll", gsap.ticker.tick);
+          scrolling.events.forEach(e => window.removeEventListener(e, scrolling.prevent));
+        }
+      }
+    };
+
+    const goToSection = (section, anim) => {
+      if (scrolling.enabled) {
+        scrolling.disable();
+        gsap.to(window, {
+          scrollTo: { y: section, autoKill: false },
+          onComplete: scrolling.enable,
+          duration: 1,
+          ease: "power2.inOut"
+        });
+        anim?.restart();
+      }
+    };
+
     const ctx = gsap.context(() => {
       const sections = sectionsRef.current;
 
-      // Initial animation for Section 1
-      const section1Timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: sections[0],
-          start: "top center",
-          end: "bottom center",
-          toggleActions: "play reverse play reverse",
-        },
-      });
-      section1Timeline
-        .from(sections[0], {
+      sections.forEach((section, index) => {
+        // Create parallax effect for background
+        gsap.to(section, {
           backgroundPositionY: 200,
-          duration: 0.5,
-          ease: "power3.out",
-        })
-        .from(
-          sections[0].querySelectorAll(".section-image, .section-text"),
-          {
+          ease: "power1.inOut",
+          scrollTrigger: {
+            trigger: section,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true
+          }
+        });
+
+        // Animation for content elements
+        const contentAnim = gsap.timeline({ paused: true })
+          .from(section.querySelectorAll(".section-image"), {
             y: 400,
             opacity: 0,
-            duration: 1,
-            ease: "power3.out",
-          },
-          "-=0.5"
-        );
-
-      // Section 2 animations triggered by scroll
-      const section2Timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: sections[1],
-          start: "top center",
-          end: "bottom center",
-          toggleActions: "play reverse play reverse",
-        },
-      });
-
-      section2Timeline
-        .from(sections[1], {
-          backgroundPositionY: 200,
-          duration: 0.5,
-          ease: "power3.out",
-        })
-        .from(
-          sections[1].querySelectorAll(".section-image, .section-text"),
-          {
-            y: 400,
+            duration: 1.5,
+            ease: "power3.out"
+          })
+          .from(section.querySelectorAll(".section-text"), {
+            y: 200,
             opacity: 0,
             duration: 1,
-            ease: "power3.out",
-          },
-          "-=0.5"
-        );
+            ease: "power3.out"
+          },0);
 
-      
+        // Initial setup for background position
+        gsap.set(section, {
+          backgroundPosition: "50% 0%"
+        });
+
+        ScrollTrigger.create({
+          trigger: section,
+          start: "top bottom-=1",
+          end: "bottom top+=1",
+          onEnter: () => goToSection(section, contentAnim),
+          onEnterBack: () => goToSection(section)
+        });
+      });
     }, containerRef);
 
-    return () => ctx.revert(); // Cleanup GSAP context
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -84,7 +105,7 @@ export default function Hero() {
       {/* Section 1 */}
       <section
         ref={addToSectionsRef}
-        className="relative w-full h-screen flex items-center overflow-hidden bg-[url('/images/home/home-hero-bg-1.png')] bg-cover bg-center "
+        className="relative w-full h-screen flex items-center overflow-hidden bg-[url('/images/home/home-hero-bg-1.png')] will-change-transform"
       >
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/40"></div>
         <div className="section-content relative w-full">
@@ -120,7 +141,7 @@ export default function Hero() {
       {/* Section 2 */}
       <section
         ref={addToSectionsRef}
-        className="relative w-full h-screen flex items-center overflow-hidden bg-[url('/images/home/home-hero-bg-2.png')] bg-cover bg-center"
+        className="relative w-full h-screen flex items-center overflow-hidden bg-[url('/images/home/home-hero-bg-2.1.png')] bg-repeat  will-change-transform"
       >
         <div className="section-content relative w-full">
           <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
