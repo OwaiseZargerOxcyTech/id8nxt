@@ -18,7 +18,7 @@ export default function VideoBanner() {
       ) : (
         <>
           <img
-        src="https://www.w3schools.com/html/pic_trulli.jpg" // Dummy thumbnail URL
+        src="./images/home/designer-concept.jpg"
             alt="Video Thumbnail"
             className="absolute inset-0 w-full h-full object-cover"
           />

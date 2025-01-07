@@ -8,37 +8,20 @@ gsap.registerPlugin(ScrollTrigger);
 
 const imageSets = [
   {
-    left: "https://png.pngtree.com/png-clipart/20221013/ourmid/pngtree-simulation-cosmetics-product-sample-skin-care-essential-oil-png-image_6158599.png",
-    center:
-      "https://www.bigbasket.com/media/uploads/p/xxl/40176779_7-tata-coffee-grand-filter-coffee.jpg",
-    right:
-      "https://png.pngtree.com/png-clipart/20221013/ourmid/pngtree-simulation-cosmetics-product-sample-skin-care-essential-oil-png-image_6158599.png",
+    left: "./images/home/Tata-Coffee-3.png",
+    center: "./images/home/Tata-Coffee-2.png",
+    right: "./images/home/Tata-Coffee-1.png",
     logo: "https://m.media-amazon.com/images/I/61P8NNtScHL._AC_UF1000,1000_QL80_.jpg",
     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   },
   {
-    left: "https://www.bigbasket.com/media/uploads/p/xxl/40176779_7-tata-coffee-grand-filter-coffee.jpg",
-    center:
-      "https://png.pngtree.com/png-clipart/20221013/ourmid/pngtree-simulation-cosmetics-product-sample-skin-care-essential-oil-png-image_6158599.png",
-    right:
-      "https://www.bigbasket.com/media/uploads/p/xxl/40176779_7-tata-coffee-grand-filter-coffee.jpg",
+    left: "./images/home/Tata-Coffee-3.png",
+    center: "./images/home/Tata-Coffee-2.png",
+    right: "./images/home/Tata-Coffee-1.png",
     logo: "https://source.unsplash.com/random/100x200?sig=8",
     text: "Praesent euismod nunc in velit tincidunt, vel malesuada lectus feugiat.",
   },
-  //   {
-  //     left: "https://source.unsplash.com/random/400x300?sig=9",
-  //     center: "https://source.unsplash.com/random/400x300?sig=10",
-  //     right: "https://source.unsplash.com/random/400x300?sig=11",
-  //     logo: "https://source.unsplash.com/random/100x200?sig=12",
-  //     text: "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-  //   },
-  //   {
-  //     left: "https://source.unsplash.com/random/400x300?sig=13",
-  //     center: "https://source.unsplash.com/random/400x300?sig=14",
-  //     right: "https://source.unsplash.com/random/400x300?sig=15",
-  //     logo: "https://source.unsplash.com/random/100x200?sig=16",
-  //     text: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris."
-  //   }
+
 ];
 
 export default function ProductAnimationCarousel() {
@@ -114,18 +97,18 @@ export default function ProductAnimationCarousel() {
   };
 
   return (
-    <div className="relative flex w-full min-h-screen items-center justify-center bg-[#f5e6d3]">
+    <div className="relative flex w-full min-h-screen items-center justify-center bg-white">
       <div className="flex w-full max-w-7xl flex-col md:flex-row">
         {/* Left Panel */}
         <div
           ref={leftPanelRef}
           className="flex-1 overflow-hidden opacity-0 p-2 "
         >
-          <div className="p-2 ">
+          <div className="">
             <img
               src={imageSets[currentSet].left}
               alt={imageSets[currentSet].left}
-              className="w-full"
+              className="w-full h-[200%]"
             />
           </div>
         </div>
@@ -158,7 +141,7 @@ export default function ProductAnimationCarousel() {
       {/* Next Button */}
       <button
         onClick={handleNextSet}
-        className="absolute bottom-44 left-4 md:bottom-44 md:left-24 top-4 right-4 md:top-auto md:right-auto bg-brown-600 text-black p-3 rounded-full hover:bg-brown-700 transition-colors duration-300"
+        className="absolute bottom-44 left-4 md:bottom-12 md:left-24 top-4 right-4 md:top-auto md:right-auto bg-brown-600 text-black p-3 rounded-full hover:bg-brown-700 transition-colors duration-300"
         aria-label="Next set"
       >
         <FaArrowRight className="h-6 w-6" />

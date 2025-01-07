@@ -27,7 +27,7 @@ export default function Hero() {
         ScrollTrigger.create({
           trigger: section,
           start: "top top",
-          end: nextSection ? "bottom top" : "+=10%", // If next section exists, pin till next section
+          end: nextSection ? "bottom top" : "+=50%", // If next section exists, pin till next section
           scrub: true,
           pin: true, 
           pinSpacing: false, 
@@ -40,7 +40,7 @@ export default function Hero() {
         // Parallax effect for images
         if (image) {
           gsap.to(image, {
-            scale: 1.2,
+            scale: 1.1,
             scrollTrigger: {
               trigger: section,
               start: "top bottom",
@@ -88,7 +88,7 @@ export default function Hero() {
             </div>
             <div className="relative">
               <img
-                src="https://pngimg.com/d/sculpture_PNG41.png"
+                src="./images/home/V1.png"
                 alt="Digital Statue"
                 className="section-image w-1/2 md:w-full h-auto relative z-10"
               />
@@ -116,7 +116,7 @@ export default function Hero() {
           <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
             <div className="section-text z-20">
               <div className="relative">
-                <div className="hidden md:block absolute left-36 -top-12 w-24 h-24 border-8 border-red-500">
+                <div className="hidden md:block absolute left-36 -top-6 w-24 h-24 border-8 border-red-500">
                   <div className="absolute inset-0 border-8 border-red-500"></div>
                 </div>
                 <h2 className="text-4xl md:text-6xl font-light text-white leading-tight relative z-10">
@@ -130,12 +130,12 @@ export default function Hero() {
             </div>
             <div className="relative">
               <img
-                src="https://pngimg.com/d/sculpture_PNG41.png"
+                src="./images/home/V2 The Magic_.png"
                 alt="Creative Statue"
                 className="section-image w-1/2 md:w-full h-auto relative z-10"
               />
             </div>
-            <div className="relative md:top-60 section-text z-20">
+            <div className="relative md:top-96 md:right-12 section-text z-20">
               <p className="text-white/80  text-lg">
                 We offer branding, print, and digital marketing services across
                 India.

@@ -16,6 +16,8 @@ export default function HeroSection() {
     const section = sectionRef.current
     const container = containerRef.current
 
+    if (!image || !section || !container) return // Ensure refs are initialized
+
     // Create timeline for the animation
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -24,31 +26,36 @@ export default function HeroSection() {
         end: '+=100%',
         pin: true,
         scrub: true,
-      }
+      },
     })
 
     // Add animations to timeline
     tl.to(image, {
       scale: 1.2,
       duration: 1,
-    }).to(container, {
-      opacity: 0,
-      duration: 0.5,
-    }, '>-0.5')
+    }).to(
+      container,
+      {
+        opacity: 0,
+        duration: 0.5,
+      },
+      '>-0.5' // Overlap timing with the previous animation
+    )
 
-    // Cleanup
+    // Cleanup ScrollTrigger and timeline
     return () => {
       tl.kill()
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill())
     }
   }, [])
 
   return (
     <>
-      <section 
+      <section
         ref={sectionRef}
         className="relative h-screen w-full overflow-hidden bg-gradient-to-b from-black via-gray-900 to-black"
       >
-        <div 
+        <div
           ref={containerRef}
           className="relative z-10 flex h-full w-full items-center justify-start px-4"
         >
@@ -72,8 +79,6 @@ export default function HeroSection() {
           />
         </div>
       </section>
-    
     </>
   )
 }
-
