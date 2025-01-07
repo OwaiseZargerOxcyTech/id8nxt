@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -16,17 +16,19 @@ export default function Hero() {
     }
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       const sections = sectionsRef.current;
 
       // Initial animation for Section 1
-      const section1Timeline = gsap.timeline({scrollTrigger: {
-        trigger: sections[0],
-        start: "top center",
-        end: "bottom center",
-        toggleActions: "play reverse play reverse", 
-      },});
+      const section1Timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: sections[0],
+          start: "top center",
+          end: "bottom center",
+          toggleActions: "play reverse play reverse",
+        },
+      });
       section1Timeline
         .from(sections[0], {
           backgroundPositionY: 200,
@@ -40,9 +42,8 @@ export default function Hero() {
             opacity: 0,
             duration: 1,
             ease: "power3.out",
-            stagger: 0.2,
           },
-          "-=0.3"
+          "-=0.5"
         );
 
       // Section 2 animations triggered by scroll
@@ -51,7 +52,7 @@ export default function Hero() {
           trigger: sections[1],
           start: "top center",
           end: "bottom center",
-          toggleActions: "play reverse play reverse", 
+          toggleActions: "play reverse play reverse",
         },
       });
 
@@ -68,28 +69,11 @@ export default function Hero() {
             opacity: 0,
             duration: 1,
             ease: "power3.out",
-            stagger: 0.2,
           },
-          "-=0.3"
+          "-=0.5"
         );
 
-      // Create scroll-triggered animation for section transitions
-      sections.forEach((section, index) => {
-        gsap.to(section, {
-          yPercent: -100,
-          ease: "none",
-          scrollTrigger: {
-            trigger: section,
-            start: "bottom bottom",
-            end: "bottom top",
-            scrub: true,
-            pin: true,
-            pinSpacing: false,
-            toggleActions: "play reverse play reverse",
-          },
-        });
-      });
-
+      
     }, containerRef);
 
     return () => ctx.revert(); // Cleanup GSAP context
@@ -142,7 +126,7 @@ export default function Hero() {
           <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
             <div className="section-text z-20">
               <div className="relative">
-                <div className="hidden md:block absolute left-60 top-36 w-24 h-24 border-8 border-red-500">
+                <div className="hidden md:block absolute left-52 top-36 w-24 h-24 border-8 border-red-500">
                   <div className="absolute inset-0 border-8 border-red-500"></div>
                 </div>
                 <h2 className="md:relative md:top-48 text-4xl md:text-7xl text-white leading-tight z-10">
