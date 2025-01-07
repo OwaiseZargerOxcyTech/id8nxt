@@ -27,9 +27,9 @@ export default function Hero() {
         ScrollTrigger.create({
           trigger: section,
           start: "top top",
-          end: nextSection ? "bottom top" : "+=90%", // If next section exists, pin till next section
+          end: nextSection ? "bottom top" : "+=50%", // If next section exists, pin till next section
           scrub: true,
-          pin: true, 
+          pin: true,
           pinSpacing: false, 
         });
 
@@ -80,7 +80,7 @@ export default function Hero() {
         <div className="section-content relative w-full">
           <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
             <div className="section-text z-20">
-              <h2 className="text-4xl md:text-6xl font-light text-white">
+              <h2 className="md:relative md:top-40 md:left-12 text-4xl md:text-7xl text-white font-uni">
                 Digital
                 <br className="hidden md:block" />
                 &amp; Beyond
@@ -94,12 +94,12 @@ export default function Hero() {
               />
             </div>
             <div className="relative md:top-60 section-text z-20">
-              <p className="text-white/80 text-lg">
+              <p className="text-white/80 text-lg text-right">
                 ID8NXT is a Digital Marketing agency in Mumbai, India. We
                 specialize in boosting businesses by focusing on their brand,
                 using strategies, and harnessing digital tools.
               </p>
-              <button className="mt-8 border-b border-red-500 text-white px-4 py-2 rounded hover:bg-red-500/20 transition duration-300">
+              <button className="absolute top-30 right-0  border-b border-red-500 text-white px-4 py-2 rounded hover:bg-red-500/20 transition duration-300">
                 View Portfolio
               </button>
             </div>
@@ -116,10 +116,10 @@ export default function Hero() {
           <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
             <div className="section-text z-20">
               <div className="relative">
-                <div className="hidden md:block absolute left-36 -top-6 w-24 h-24 border-8 border-red-500">
+                <div className="hidden md:block absolute left-60 top-36 w-24 h-24 border-8 border-red-500">
                   <div className="absolute inset-0 border-8 border-red-500"></div>
                 </div>
-                <h2 className="text-4xl md:text-6xl font-light text-white leading-tight relative z-10">
+                <h2 className="md:relative md:top-48 text-4xl md:text-7xl text-white leading-tight z-10">
                   Creativity
                   <br />
                   meets
@@ -136,11 +136,11 @@ export default function Hero() {
               />
             </div>
             <div className="relative md:top-96 md:right-12 section-text z-20">
-              <p className="text-white/80  text-lg">
+              <p className="text-white/80  text-lg text-right">
                 We offer branding, print, and digital marketing services across
                 India.
               </p>
-              <button className="mt-8 border-b border-red-500 text-white px-4 py-2 rounded hover:bg-red-500/20 transition duration-300">
+              <button className="absolute top-22 right-0 border-b border-red-500 text-white px-4 py-2 rounded hover:bg-red-500/20 transition duration-300">
                 View Portfolio
               </button>
             </div>

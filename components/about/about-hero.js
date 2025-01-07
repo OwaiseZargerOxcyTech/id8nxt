@@ -60,7 +60,7 @@ export default function HeroSection() {
           className="relative z-10 flex h-full w-full items-center justify-start px-4"
         >
           <div className="text-left">
-            <h1 className="mb-6 ml-20 text-4xl font-light text-white md:text-6xl lg:text-9xl">
+            <h1 className="mb-6 ml-20 text-4xl font-light text-white md:text-6xl">
               Creatively Led.
               <br />
               Results Driven.

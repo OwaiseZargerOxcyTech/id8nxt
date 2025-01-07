@@ -33,7 +33,7 @@ export function Footer({ backColor, isAbout }) {
 
   return (
     <main
-      className={`w-full py-16 min-h-[100vh] flex flex-col justify-center`}
+      className={`w-full py-4 flex flex-col justify-center`}
       style={{ backgroundColor: backColor }}>
       <footer ref={footerRef}>
         <FooterNav />

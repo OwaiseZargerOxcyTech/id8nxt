@@ -6,60 +6,67 @@ export default function ClientLogos() {
   const clients = [
     {
       name: 'Pixadoo',
-      bwLogo: '/placeholder.svg?height=80&width=160',
-      colorLogo: '/placeholder.svg?height=80&width=160',
+      logo: '/images/home/client-logos/Pixadoo@2x.png',
     },
     {
       name: 'Bayer',
-      bwLogo: '/placeholder.svg?height=80&width=160',
-      colorLogo: '/placeholder.svg?height=80&width=160',
+      logo: '/images/home/client-logos/Bayer@2x.png',
     },
     {
       name: 'Microsoft Azure',
-      bwLogo: '/placeholder.svg?height=80&width=160',
-      colorLogo: '/placeholder.svg?height=80&width=160',
+      logo: '/images/home/client-logos/Microsoft@2x.png',
     },
     {
       name: 'Neoniche',
-      bwLogo: '/placeholder.svg?height=80&width=160',
-      colorLogo: '/placeholder.svg?height=80&width=160',
+      logo: '/images/home/client-logos/Neoniche@2x.png',
     },
     {
       name: 'CelerityX',
-      bwLogo: '/placeholder.svg?height=80&width=160',
-      colorLogo: '/placeholder.svg?height=80&width=160',
+      logo: '/images/home/client-logos/CelerityX@2x.png',
+    },
+    {
+      name: 'Opentext',
+      logo: '/images/home/client-logos/opentext@2x.png',
     },
     {
       name: 'NComputing',
-      bwLogo: '/placeholder.svg?height=80&width=160',
-      colorLogo: '/placeholder.svg?height=80&width=160',
+      logo: '/images/home/client-logos/Ncomputing@2x.png',
     },
     {
       name: 'Adobe',
-      bwLogo: '/placeholder.svg?height=80&width=160',
-      colorLogo: '/placeholder.svg?height=80&width=160',
+      logo: '/images/home/client-logos/Redington@2x.png',
     },
     {
       name: 'Academy',
-      bwLogo: '/placeholder.svg?height=80&width=160',
-      colorLogo: '/placeholder.svg?height=80&width=160',
+      logo: '/images/home/client-logos/Adobe@2x.png',
     },
     {
       name: 'Snowflake',
-      bwLogo: '/placeholder.svg?height=80&width=160',
-      colorLogo: '/placeholder.svg?height=80&width=160',
+      logo: '/images/home/client-logos/SAS@2x.png',
     },
     {
       name: 'Hubblee',
-      bwLogo: '/placeholder.svg?height=80&width=160',
-      colorLogo: '/placeholder.svg?height=80&width=160',
-    }
+      logo: '/images/home/client-logos/Snowflake@2x.png',
+    },
+    {
+      name: 'OmaniVibe',
+      logo: '/images/home/client-logos/Omani-Vibe@2x.png',
+    },
+   
+    {
+      name: 'Smaack',
+      logo: '/images/home/client-logos/Smaack@2x.png',
+    },
+    {
+      name: 'SaintGobain',
+      logo: '/images/home/client-logos/Saint-Gobain@2x.png',
+    },
   ]
 
   return (
     <div className="py-12 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-5">
+        <div className="grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-7">
           {clients.map((client) => (
             <div
               key={client.name}
@@ -67,16 +74,10 @@ export default function ClientLogos() {
             >
               <div className="relative w-40 h-20">
                 <Image
-                  src={client.bwLogo}
-                  alt={`${client.name} logo in black and white`}
+                  src={client.logo}
+                  alt={`${client.name} logo`}
                   fill
-                  className="object-contain transition-opacity duration-300 group-hover:opacity-0"
-                />
-                <Image
-                  src={client.colorLogo}
-                  alt={`${client.name} logo in color`}
-                  fill
-                  className="object-contain absolute top-0 left-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                  className="object-contain transition-all duration-300 filter grayscale group-hover:grayscale-0"
                 />
               </div>
             </div>
@@ -86,4 +87,3 @@ export default function ClientLogos() {
     </div>
   )
 }
-

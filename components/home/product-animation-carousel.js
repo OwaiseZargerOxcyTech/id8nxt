@@ -8,20 +8,19 @@ gsap.registerPlugin(ScrollTrigger);
 
 const imageSets = [
   {
-    left: "./images/home/Tata-Coffee-3.png",
-    center: "./images/home/Tata-Coffee-2.png",
-    right: "./images/home/Tata-Coffee-1.png",
-    logo: "https://m.media-amazon.com/images/I/61P8NNtScHL._AC_UF1000,1000_QL80_.jpg",
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    left: "/images/home/Tata-Coffee-3.png",
+    center: "/images/home/Tata-Coffee-2.png",
+    right: "/images/home/Tata-Coffee-1.png",
+    logo: "/images/home/Tata-Coffee-Logo.png",
+    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   },
   {
-    left: "./images/home/Tata-Coffee-3.png",
-    center: "./images/home/Tata-Coffee-2.png",
-    right: "./images/home/Tata-Coffee-1.png",
-    logo: "https://source.unsplash.com/random/100x200?sig=8",
-    text: "Praesent euismod nunc in velit tincidunt, vel malesuada lectus feugiat.",
+    left: "/images/home/Tata-Coffee-3.png",
+    center: "/images/home/Tata-Coffee-2.png",
+    right: "/images/home/Tata-Coffee-1.png",
+    logo: "/images/home/Tata-Coffee-Logo.png",
+    text: "Praesent euismod nunc in velit tincidunt, vel malesuada lectus feugiat.Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   },
-
 ];
 
 export default function ProductAnimationCarousel() {
@@ -97,19 +96,27 @@ export default function ProductAnimationCarousel() {
   };
 
   return (
-    <div className="relative flex w-full min-h-screen items-center justify-center bg-white">
-      <div className="flex w-full max-w-7xl flex-col md:flex-row">
+    <div className="relative flex w-full md:min-h-screen items-center justify-center bg-white">
+      <div className="flex flex-row">
         {/* Left Panel */}
         <div
           ref={leftPanelRef}
-          className="flex-1 overflow-hidden opacity-0 p-2 "
+          className="flex-1 overflow-hidden opacity-0 p-2 relative"
         >
-          <div className="">
+          <div>
             <img
               src={imageSets[currentSet].left}
               alt={imageSets[currentSet].left}
-              className="w-full h-[200%]"
+              className="w-full"
             />
+            <img
+              src={imageSets[currentSet].logo}
+              alt="Logo"
+              className="absolute top-8 left-8 md:top-16 md:left-20 w-1/2"
+            />
+          </div>
+          <div className="hidden md:block absolute bottom-0 md:bottom-10 md:left-28 w-3/4 p-2">
+            <p >{imageSets[currentSet].text}</p>
           </div>
         </div>
 
@@ -141,7 +148,7 @@ export default function ProductAnimationCarousel() {
       {/* Next Button */}
       <button
         onClick={handleNextSet}
-        className="absolute bottom-44 left-4 md:bottom-12 md:left-24 top-4 right-4 md:top-auto md:right-auto bg-brown-600 text-black p-3 rounded-full hover:bg-brown-700 transition-colors duration-300"
+        className="absolute left-6 top-40 md:-bottom-96 md:left-12 text-black p-3 transition-colors duration-300"
         aria-label="Next set"
       >
         <FaArrowRight className="h-6 w-6" />

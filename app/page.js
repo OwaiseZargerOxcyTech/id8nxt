@@ -5,6 +5,7 @@ import VideoBanner from "@/components/home/video-banner";
 import WhoWeAre from "@/components/home/whoweare";
 import Hero from "@/components/home/hero";
 import ProductAnimationCarousel from "@/components/home/product-animation-carousel";
+import ClientLogos from "@/components/home/clients";
 
 export default function Home() {
   return (
@@ -14,8 +15,9 @@ export default function Home() {
       <WhoWeAre />
       <ProductAnimationCarousel />
       <FeatureCards />
-      <ContactForm backColor={"#D2042D"}/>
-      <Footer backColor={"#D2042D"} isAbout={false}/>
+      <ClientLogos />
+      <ContactForm backColor={"#da1f3d"}/>
+      <Footer backColor={"#da1f3d"} isAbout={false}/>
     </main>
   );
 }
