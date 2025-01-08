@@ -20,17 +20,17 @@ const Hero = () => {
         description: 'ID8NXT is a Digital Marketing agency in Mumbai, India. We specialize in boosting businesses by focusing on their brand, using strategies, and harnessing digital tools.',
         mainImage: './images/home/V1.png',
         overlayImages: [
-          './images/home/cloud.png',
-          './images/home/rectangle-1.png'
+          '/images/home/cloud.png',
+          '/images/home/rectangle-1.png'
         ]
       }
     },
     {
-      bgImage: '/images/home/home-hero-bg-2.1.png',
+      bgImage: '/images/home/home-hero-bg-2.png',
       content: {
         title: 'Creativity\nmeets\nInnovation',
         description: 'We offer branding, print, and digital marketing services across India.',
-        mainImage: './images/home/V2 The Magic_.png',
+        mainImage: '/images/home/V2.png',
         hasBoxDecoration: true
       }
     }
