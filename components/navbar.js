@@ -12,9 +12,7 @@ export default function Navbar() {
         {/* Logo */}
         <div className="flex-shrink-0">
           <Link href="/">
-            <p className="text-white text-xl font-bold">ID8NXT</p>
-            {/* <img src="https://id8nxt.com/wp-content/uploads/2023/08/id8Nxt_logo.png" alt="logo"/> */}
-
+            <img src="/images/ID8-Logo-W.png" alt="logo" className="w-20"/>
           </Link>
         </div>
 

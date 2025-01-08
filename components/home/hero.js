@@ -271,6 +271,7 @@ const Hero = () => {
     };
   }, [activeSection]);
   
+
   return (
     <div ref={containerRef} className="relative w-full h-screen overflow-hidden bg-black isolate">
       {sections.map((section, index) => (
@@ -301,17 +302,65 @@ const Hero = () => {
             <div className={`container mx-auto h-full ${
               index === activeSection ? 'opacity-100' : 'opacity-0'
             }`}>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-4 h-full items-center">
+              {/* Mobile Layout */}
+              <div className="flex flex-col h-full md:hidden px-4 pt-16">
+                <div className="flex-none section-text z-20 mb-8">
+                  <h2 
+                    ref={el => titleRefs.current[index] = el}
+                    className="text-4xl text-white font-uni whitespace-pre-line text-center"
+                  >
+                    {section.content.title}
+                  </h2>
+                </div>
+                
+                <div 
+                  ref={el => imageRefs.current[index] = el}
+                  className="flex-1 flex items-center justify-center relative"
+                >
+                  <img
+                    src={section.content.mainImage}
+                    alt="Section Visual"
+                    className="w-3/4 h-auto relative z-10"
+                  />
+                  {index === 0 && section.content.overlayImages && section.content.overlayImages.map((img, i) => (
+                    <img
+                      key={i}
+                      src={img}
+                      alt={`Overlay ${i + 1}`}
+                      className={`absolute ${
+                        i === 0 ? 'top-1/2 -translate-y-1/4 scale-150' : 'top-0'
+                      } w-3/4 h-auto z-${9 - i}`}
+                    />
+                  ))}
+                </div>
+                
+                <div 
+                  ref={el => descRefs.current[index] = el}
+                  className="flex-none section-text z-20 mt-8 mb-16"
+                >
+                  <p className="text-white/80 text-lg text-center px-4">
+                    {section.content.description}
+                  </p>
+                  <div className="text-center mt-6">
+                    <button className="border-b border-red-500 text-white px-4 py-2 rounded hover:bg-red-500/20 transition duration-300">
+                      View Portfolio
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Desktop Layout */}
+              <div className="hidden md:grid md:grid-cols-3 gap-8 px-4 h-full items-center">
                 {/* Left column - Title */}
                 <div className="section-text z-20">
                   {index === 1 && (
-                    <div className="hidden md:block absolute left-96 top-56 w-24 h-24 border-8 border-red-500">
+                    <div className="hidden md:block relative left-80 top-16 w-24 h-24 border-8 border-red-500">
                       <div className="absolute inset-0 border-8 border-red-500"></div>
                     </div>
                   )}
                   <h2 
                     ref={el => titleRefs.current[index] = el}
-                    className={`md:relative ${index === 0 ? 'md:top-0 md:left-12' : 'md:top-0 md:left-24'} text-4xl md:text-7xl text-white font-uni whitespace-pre-line`}
+                    className={`relative ${index === 0 ? 'top-0 left-12' : 'top-0 left-24'} text-7xl text-white font-uni whitespace-pre-line`}
                   >
                     {section.content.title}
                   </h2>
@@ -325,7 +374,7 @@ const Hero = () => {
                   <img
                     src={section.content.mainImage}
                     alt="Section Visual"
-                    className="w-1/2 md:w-full h-auto relative z-10"
+                    className="w-full h-auto relative z-10"
                   />
                   {index === 0 && section.content.overlayImages && section.content.overlayImages.map((img, i) => (
                     <img
@@ -334,7 +383,7 @@ const Hero = () => {
                       alt={`Overlay ${i + 1}`}
                       className={`absolute ${
                         i === 0 ? 'top-60 scale-[2]' : 'top-6'
-                      } w-1/2 md:w-full h-auto z-${9 - i}`}
+                      } w-full h-auto z-${9 - i}`}
                     />
                   ))}
                 </div>
@@ -342,7 +391,7 @@ const Hero = () => {
                 {/* Right column - Description */}
                 <div 
                   ref={el => descRefs.current[index] = el}
-                  className={`relative ${index === 0 ? 'md:top-40' : 'md:top-40 md:right-24'} section-text z-20`}
+                  className={`relative ${index === 0 ? 'top-40' : 'top-40 right-24'} section-text z-20`}
                 >
                   <p className="text-white/80 text-lg text-right">
                     {section.content.description}

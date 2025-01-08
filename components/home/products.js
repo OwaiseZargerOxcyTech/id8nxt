@@ -139,7 +139,7 @@ const ProductDisplay = () => {
               </button>
               {/* Text Content */}
               <div ref={textRef} className="flex-1">
-                <p className="text-black text-sm break-words max-w-[80%]">
+                <p className="text-black hidden md:block text-sm break-words max-w-[80%]">
                   {currentProduct.description}
                 </p>
               </div>
