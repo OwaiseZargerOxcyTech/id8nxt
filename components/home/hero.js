@@ -72,7 +72,7 @@ export default function Hero() {
           .from(section.querySelectorAll(".section-image"), {
             y: 400,
             opacity: 0,
-            duration: 1.5,
+            duration: 2,
             ease: "power3.out"
           })
           .from(section.querySelectorAll(".section-text"), {
@@ -121,10 +121,20 @@ export default function Hero() {
               <img
                 src="./images/home/V1.png"
                 alt="Digital Statue"
-                className="section-image w-1/2 md:w-full h-auto relative z-10"
+                className="section-image w-1/2 md:w-full scale-[1.2] h-auto relative z-10"
+              />
+              <img
+                src="./images/home/cloud-1.png"
+                alt="cloud"
+                className="section-image absolute top-60 scale-[2] w-1/2 md:w-full h-auto z-9"
+              />
+              <img
+                src="./images/home/rectangle-1.png"
+                alt="rectangle"
+                className="section-image absolute top-6 w-1/2 md:w-full h-auto z-8"
               />
             </div>
-            <div className="relative md:top-60 section-text z-20">
+            <div className="relative md:top-96 section-text z-20">
               <p className="text-white/80 text-lg text-right">
                 ID8NXT is a Digital Marketing agency in Mumbai, India. We
                 specialize in boosting businesses by focusing on their brand,
@@ -166,7 +176,7 @@ export default function Hero() {
                 className="section-image w-1/2 md:w-full h-auto relative z-10"
               />
             </div>
-            <div className="relative md:top-96 md:right-12 section-text z-20">
+            <div className="relative md:top-[520] md:right-24 section-text z-20">
               <p className="text-white/80 text-lg text-right">
                 We offer branding, print, and digital marketing services across
                 India.
