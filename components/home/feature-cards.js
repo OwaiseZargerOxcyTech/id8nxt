@@ -17,7 +17,7 @@ export default function FeatureCards() {
           hoveredCard === idx ? colorIndex : getNextColorIndex(colorIndex)
         )
       );
-    }, 500);
+    }, 300);
 
     return () => clearInterval(interval);
   }, [hoveredCard]);

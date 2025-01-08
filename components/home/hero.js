@@ -20,7 +20,7 @@ const Hero = () => {
         description: 'ID8NXT is a Digital Marketing agency in Mumbai, India. We specialize in boosting businesses by focusing on their brand, using strategies, and harnessing digital tools.',
         mainImage: './images/home/V1.png',
         overlayImages: [
-          './images/home/cloud-1.png',
+          './images/home/cloud.png',
           './images/home/rectangle-1.png'
         ]
       }
