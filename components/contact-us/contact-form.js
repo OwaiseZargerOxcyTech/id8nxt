@@ -181,7 +181,7 @@ export default function ContactForm() {
         </div>
 
         {/* Consent Checkboxes */}
-        <div className="grid grid-cols-2 gap-6 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="flex items-center space-x-2">
             <input
               id="consent"
