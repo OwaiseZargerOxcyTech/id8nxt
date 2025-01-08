@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { useMediaQuery } from "@/hooks/use-media-query";
 
 export default function ServicesSection() {
   const services = [
@@ -47,6 +48,7 @@ export default function ServicesSection() {
   ];
 
   const [selectedService, setSelectedService] = useState("Web Personalization"); // Default selected service
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   const handleClick = (serviceName) => {
     setSelectedService(serviceName);
@@ -76,15 +78,12 @@ export default function ServicesSection() {
         <div className="mt-12">
           <div className="relative">
             {/* Separating Line */}
-            <div className="absolute top-0 left-0 w-full h-[1px] bg-gray-300" />{" "}
-            {/* Adjusted top */}
+            <div className="absolute top-0 left-0 w-full h-[1px] bg-gray-300" />
             <div className="grid grid-cols-1 gap-6 pt-4">
-              {" "}
-              {/* Added pt-4 to add space */}
               {services.map((service) => (
                 <div
                   key={service.name}
-                  className="flex items-center justify-between text-sm text-gray-900 relative"
+                  className="flex flex-col md:flex-row items-start md:items-center justify-between text-sm text-gray-900 relative"
                 >
                   {/* Service Name */}
                   <button
@@ -102,11 +101,17 @@ export default function ServicesSection() {
                   <div
                     className={`${
                       service.name === selectedService ? "block" : "hidden"
-                    } absolute top-0 left-0 w-[750px] bg-red-600 text-white py-2 px-4 rounded`}
-                    style={{
-                      transform: "translateX(calc(25% + 1rem))",
-                      marginLeft: `${service.mleft}`,
-                    }}
+                    } ${
+                      isMobile ? "mt-2" : "absolute top-0 left-0"
+                    } w-full md:w-[750px] bg-red-600 text-white py-2 px-4 rounded`}
+                    style={
+                      isMobile
+                        ? {}
+                        : {
+                            transform: "translateX(calc(25% + 1rem))",
+                            marginLeft: `${service.mleft}`,
+                          }
+                    }
                   >
                     {service.description}
                   </div>
