@@ -1,23 +1,13 @@
-import { Geist, Geist_Mono } from "next/font/google";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
 
-// const geistSans = Geist({
-//   variable: "--font-geist-sans",
-//   subsets: ["latin"],
-// });
 
 const poppins = Poppins({
   variable: "--font-poppins-sans",
   subsets: ["latin"],
   weight: ['400', '700'],
 });
-
-// const geistMono = Geist_Mono({
-//   variable: "--font-geist-mono",
-//   subsets: ["latin"],
-// });
 
 export const metadata = {
   title: "ID8NXT",
@@ -28,7 +18,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        // className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         className={`${poppins.variable} antialiased`}
         suppressHydrationWarning
       >

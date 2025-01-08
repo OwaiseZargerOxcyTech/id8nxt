@@ -2,26 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-
+/* 
 @font-face {
   font-family: "Uni Neue";
-  src: url("/fonts/UniNeue-Regular.woff2") format("woff2"),
-       url("/fonts/UniNeue-Regular.woff") format("woff"),
-       url("/fonts/UniNeue-Regular.ttf") format("truetype");
-  font-weight: 400; /* Adjust the weight accordingly */
+  src: url("/fonts/UniNeue-Trial-Regular.woff2") format("woff2"),
+       url("/fonts/UniNeue-Trial-Regular.woff") format("woff"),
+       url("/fonts/UniNeue-Trial-Regular.eot") format("embedded-opentype");
+  font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Uni Neue";
-  src: url("/fonts/UniNeue-Bold.woff2") format("woff2"),
-       url("/fonts/UniNeue-Bold.woff") format("woff"),
-       url("/fonts/UniNeue-Bold.ttf") format("truetype");
+  src: url("/fonts/UniNeue-Trial-BoldItalic.woff2") format("woff2"),
+       url("/fonts/UniNeue-Trial-Bold.woff") format("woff"),
+       url("/fonts/UniNeue-Trail-Bold.eot") format("embedded-opentype");
   font-weight: 700;
   font-style: normal;
 }
 
-body {
-  @apply font-uni;
-}
-
+ */

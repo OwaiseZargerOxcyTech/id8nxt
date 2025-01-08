@@ -20,7 +20,7 @@ const Hero = () => {
         description: 'ID8NXT is a Digital Marketing agency in Mumbai, India. We specialize in boosting businesses by focusing on their brand, using strategies, and harnessing digital tools.',
         mainImage: './images/home/V1.png',
         overlayImages: [
-          '/images/home/cloud.png',
+          '/images/home/new-cloud.png',
           '/images/home/rectangle-1.png'
         ]
       }
@@ -307,7 +307,7 @@ const Hero = () => {
                 <div className="flex-none section-text z-20 mb-8">
                   <h2 
                     ref={el => titleRefs.current[index] = el}
-                    className="text-4xl text-white font-uni whitespace-pre-line text-center"
+                    className="text-4xl text-white whitespace-pre-line text-center"
                   >
                     {section.content.title}
                   </h2>
