@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 export default function InspirationSection() {
   return (
-    <div className="bg-[#33371a] py-16 px-4 sm:px-6 lg:px-8">
+    <div className="bg-[#33371a] md:pb-10 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8 items-start">
           {/* Quote Section */}
