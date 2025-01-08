@@ -56,17 +56,17 @@ export default function ServicesSection() {
 
   return (
     <section className="w-full bg-white">
-      <section className="max-w-6xl mx-auto px-4 py-16 bg-white">
+      <section className="max-w-6xl mx-auto px-4 pt-8 md:pt-24 bg-white">
         {/* Header Section */}
         <div className="grid md:grid-cols-3 gap-8 items-center">
           {/* Left Section: Header */}
           <div>
-            <h2 className="text-4xl font-light text-black">Tech Solutions</h2>
+            <h2 className="text-5xl font-semibold text-black max-w-4">Tech Solutions</h2>
           </div>
 
           {/* Right Section: Description */}
           <div className="md:col-span-2">
-            <p className="text-gray-600 max-w-[430px]">
+            <p className="text-gray-600 max-w-[490px] text-lg">
               Our digital alchemysts turn your digital dreams into reality. By
               leveraging cutting-edge technology, we create integrated
               ecosystems that nurture customer relationships and drive growth.
@@ -75,11 +75,11 @@ export default function ServicesSection() {
         </div>
 
         {/* Services Section */}
-        <div className="mt-12">
+        <div className="mt-8">
           <div className="relative">
             {/* Separating Line */}
-            <div className="absolute top-0 left-0 w-full h-[1px] bg-gray-300" />
-            <div className="grid grid-cols-1 gap-6 pt-4">
+            <div className="absolute top-0 left-0 w-full h-[1px] bg-black" />
+            <div className="grid grid-cols-1 gap-6 pt-12">
               {services.map((service) => (
                 <div
                   key={service.name}
@@ -90,8 +90,8 @@ export default function ServicesSection() {
                     onClick={() => handleClick(service.name)}
                     className={`text-left ${
                       service.name === selectedService
-                        ? "text-red-600 font-bold"
-                        : ""
+                        ? "text-red-600 font-bold text-lg"
+                        : "text-lg"
                     }`}
                   >
                     {service.name}
@@ -103,7 +103,7 @@ export default function ServicesSection() {
                       service.name === selectedService ? "block" : "hidden"
                     } ${
                       isMobile ? "mt-2" : "absolute top-0 left-0"
-                    } w-full md:w-[750px] bg-red-600 text-white py-2 px-4 rounded`}
+                    } w-full md:w-[750px] bg-red-600 text-white py-2 px-4 rounded text-lg`}
                     style={
                       isMobile
                         ? {}

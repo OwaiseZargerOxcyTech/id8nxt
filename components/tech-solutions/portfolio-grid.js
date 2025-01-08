@@ -49,16 +49,16 @@ const projects = [
 export default function PortfolioGrid() {
   return (
     <section className="w-full bg-white">
-      <section className="max-w-6xl mx-auto px-4 py-16 bg-white">
+      <section className="max-w-6xl mx-auto px-4 pb-16 pt-16 md:pt-40 bg-white">
         {/* Top Row */}
-        <div className="flex flex-col md:flex-row mb-8">
+        <div className="flex flex-col md:flex-row mb-8 md:mb-28">
           <div className="flex-1 mb-6 md:mb-0">
             <ProjectCard project={projects[0]} />
           </div>
           <div className="flex-1 md:ml-6 mb-6 md:mb-0">
             <ProjectCard project={projects[1]} />
           </div>
-          <div className="flex-1 md:ml-16">
+          <div className="flex-1 md:ml-24">
             <ProjectCard project={projects[2]} />
           </div>
         </div>
@@ -68,7 +68,7 @@ export default function PortfolioGrid() {
           <div className="flex-1 mb-6 md:mb-0">
             <ProjectCard project={projects[3]} />
           </div>
-          <div className="flex-1 md:ml-16 mb-6 md:mb-0">
+          <div className="flex-1 md:ml-24 mb-6 md:mb-0">
             <ProjectCard project={projects[4]} />
           </div>
           <div className="flex-1 md:ml-6">
@@ -85,7 +85,7 @@ function ProjectCard({ project }) {
     <Link href={`/projects/${project.id}`}>
       <div className="space-y-2">
         <div className="mt-2">
-          <p className="text-sm text-gray-600">{project.subtitle}</p>
+          <p className="text-sm text-gray-600 whitespace-nowrap">{project.subtitle}</p>
         </div>
         <div className="relative aspect-square overflow-hidden bg-gray-100">
           <Image
