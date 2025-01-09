@@ -54,7 +54,7 @@ const Hero = () => {
   const startFloatingAnimation = (index) => {
     // Main image floating animation
     gsap.to(imageRefs.current[index], {
-      x: "20px",
+      y: "20px",
       duration: 2,
       ease: "sine.inOut",
       repeat: -1,
@@ -64,7 +64,7 @@ const Hero = () => {
     // Overlay images floating animation (if they exist)
     if (sections[index].content.overlayImages) {
       gsap.to(overlayRefs.current[index][1], {
-        x: "20px",
+        y: "20px",
       duration: 2,
       ease: "sine.inOut",
       repeat: -1,
