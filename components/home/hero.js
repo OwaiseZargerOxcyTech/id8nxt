@@ -1,6 +1,6 @@
-"use client";
-import React, { useLayoutEffect, useRef, useState } from "react";
-import gsap from "gsap";
+"use client"
+import React, { useLayoutEffect, useRef, useState } from 'react';
+import gsap from 'gsap';
 
 const Hero = () => {
   const [activeSection, setActiveSection] = useState(0);
@@ -11,31 +11,29 @@ const Hero = () => {
   const imageRefs = useRef([]);
   const descRefs = useRef([]);
   const bgRefs = useRef([]);
-
+  
   const sections = [
     {
-      bgImage: "/images/home/home-hero-bg-1.png",
+      bgImage: '/images/home/home-hero-bg-1.png',
       content: {
-        title: "Digital\n& Beyond",
-        description:
-          "ID8NXT is a Digital Marketing agency in Mumbai, India. We specialize in boosting businesses by focusing on their brand, using strategies, and harnessing digital tools.",
-        mainImage: "./images/home/V1.png",
+        title: 'Digital\n& Beyond',
+        description: 'ID8NXT is a Digital Marketing agency in Mumbai, India. We specialize in boosting businesses by focusing on their brand, using strategies, and harnessing digital tools.',
+        mainImage: './images/home/V1.png',
         overlayImages: [
-          "/images/home/new-cloud.png",
-          "/images/home/rectangle-1.png",
-        ],
-      },
+          '/images/home/new-cloud.png',
+          '/images/home/rectangle-1.png'
+        ]
+      }
     },
     {
-      bgImage: "/images/home/home-hero-bg-2.png",
+      bgImage: '/images/home/home-hero-bg-2.png',
       content: {
-        title: "Creativity\nmeets\nInnovation",
-        description:
-          "We offer branding, print, and digital marketing services across India.",
-        mainImage: "/images/home/V2.png",
-        hasBoxDecoration: true,
-      },
-    },
+        title: 'Creativity\nmeets\nInnovation',
+        description: 'We offer branding, print, and digital marketing services across India.',
+        mainImage: '/images/home/V2.png',
+        hasBoxDecoration: true
+      }
+    }
   ];
 
   const animateSection = (direction, nextIndex) => {
@@ -47,107 +45,94 @@ const Hero = () => {
     gsap.to(bgRefs.current[currentSection], {
       scale: direction > 0 ? 1.3 : 0.9,
       duration: duration,
-      ease: ease,
+      ease: ease
     });
 
-    gsap.fromTo(
-      bgRefs.current[nextIndex],
+    gsap.fromTo(bgRefs.current[nextIndex],
       {
-        scale: direction > 0 ? 0.9 : 1.3,
+        scale: direction > 0 ? 0.9 : 1.3
       },
       {
         scale: 1.1,
         duration: duration,
-        ease: ease,
+        ease: ease
       }
     );
 
     // Content animations
-    if (direction > 0) {
-      // Scrolling down
+    if (direction > 0) { // Scrolling down
       // Current section animations (moving up)
       gsap.to(titleRefs.current[currentSection], {
         y: "-100%",
         opacity: 0,
         duration: duration,
-        ease: ease,
+        ease: ease
       });
       gsap.to(imageRefs.current[currentSection], {
         y: "-100%",
         opacity: 0,
         duration: duration,
-        ease: ease,
+        ease: ease
       });
       gsap.to(descRefs.current[currentSection], {
         y: "-100%",
         opacity: 0,
         duration: duration,
-        ease: ease,
+        ease: ease
       });
 
       // Next section animations (coming from below)
-      gsap.fromTo(
-        [
-          titleRefs.current[nextIndex],
-          imageRefs.current[nextIndex],
-          descRefs.current[nextIndex],
-        ],
+      gsap.fromTo([titleRefs.current[nextIndex], imageRefs.current[nextIndex], descRefs.current[nextIndex]],
         {
           y: "100%",
-          opacity: 0,
+          opacity: 0
         },
         {
           y: "0%",
           opacity: 1,
           duration: duration,
           ease: ease,
-          stagger: 0.1,
+          stagger: 0.1
         }
       );
-    } else {
-      // Scrolling up
+    } else { // Scrolling up
       // Current section animations (moving down)
       gsap.to(titleRefs.current[currentSection], {
         y: "100%",
         opacity: 0,
         duration: duration,
-        ease: ease,
+        ease: ease
       });
       gsap.to(imageRefs.current[currentSection], {
         y: "100%",
         opacity: 0,
         duration: duration,
-        ease: ease,
+        ease: ease
       });
       gsap.to(descRefs.current[currentSection], {
         y: "100%",
         opacity: 0,
         duration: duration,
-        ease: ease,
+        ease: ease
       });
 
       // Next section animations (coming from above)
-      gsap.fromTo(
-        [
-          titleRefs.current[nextIndex],
-          imageRefs.current[nextIndex],
-          descRefs.current[nextIndex],
-        ],
+      gsap.fromTo([titleRefs.current[nextIndex], imageRefs.current[nextIndex], descRefs.current[nextIndex]],
         {
           y: "-100%",
-          opacity: 0,
+          opacity: 0
         },
         {
           y: "0%",
           opacity: 1,
           duration: duration,
           ease: ease,
-          stagger: 0.1,
+          stagger: 0.1
         }
       );
     }
   };
-
+  
   // Initial load animation
   useLayoutEffect(() => {
     if (isInitialLoad) {
@@ -164,20 +149,17 @@ const Hero = () => {
       gsap.to(bgRefs.current[0], {
         scale: 1.1,
         duration: duration * 1.2,
-        ease: ease,
+        ease: ease
       });
 
-      gsap.to(
-        [titleRefs.current[0], imageRefs.current[0], descRefs.current[0]],
-        {
-          y: "0%",
-          opacity: 1,
-          duration: duration,
-          ease: ease,
-          stagger: 0.1,
-          onComplete: () => setIsInitialLoad(false),
-        }
-      );
+      gsap.to([titleRefs.current[0], imageRefs.current[0], descRefs.current[0]], {
+        y: "0%",
+        opacity: 1,
+        duration: duration,
+        ease: ease,
+        stagger: 0.1,
+        onComplete: () => setIsInitialLoad(false)
+      });
     }
   }, [isInitialLoad]);
 
@@ -186,94 +168,78 @@ const Hero = () => {
     let touchStartY = 0;
     let lastScrollTime = Date.now();
     const scrollCooldown = 1000;
-
-    // Updated isInView check function
-    const checkIsInView = () => {
-      if (!container) return false;
-      const rect = container.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-
-      // Check if at least 50% of the container is in view
-      const visibleHeight =
-        Math.min(rect.bottom, windowHeight) - Math.max(rect.top, 0);
-      const isVisible = visibleHeight > windowHeight * 0.5;
-
-      // Also check if we're near the container
-      const isNearTop = Math.abs(rect.top) < windowHeight * 0.5;
-      const isNearBottom =
-        Math.abs(rect.bottom - windowHeight) < windowHeight * 0.5;
-
-      return isVisible || isNearTop || isNearBottom;
-    };
-
+    
     const handleScroll = (direction) => {
       const now = Date.now();
       if (isScrolling.current || now - lastScrollTime < scrollCooldown) return;
-
-      if (!checkIsInView()) return;
-
+      
+      const rect = container.getBoundingClientRect();
+      const isInView = rect.top <= 0 && rect.bottom >= window.innerHeight;
+      
+      if (!isInView) return;
+      
       isScrolling.current = true;
       lastScrollTime = now;
-
-      setActiveSection((prev) => {
+      
+      setActiveSection(prev => {
         const next = prev + direction;
         if (next >= 0 && next < sections.length) {
-          // Lock scroll while animating
-          document.body.style.overflow = "hidden";
           animateSection(direction, next);
           return next;
         }
-        // Release scroll lock when reaching ends
         if (prev === sections.length - 1 && direction > 0) {
-          document.body.style.overflow = "auto";
+          document.body.style.overflow = 'auto';
           return prev;
         }
         if (prev === 0 && direction < 0) {
-          document.body.style.overflow = "auto";
+          document.body.style.overflow = 'auto';
           return prev;
         }
         return prev;
       });
-
+      
       setTimeout(() => {
         isScrolling.current = false;
       }, scrollCooldown);
     };
-
+    
+    // Rest of the event handlers remain the same
     const handleWheel = (e) => {
-      if (checkIsInView()) {
+      const rect = container.getBoundingClientRect();
+      const isInView = rect.top <= 0 && rect.bottom >= window.innerHeight;
+      
+      if (isInView) {
         const direction = e.deltaY > 0 ? 1 : -1;
-
-        // Prevent default scroll only when we're between sections
-        if (
-          (activeSection > 0 || (activeSection === 0 && direction > 0)) &&
-          (activeSection < sections.length - 1 ||
-            (activeSection === sections.length - 1 && direction < 0))
-        ) {
+        
+        if ((activeSection > 0 || (activeSection === 0 && direction > 0)) &&
+            (activeSection < sections.length - 1 || (activeSection === sections.length - 1 && direction < 0))) {
           e.preventDefault();
-          handleScroll(direction);
+          document.body.style.overflow = 'hidden';
         }
+        
+        handleScroll(direction);
       }
     };
-
+    
     const handleTouchStart = (e) => {
       touchStartY = e.touches[0].clientY;
     };
-
+    
     const handleTouchMove = (e) => {
-      if (checkIsInView()) {
+      const rect = container.getBoundingClientRect();
+      const isInView = rect.top <= 0 && rect.bottom >= window.innerHeight;
+      
+      if (isInView) {
         const touchEndY = e.touches[0].clientY;
         const direction = touchStartY > touchEndY ? 1 : -1;
-
+        
         if (Math.abs(touchStartY - touchEndY) > 50) {
-          if (
-            (activeSection > 0 || (activeSection === 0 && direction > 0)) &&
-            (activeSection < sections.length - 1 ||
-              (activeSection === sections.length - 1 && direction < 0))
-          ) {
+          if ((activeSection > 0 || (activeSection === 0 && direction > 0)) &&
+              (activeSection < sections.length - 1 || (activeSection === sections.length - 1 && direction < 0))) {
             e.preventDefault();
+            document.body.style.overflow = 'hidden';
           }
-
+          
           handleScroll(direction);
           touchStartY = touchEndY;
         }
@@ -281,86 +247,74 @@ const Hero = () => {
     };
 
     const handleScrollIntoView = () => {
-      if (checkIsInView()) {
-        document.body.style.overflow = "hidden";
+      const rect = container.getBoundingClientRect();
+      if (rect.top <= 0 && rect.bottom >= window.innerHeight) {
+        document.body.style.overflow = 'hidden';
       } else {
-        document.body.style.overflow = "auto";
+        document.body.style.overflow = 'auto';
       }
     };
-
-    // Use passive: false for wheel events to allow preventDefault
-    window.addEventListener("wheel", handleWheel, { passive: false });
-    container.addEventListener("touchstart", handleTouchStart, {
-      passive: true,
-    });
-    container.addEventListener("touchmove", handleTouchMove, {
-      passive: false,
-    });
-    window.addEventListener("scroll", handleScrollIntoView);
-
-    // Initial check
+    
+    window.addEventListener('wheel', handleWheel, { passive: false, capture: true });
+    container.addEventListener('touchstart', handleTouchStart, { passive: true });
+    container.addEventListener('touchmove', handleTouchMove, { passive: false });
+    window.addEventListener('scroll', handleScrollIntoView);
+    
     handleScrollIntoView();
-
+    
     return () => {
-      window.removeEventListener("wheel", handleWheel);
-      container.removeEventListener("touchstart", handleTouchStart);
-      container.removeEventListener("touchmove", handleTouchMove);
-      window.removeEventListener("scroll", handleScrollIntoView);
-      document.body.style.overflow = "auto";
+      window.removeEventListener('wheel', handleWheel, { capture: true });
+      container.removeEventListener('touchstart', handleTouchStart);
+      container.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('scroll', handleScrollIntoView);
+      document.body.style.overflow = 'auto';
     };
   }, [activeSection]);
+  
 
   return (
-    <div
-      ref={containerRef}
-      className="relative w-full h-screen overflow-hidden bg-black isolate"
-    >
+    <div ref={containerRef} className="relative w-full h-screen overflow-hidden bg-black isolate">
       {sections.map((section, index) => (
         <div
           key={index}
           className={`absolute inset-0 w-full h-full overflow-hidden transition-transform duration-1000 ease-in-out ${
-            index === activeSection
-              ? "translate-y-0"
-              : index < activeSection
-              ? "-translate-y-full"
-              : "translate-y-full"
+            index === activeSection ? 'translate-y-0' : 
+            index < activeSection ? '-translate-y-full' : 'translate-y-full'
           }`}
         >
           {/* Background with parallax effect */}
           <div
-            ref={(el) => (bgRefs.current[index] = el)}
+            ref={el => bgRefs.current[index] = el}
             className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
             style={{
               backgroundImage: `url(${section.bgImage})`,
               transform: `scale(${isInitialLoad && index === 0 ? 1.2 : 1.1})`,
-              transformOrigin: "center",
-              willChange: "transform",
+              transformOrigin: 'center',
+              willChange: 'transform'
             }}
           />
-
+          
           {/* Background gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/40" />
-
+          
           {/* Content */}
           <div className="relative z-10 h-full">
-            <div
-              className={`container mx-auto h-full ${
-                index === activeSection ? "opacity-100" : "opacity-0"
-              }`}
-            >
+            <div className={`container mx-auto h-full ${
+              index === activeSection ? 'opacity-100' : 'opacity-0'
+            }`}>
               {/* Mobile Layout */}
               <div className="flex flex-col h-full md:hidden px-4 pt-16">
                 <div className="flex-none section-text z-20 mb-8">
-                  <h2
-                    ref={(el) => (titleRefs.current[index] = el)}
+                  <h2 
+                    ref={el => titleRefs.current[index] = el}
                     className="text-4xl text-white whitespace-pre-line text-center"
                   >
                     {section.content.title}
                   </h2>
                 </div>
-
-                <div
-                  ref={(el) => (imageRefs.current[index] = el)}
+                
+                <div 
+                  ref={el => imageRefs.current[index] = el}
                   className="flex-1 flex items-center justify-center relative"
                 >
                   <img
@@ -368,24 +322,20 @@ const Hero = () => {
                     alt="Section Visual"
                     className="w-3/4 h-auto relative z-10"
                   />
-                  {index === 0 &&
-                    section.content.overlayImages &&
-                    section.content.overlayImages.map((img, i) => (
-                      <img
-                        key={i}
-                        src={img}
-                        alt={`Overlay ${i + 1}`}
-                        className={`absolute ${
-                          i === 0
-                            ? "top-1/2 -translate-y-1/4 scale-150"
-                            : "top-0"
-                        } w-3/4 h-auto z-${9 - i}`}
-                      />
-                    ))}
+                  {index === 0 && section.content.overlayImages && section.content.overlayImages.map((img, i) => (
+                    <img
+                      key={i}
+                      src={img}
+                      alt={`Overlay ${i + 1}`}
+                      className={`absolute ${
+                        i === 0 ? 'top-1/2 -translate-y-1/4 scale-150' : 'top-0'
+                      } w-3/4 h-auto z-${9 - i}`}
+                    />
+                  ))}
                 </div>
-
-                <div
-                  ref={(el) => (descRefs.current[index] = el)}
+                
+                <div 
+                  ref={el => descRefs.current[index] = el}
                   className="flex-none section-text z-20 mt-8 mb-16"
                 >
                   <p className="text-white/80 text-lg text-center px-4">
@@ -408,19 +358,17 @@ const Hero = () => {
                       <div className="absolute inset-0 border-8 border-red-500"></div>
                     </div>
                   )}
-                  <h2
-                    ref={(el) => (titleRefs.current[index] = el)}
-                    className={`relative ${
-                      index === 0 ? "top-0 left-12" : "top-0 left-24"
-                    } text-7xl text-white font-uni whitespace-pre-line`}
+                  <h2 
+                    ref={el => titleRefs.current[index] = el}
+                    className={`relative ${index === 0 ? 'top-0 left-12' : 'top-0 left-24'} text-7xl text-white font-uni whitespace-pre-line`}
                   >
                     {section.content.title}
                   </h2>
                 </div>
 
                 {/* Middle column - Images */}
-                <div
-                  ref={(el) => (imageRefs.current[index] = el)}
+                <div 
+                  ref={el => imageRefs.current[index] = el}
                   className="relative"
                 >
                   <img
@@ -428,26 +376,22 @@ const Hero = () => {
                     alt="Section Visual"
                     className="w-full h-auto relative z-10"
                   />
-                  {index === 0 &&
-                    section.content.overlayImages &&
-                    section.content.overlayImages.map((img, i) => (
-                      <img
-                        key={i}
-                        src={img}
-                        alt={`Overlay ${i + 1}`}
-                        className={`absolute ${
-                          i === 0 ? "top-60 scale-[2]" : "top-6"
-                        } w-full h-auto z-${9 - i}`}
-                      />
-                    ))}
+                  {index === 0 && section.content.overlayImages && section.content.overlayImages.map((img, i) => (
+                    <img
+                      key={i}
+                      src={img}
+                      alt={`Overlay ${i + 1}`}
+                      className={`absolute ${
+                        i === 0 ? 'top-60 scale-[2]' : 'top-6'
+                      } w-full h-auto z-${9 - i}`}
+                    />
+                  ))}
                 </div>
 
                 {/* Right column - Description */}
-                <div
-                  ref={(el) => (descRefs.current[index] = el)}
-                  className={`relative ${
-                    index === 0 ? "top-40" : "top-40 right-24"
-                  } section-text z-20`}
+                <div 
+                  ref={el => descRefs.current[index] = el}
+                  className={`relative ${index === 0 ? 'top-40' : 'top-40 right-24'} section-text z-20`}
                 >
                   <p className="text-white/80 text-lg text-right">
                     {section.content.description}
@@ -461,7 +405,7 @@ const Hero = () => {
           </div>
         </div>
       ))}
-
+      
       {/* Navigation dots */}
       <div className="absolute right-8 top-1/2 -translate-y-1/2 flex flex-col gap-4 z-50">
         {sections.map((_, index) => (
@@ -473,9 +417,7 @@ const Hero = () => {
               setActiveSection(index);
             }}
             className={`w-1 h-1 rounded-full transition-all duration-300 ${
-              index === activeSection
-                ? "bg-white scale-150"
-                : "bg-white/50 hover:bg-white/75"
+              index === activeSection ? 'bg-white scale-150' : 'bg-white/50 hover:bg-white/75'
             }`}
             aria-label={`Go to slide ${index + 1}`}
           />
