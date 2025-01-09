@@ -170,13 +170,15 @@ const Hero = () => {
     const scrollCooldown = 1000;
     
     const handleScroll = (direction) => {
+ 
+      
       const now = Date.now();
       if (isScrolling.current || now - lastScrollTime < scrollCooldown) return;
       
       const rect = container.getBoundingClientRect();
-      const isInView = rect.top <= 0 && rect.bottom >= window.innerHeight;
-      // console.log(rect, window.innerHeight);
-      
+      const isInView = rect.top <= 0 && rect.bottom >= window.innerHeight * 0.8;
+    
+     
       if (!isInView) return;
       
       isScrolling.current = true;
@@ -207,8 +209,8 @@ const Hero = () => {
     // Rest of the event handlers remain the same
     const handleWheel = (e) => {
       const rect = container.getBoundingClientRect();
-      const isInView = rect.top <= 0 && rect.bottom >= window.innerHeight;
-      
+      const isInView = rect.top <= 0 && rect.bottom >= window.innerHeight * 0.8;
+     
       if (isInView) {
         const direction = e.deltaY > 0 ? 1 : -1;
         
@@ -217,7 +219,7 @@ const Hero = () => {
           e.preventDefault();
           document.body.style.overflow = 'hidden';
         }
-        
+    
         handleScroll(direction);
       }
     };
@@ -249,7 +251,7 @@ const Hero = () => {
 
     const handleScrollIntoView = () => {
       const rect = container.getBoundingClientRect();
-      if (rect.top <= 0 && rect.bottom >= window.innerHeight) {
+      if (rect.top <= 0 && rect.bottom >= window.innerHeight * 0.8) {
         document.body.style.overflow = 'hidden';
       } else {
         document.body.style.overflow = 'auto';
@@ -278,7 +280,7 @@ const Hero = () => {
       {sections.map((section, index) => (
         <div
           key={index}
-          className={`absolute inset-0 w-full h-full overflow-hidden transition-transform duration-1000 ease-in-out ${
+          className={`absolute inset-0  w-full h-full overflow-hidden transition-transform duration-1000 ease-in-out ${
             index === activeSection ? 'translate-y-0' : 
             index < activeSection ? '-translate-y-full' : 'translate-y-full'
           }`}
@@ -299,7 +301,7 @@ const Hero = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/40" />
           
           {/* Content */}
-          <div className="relative z-10 h-full">
+          <div className="relative z-10 h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className={`container mx-auto h-full ${
               index === activeSection ? 'opacity-100' : 'opacity-0'
             }`}>
