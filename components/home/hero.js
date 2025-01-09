@@ -170,12 +170,15 @@ const Hero = () => {
     const scrollCooldown = 1000;
     
     const handleScroll = (direction) => {
+ 
+      
       const now = Date.now();
       if (isScrolling.current || now - lastScrollTime < scrollCooldown) return;
       
       const rect = container.getBoundingClientRect();
-      const isInView = rect.top <= 0 && rect.bottom >= window.innerHeight;
-      
+      const isInView = rect.top <= 0 && rect.bottom + 1 >= window.innerHeight;
+    
+     
       if (!isInView) return;
       
       isScrolling.current = true;
@@ -206,8 +209,8 @@ const Hero = () => {
     // Rest of the event handlers remain the same
     const handleWheel = (e) => {
       const rect = container.getBoundingClientRect();
-      const isInView = rect.top <= 0 && rect.bottom >= window.innerHeight;
-      
+      const isInView = rect.top <= 0 && rect.bottom + 1 >= window.innerHeight;
+     
       if (isInView) {
         const direction = e.deltaY > 0 ? 1 : -1;
         
@@ -216,7 +219,7 @@ const Hero = () => {
           e.preventDefault();
           document.body.style.overflow = 'hidden';
         }
-        
+    
         handleScroll(direction);
       }
     };
@@ -227,7 +230,7 @@ const Hero = () => {
     
     const handleTouchMove = (e) => {
       const rect = container.getBoundingClientRect();
-      const isInView = rect.top <= 0 && rect.bottom >= window.innerHeight;
+      const isInView = rect.top <= 0 && rect.bottom + 1 >= window.innerHeight;
       
       if (isInView) {
         const touchEndY = e.touches[0].clientY;
@@ -248,7 +251,7 @@ const Hero = () => {
 
     const handleScrollIntoView = () => {
       const rect = container.getBoundingClientRect();
-      if (rect.top <= 0 && rect.bottom >= window.innerHeight) {
+      if (rect.top <= 0 && rect.bottom + 1 >= window.innerHeight) {
         document.body.style.overflow = 'hidden';
       } else {
         document.body.style.overflow = 'auto';
@@ -277,7 +280,7 @@ const Hero = () => {
       {sections.map((section, index) => (
         <div
           key={index}
-          className={`absolute inset-0 w-full h-full overflow-hidden transition-transform duration-1000 ease-in-out ${
+          className={`absolute inset-0  w-full h-full overflow-hidden transition-transform duration-1000 ease-in-out ${
             index === activeSection ? 'translate-y-0' : 
             index < activeSection ? '-translate-y-full' : 'translate-y-full'
           }`}
@@ -298,7 +301,7 @@ const Hero = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/40" />
           
           {/* Content */}
-          <div className="relative z-10 h-full">
+          <div className="relative z-10 h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className={`container mx-auto h-full ${
               index === activeSection ? 'opacity-100' : 'opacity-0'
             }`}>
@@ -354,13 +357,13 @@ const Hero = () => {
                 {/* Left column - Title */}
                 <div className="section-text z-20">
                   {index === 1 && (
-                    <div className="hidden md:block relative left-80 top-16 w-24 h-24 border-8 border-red-500">
+                    <div className="hidden md:block relative left-48 -top-8 w-24 h-24 border-8 border-red-500">
                       <div className="absolute inset-0 border-8 border-red-500"></div>
                     </div>
                   )}
                   <h2 
                     ref={el => titleRefs.current[index] = el}
-                    className={`relative ${index === 0 ? 'top-0 left-12' : 'top-0 left-24'} text-7xl text-white font-uni whitespace-pre-line`}
+                    className={`relative ${index === 0 ? 'top-0 left-0' : '-top-20 left-0'} text-7xl text-white font-uni whitespace-pre-line`}
                   >
                     {section.content.title}
                   </h2>
@@ -391,7 +394,7 @@ const Hero = () => {
                 {/* Right column - Description */}
                 <div 
                   ref={el => descRefs.current[index] = el}
-                  className={`relative ${index === 0 ? 'top-40' : 'top-40 right-24'} section-text z-20`}
+                  className={`relative ${index === 0 ? 'top-40 right-0' : 'top-40 right-0'} section-text z-20`}
                 >
                   <p className="text-white/80 text-lg text-right">
                     {section.content.description}
