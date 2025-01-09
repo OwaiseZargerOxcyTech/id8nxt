@@ -273,7 +273,7 @@ const Hero = () => {
   
 
   return (
-    <div ref={containerRef} className="relative w-full h-screen overflow-hidden bg-black isolate">
+    <div ref={containerRef} className="relative w-full min-h-screen overflow-hidden bg-black isolate">
       {sections.map((section, index) => (
         <div
           key={index}
