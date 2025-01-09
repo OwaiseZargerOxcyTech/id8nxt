@@ -168,22 +168,16 @@ const Hero = () => {
     let touchStartY = 0;
     let lastScrollTime = Date.now();
     const scrollCooldown = 1000;
-
-    const isElementInView = (rect) => {
-      const threshold = window.innerHeight * 0.3; // 30% threshold for more lenient detection
-      return (
-        (rect.top >= -threshold && rect.top <= threshold) || // Element's top is near viewport
-        (rect.bottom >= window.innerHeight - threshold && rect.bottom <= window.innerHeight + threshold) || // Element's bottom is near viewport
-        (rect.top <= 0 && rect.bottom >= window.innerHeight) // Element fully covers viewport
-      );
-    };
     
     const handleScroll = (direction) => {
       const now = Date.now();
       if (isScrolling.current || now - lastScrollTime < scrollCooldown) return;
       
       const rect = container.getBoundingClientRect();
-      if (!isElementInView(rect)) return;
+      const isInView = rect.top <= 0 && rect.bottom >= window.innerHeight;
+      // console.log(rect, window.innerHeight);
+      
+      if (!isInView) return;
       
       isScrolling.current = true;
       lastScrollTime = now;
@@ -213,7 +207,9 @@ const Hero = () => {
     // Rest of the event handlers remain the same
     const handleWheel = (e) => {
       const rect = container.getBoundingClientRect();
-      if (isElementInView(rect)) {
+      const isInView = rect.top <= 0 && rect.bottom >= window.innerHeight;
+      
+      if (isInView) {
         const direction = e.deltaY > 0 ? 1 : -1;
         
         if ((activeSection > 0 || (activeSection === 0 && direction > 0)) &&
@@ -232,14 +228,17 @@ const Hero = () => {
     
     const handleTouchMove = (e) => {
       const rect = container.getBoundingClientRect();
-      if (isElementInView(rect)) {
+      const isInView = rect.top <= 0 && rect.bottom >= window.innerHeight;
+      
+      if (isInView) {
         const touchEndY = e.touches[0].clientY;
         const direction = touchStartY > touchEndY ? 1 : -1;
         
         if (Math.abs(touchStartY - touchEndY) > 50) {
           if ((activeSection > 0 || (activeSection === 0 && direction > 0)) &&
               (activeSection < sections.length - 1 || (activeSection === sections.length - 1 && direction < 0))) {
-            e.preventDefault();document.body.style.overflow = 'hidden';
+            e.preventDefault();
+            document.body.style.overflow = 'hidden';
           }
           
           handleScroll(direction);
@@ -250,13 +249,13 @@ const Hero = () => {
 
     const handleScrollIntoView = () => {
       const rect = container.getBoundingClientRect();
-      if (isElementInView(rect)) {
+      if (rect.top <= 0 && rect.bottom >= window.innerHeight) {
         document.body.style.overflow = 'hidden';
       } else {
         document.body.style.overflow = 'auto';
       }
     };
-
+    
     window.addEventListener('wheel', handleWheel, { passive: false, capture: true });
     container.addEventListener('touchstart', handleTouchStart, { passive: true });
     container.addEventListener('touchmove', handleTouchMove, { passive: false });
@@ -275,7 +274,7 @@ const Hero = () => {
   
 
   return (
-    <div ref={containerRef} className="relative w-full min-h-screen overflow-hidden bg-black isolate">
+    <div ref={containerRef} className="relative w-full h-screen overflow-hidden bg-black isolate">
       {sections.map((section, index) => (
         <div
           key={index}
