@@ -1,4 +1,3 @@
-import HeroSection from "@/components/about/about-hero";
 import HeroAbout from "@/components/about/hero";
 import OurTeam from "@/components/about/our-team";
 import WhoWeAre from "@/components/about/whoweare";
@@ -8,7 +7,6 @@ import { Footer } from "@/components/footer/homeFooter/footer";
 export default function AboutPage() {
   return (
     <main>
-      {/* <HeroSection /> */}
       <HeroAbout />
       <WhoWeAre />
       <OurTeam />
