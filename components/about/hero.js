@@ -38,9 +38,9 @@ const HeroAbout = () => {
   return (
     <div ref={headerRef} className="relative min-h-screen bg-black overflow-hidden">
       {/* Title */}
-      <div ref={titleRef} className="absolute top-1/4 left-16 z-10">
-        <h1 className="text-6xl font-bold text-white mb-4">Creatively Led.</h1>
-        <h1 className="text-6xl font-bold text-white">Results Driven.</h1>
+      <div ref={titleRef} className="absolute top-1/4 left-32 z-10">
+        <h1 className="text-6xl font-light text-white mb-4">Creatively Led.</h1>
+        <h1 className="text-6xl font-light text-white">Results Driven.</h1>
       </div>
 
       {/* Background Elements (Leaves and Bulbs) */}
