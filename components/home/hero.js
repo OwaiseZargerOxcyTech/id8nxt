@@ -44,26 +44,30 @@ const Hero = () => {
 
   // Create continuous background zoom animation
   const startBackgroundAnimation = (index) => {
-    gsap.killTweensOf(bgRefs.current[index]); // Kill existing animation
-    gsap.to(bgRefs.current[index], {
-      scale: 1.2,
-      duration: 3,
-      ease: "none",
-      repeat: -1,
-      yoyo: true,
-    });
+    if (!bgRefs.current[index].animationStarted) {
+      gsap.to(bgRefs.current[index], {
+        scale: 1.2,
+        duration: 3,
+        ease: "none",
+        repeat: -1,
+        yoyo: true,
+      });
+      bgRefs.current[index].animationStarted = true;
+    }
   };
 
   // Create zoom animation for images
   const startZoomAnimation = (index) => {
-    gsap.killTweensOf(imageRefs.current[index]); // Kill existing animation
-    gsap.to(imageRefs.current[index], {
-      scale: 1.1, // Zoom to 110% of original size
-      duration: 3,
-      ease: "sine.inOut",
-      repeat: -1,
-      yoyo: true,
-    });
+    if (!imageRefs.current[index].animationStarted) {
+      gsap.to(imageRefs.current[index], {
+        scale: 1.1, // Zoom to 110% of original size
+        duration: 3,
+        ease: "sine.inOut",
+        repeat: -1,
+        yoyo: true,
+      });
+      imageRefs.current[index].animationStarted = true;
+    }
   };
 
   const animateSection = (direction, nextIndex) => {
@@ -330,6 +334,18 @@ const Hero = () => {
       document.body.style.overflow = "auto";
     };
   }, [activeSection]);
+
+  useLayoutEffect(() => {
+    const interval = setInterval(() => {
+      setActiveSection((prev) => {
+        const next = (prev + 1) % sections.length;
+        animateSection(1, next);
+        return next;
+      });
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div
