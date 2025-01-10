@@ -9,9 +9,6 @@ export default function TechSolutions() {
     <main>
       <HeroSection />
       <ProjectsFilter />
-      <ImageGrid data={data1} />
-      <ImageGrid data={data2} />
-      <ImageGrid data={data3} />
       <Footer color={"white"} textColor={"black"} />
     </main>
   );

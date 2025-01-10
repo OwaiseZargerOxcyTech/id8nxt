@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import CaseStudy from "./case-study";
+import DailyCreativity from "./daily-creativity";
 
 export default function ProjectsFilter() {
   const [filter, setFilter] = useState("");
@@ -13,7 +15,7 @@ export default function ProjectsFilter() {
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-4 pt-12 md:pt-28 pb-10">
       {/* Title */}
-      <h2 className="mb-12 md:mb-24 text-4xl font-semibold sm:text-5xl lg:text-5xl">
+      <h2 className="mb-12 md:mb-24 text-4xl font-light sm:text-5xl lg:text-5xl">
         Our Recent
         <br />
         Projects
@@ -59,6 +61,12 @@ export default function ProjectsFilter() {
             Reset
           </button>
         </div>
+      </div>
+
+      {/* Conditional Rendering */}
+      <div className="mt-12">
+        {activeTab === "case-study" && <CaseStudy />}
+        {activeTab === "daily-creativity" && <DailyCreativity />}
       </div>
     </div>
   );
