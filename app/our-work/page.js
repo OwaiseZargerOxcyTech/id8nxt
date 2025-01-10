@@ -1,4 +1,3 @@
-import ImageGrid from "@/components/common-image-grid";
 import { Footer } from "@/components/footer/footer";
 import HeroSection from "@/components/our-work/hero-section";
 import ProjectsFilter from "@/components/our-work/projects-filter";
