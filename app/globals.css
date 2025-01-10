@@ -2,3 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 
+@font-face {
+  font-family: "Uni Neue";
+  src: url("/fonts/UniNeue-Trial-Regular.woff2") format("woff2"),
+       url("/fonts/UniNeue-Trial-Regular.woff") format("woff"),
+       url("/fonts/UniNeue-Trial-Regular.eot") format("embedded-opentype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Uni Neue";
+  src: url("/fonts/UniNeue-Trial-BoldItalic.woff2") format("woff2"),
+       url("/fonts/UniNeue-Trial-Bold.woff") format("woff"),
+       url("/fonts/UniNeue-Trail-Bold.eot") format("embedded-opentype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+ */
+ 
+/* Scrollbar  style*/
+.ps:hover>.ps__rail-x {
+  display: none !important;
+}
+
+.scrollbar-container::-webkit-scrollbar {
+  background-color: #f1f1f1;
+  border-radius: 0px !important;
+  width: 0px !important;
+  height: 0px !important;
+  cursor: pointer !important;
+}
+
+.scrollbar-container::-webkit-scrollbar-thumb {
+  background-color: #c1c1c1;
+  border-radius: 0px !important;
+  cursor: pointer !important;
+}

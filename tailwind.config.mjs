@@ -7,11 +7,24 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Poppins', 'sans-serif'], // Add Poppins as the primary font
+        uni: ['"Uni Neue"', 'sans-serif'],
+      },
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        primary: {
+          red: '#da1f3d',
+          navy: '#051432',
+          black: '#333132',
+        },
+        secondary: {
+          white: '#ffffff',
+          lime: '#cadb36',
+          gray: '#a7a9ac',
+        },
       },
     },
+    
   },
   plugins: [],
 };
