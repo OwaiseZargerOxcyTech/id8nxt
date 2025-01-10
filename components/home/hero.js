@@ -74,7 +74,7 @@ const Hero = () => {
     if (isEnter) {
       gsap.to(imageRefs.current[index], {
         x: "2px",
-        duration: 0.2,
+        duration: 0.4,
         repeat: 3,
         yoyo: true,
         ease: "power1.inOut",
