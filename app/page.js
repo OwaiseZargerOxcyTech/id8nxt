@@ -17,7 +17,7 @@ export default function Home() {
       <FeatureCards />
       <ClientLogos />
       <ContactForm backColor={"#da1f3d"}/>
-      <Footer backColor={"#da1f3d"} isAbout={false}/>
+      <Footer color={"#da1f3d"} textColor={"white"}/>
     </main>
   );
 }
