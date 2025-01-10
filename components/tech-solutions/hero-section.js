@@ -6,7 +6,7 @@ export default function HeroSection() {
       {/* Full-screen Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/tech-solutions/istockphoto-1300760288-612x612.jpg"
+          src="/images/home/home-hero-bg-2.png"
           alt="Statue with telescope representing vision and innovation"
           layout="fill"
           priority
@@ -16,7 +16,7 @@ export default function HeroSection() {
       {/* Overlay Content */}
       <div className="relative z-10 flex items-center justify-start ml-4 md:ml-16 min-h-screen text-center">
         <div className="text-white space-y-6 px-4 max-w-4xl">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light leading-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light leading-tight text-left">
             Tech
             <br />
             Solutions

@@ -61,7 +61,9 @@ export default function ServicesSection() {
         <div className="grid md:grid-cols-3 gap-8 items-center">
           {/* Left Section: Header */}
           <div>
-            <h2 className="text-5xl font-semibold text-black max-w-4">Tech Solutions</h2>
+            <h2 className="text-5xl font-semibold text-black max-w-4">
+              Tech Solutions
+            </h2>
           </div>
 
           {/* Right Section: Description */}

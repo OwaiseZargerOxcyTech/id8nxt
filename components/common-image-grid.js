@@ -2,7 +2,7 @@ import React from "react";
 
 const ImageGrid = ({ data }) => {
   return (
-    <div className="container mx-auto p-4 mb-24">
+    <div className="container mx-auto p-4 my-20">
       <div className="flex flex-col space-y-16">
         {/* First row */}
         <div className="flex flex-col md:flex-row space-y-8 md:space-y-0">
