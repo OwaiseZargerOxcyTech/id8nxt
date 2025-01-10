@@ -11,7 +11,7 @@ export default function AboutPage() {
       <WhoWeAre />
       <OurTeam />
       <ContactForm backColor={"black"} />
-      <Footer backColor={"black"} isAbout={true} />
+      <Footer color={"black"} textColor={"white"} />
     </main>
   );
 }
