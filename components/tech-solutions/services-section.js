@@ -1,7 +1,7 @@
 "use client";
-import React, { useState } from "react";
-import { useMediaQuery } from "@/hooks/use-media-query";
+import React from "react";
 import CommonServicesSection from "../common-services-section";
+import { services_data } from "./services-data";
 
 export default function ServicesSection() {
   return (
@@ -25,7 +25,10 @@ export default function ServicesSection() {
             </p>
           </div>
         </div>
-        <CommonServicesSection />
+        <CommonServicesSection
+          initialService={"Web Personalization"}
+          services_data={services_data}
+        />
       </section>
     </section>
   );
