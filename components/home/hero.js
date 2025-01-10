@@ -34,6 +34,9 @@ const Hero = () => {
         description:
           "We offer branding, print, and digital marketing services across India.",
         mainImage: "/images/home/V2.png",
+
+        overlayImages: ["/images/home/sec-2-rectangle.png"],
+
         hasBoxDecoration: true,
       },
     },
@@ -78,33 +81,56 @@ const Hero = () => {
     const duration = 0.8;
     const ease = "power2.inOut";
 
-    // Animate all content at once
-    const elements = [
-      titleRefs.current[currentSection],
-      imageRefs.current[currentSection],
-      descRefs.current[currentSection],
-      overlayRefs.current[currentSection],
-      ,
-    ];
-
-    // Exit animation for current section
-    gsap.to(elements, {
-      y: direction > 0 ? "-100%" : "100%",
+    // Current section animations
+    // When scrolling down: bg exits down, content exits down
+    // When scrolling up: bg exits up, content exits up
+    gsap.to(bgRefs.current[currentSection], {
+      y: direction > 0 ? "100%" : "-100%",
       opacity: 0,
       duration: duration,
       ease: ease,
     });
 
-    // Enter animation for next section
-    const nextElements = [
+    const contentElements = [
+      titleRefs.current[currentSection],
+      imageRefs.current[currentSection],
+      descRefs.current[currentSection],
+      ...(overlayRefs.current[currentSection] || []),
+    ];
+
+    gsap.to(contentElements, {
+      y: direction > 0 ? "100%" : "-100%",
+      opacity: 0,
+      duration: duration,
+      ease: ease,
+    });
+
+    // Next section animations
+    // When scrolling down: bg enters from top, content enters from bottom
+    // When scrolling up: bg enters from bottom, content enters from top
+    gsap.fromTo(
+      bgRefs.current[nextIndex],
+      {
+        y: direction > 0 ? "-100%" : "100%",
+        opacity: 0,
+      },
+      {
+        y: "0%",
+        opacity: 1,
+        duration: duration,
+        ease: ease,
+      }
+    );
+
+    const nextContentElements = [
       titleRefs.current[nextIndex],
       imageRefs.current[nextIndex],
       descRefs.current[nextIndex],
-      overlayRefs.current[nextIndex],
+      ...(overlayRefs.current[nextIndex] || []),
     ];
 
     gsap.fromTo(
-      nextElements,
+      nextContentElements,
       {
         y: direction > 0 ? "100%" : "-100%",
         opacity: 0,
@@ -115,23 +141,38 @@ const Hero = () => {
         duration: duration,
         ease: ease,
         onComplete: () => {
-          // Start continuous animations for new section
           startBackgroundAnimation(nextIndex);
           startZoomAnimation(nextIndex);
         },
       }
     );
   };
-
+  // Initial load animation
   // Initial load animation
   useLayoutEffect(() => {
     if (isInitialLoad) {
       const duration = 0.8;
       const ease = "power2.out";
 
-      // Set initial positions
+      // Hide all sections except the first one
+      sections.forEach((_, index) => {
+        if (index !== 0) {
+          gsap.set(bgRefs.current[index], { opacity: 0, y: "100%" });
+          gsap.set(
+            [
+              titleRefs.current[index],
+              imageRefs.current[index],
+              descRefs.current[index],
+              ...(overlayRefs.current[index] || []),
+            ],
+            { opacity: 0, y: "100%" }
+          );
+        }
+      });
+
+      // Set initial positions for first section
       gsap.set(bgRefs.current[0], {
-        y: "-100%", // Background starts from above
+        y: "-100%",
         opacity: 0,
       });
 
@@ -140,10 +181,10 @@ const Hero = () => {
           titleRefs.current[0],
           imageRefs.current[0],
           descRefs.current[0],
-          overlayRefs.current[0],
+          ...(overlayRefs.current[0] || []),
         ],
         {
-          y: "100%", // Other elements start from below
+          y: "100%",
           opacity: 0,
         }
       );
@@ -162,7 +203,7 @@ const Hero = () => {
           titleRefs.current[0],
           imageRefs.current[0],
           descRefs.current[0],
-          overlayRefs.current[0],
+          ...(overlayRefs.current[0] || []),
         ],
         {
           y: "0%",
@@ -178,9 +219,6 @@ const Hero = () => {
       );
     }
   }, [isInitialLoad]);
-
-
-
 
   useLayoutEffect(() => {
     const container = containerRef.current;
@@ -311,13 +349,13 @@ const Hero = () => {
       {sections.map((section, index) => (
         <div
           key={index}
-          className={`absolute inset-0 w-full h-full overflow-hidden transition-transform duration-1000 ease-in-out ${
-            index === activeSection
-              ? "translate-y-0"
-              : index < activeSection
-              ? "-translate-y-full"
-              : "translate-y-full"
+          className={`absolute inset-0 w-full h-full overflow-hidden ${
+            index === 0 ? "visible" : "invisible"
           }`}
+          style={{
+            visibility: index === activeSection ? "visible" : "hidden",
+            zIndex: index === activeSection ? 1 : 0,
+          }}
         >
           {/* Background */}
           <div
@@ -326,11 +364,9 @@ const Hero = () => {
             style={{
               backgroundImage: `url(${section.bgImage})`,
               willChange: "transform",
+              opacity: index === 0 ? 1 : 0, // Initially hide all backgrounds except first
             }}
           />
-
-          {/* Background gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/40" />
 
           {/* Content */}
           <div className="relative z-10 h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -397,9 +433,16 @@ const Hero = () => {
               <div className="hidden md:grid md:grid-cols-3 gap-8 px-4 h-full items-center">
                 <div className="section-text z-20">
                   {index === 1 && (
-                    <div className="hidden md:block relative left-48 -top-8 w-24 h-24 border-8 border-red-500">
-                      <div className="absolute inset-0 border-8 border-red-500"></div>
-                    </div>
+                    <img
+                      ref={(el) => {
+                        if (!overlayRefs.current[1])
+                          overlayRefs.current[1] = [];
+                        overlayRefs.current[1][0] = el;
+                      }}
+                      src="/images/home/sec-2-rectangle.png"
+                      alt="Decorative Rectangle"
+                      className="absolute w-36 top-24 left-40 z-0"
+                    />
                   )}
                   <h2
                     ref={(el) => (titleRefs.current[index] = el)}
