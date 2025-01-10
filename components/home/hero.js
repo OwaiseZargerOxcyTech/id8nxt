@@ -5,8 +5,10 @@ import gsap from "gsap";
 const Hero = () => {
   const [activeSection, setActiveSection] = useState(0);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
+  const [autoplayEnabled, setAutoplayEnabled] = useState(true);
   const containerRef = useRef(null);
   const isScrolling = useRef(false);
+  const autoplayTimerRef = useRef(null);
   const titleRefs = useRef([]);
   const imageRefs = useRef([]);
   const descRefs = useRef([]);
@@ -80,10 +82,9 @@ const Hero = () => {
         ease: "power1.inOut",
         onComplete: () => {
           gsap.set(imageRefs.current[index], { x: 0 });
-        }
+        },
       });
     }
-   
   };
 
   const animateSection = (direction, nextIndex) => {
@@ -230,6 +231,22 @@ const Hero = () => {
     }
   }, [isInitialLoad]);
 
+  const resetAutoplayTimer = () => {
+    if (autoplayTimerRef.current) {
+      clearInterval(autoplayTimerRef.current);
+    }
+
+    if (autoplayEnabled) {
+      autoplayTimerRef.current = setInterval(() => {
+        setActiveSection((prev) => {
+          const next = (prev + 1) % sections.length;
+          animateSection(1, next);
+          return next;
+        });
+      }, 5000);
+    }
+  };
+
   useLayoutEffect(() => {
     const container = containerRef.current;
     let touchStartY = 0;
@@ -252,10 +269,12 @@ const Hero = () => {
         const next = prev + direction;
         if (next >= 0 && next < sections.length) {
           animateSection(direction, next);
+          resetAutoplayTimer(); // Reset timer on manual scroll
           return next;
         }
         if (prev === sections.length - 1 && direction > 0) {
           document.body.style.overflow = "auto";
+          setAutoplayEnabled(false); // Disable autoplay when scrolling past last section
           return prev;
         }
         if (prev === 0 && direction < 0) {
@@ -268,6 +287,20 @@ const Hero = () => {
       setTimeout(() => {
         isScrolling.current = false;
       }, scrollCooldown);
+    };
+
+    const handleScrollIntoView = () => {
+      const rect = container.getBoundingClientRect();
+      const isInView = rect.top <= 0 && rect.bottom + 1 >= window.innerHeight;
+
+      if (isInView) {
+        document.body.style.overflow = "hidden";
+        setAutoplayEnabled(true); // Re-enable autoplay when hero section is in view
+        resetAutoplayTimer();
+      } else {
+        document.body.style.overflow = "auto";
+        setAutoplayEnabled(false);
+      }
     };
 
     // Rest of the event handlers remain the same
@@ -319,15 +352,6 @@ const Hero = () => {
       }
     };
 
-    const handleScrollIntoView = () => {
-      const rect = container.getBoundingClientRect();
-      if (rect.top <= 0 && rect.bottom + 1 >= window.innerHeight) {
-        document.body.style.overflow = "hidden";
-      } else {
-        document.body.style.overflow = "auto";
-      }
-    };
-
     window.addEventListener("wheel", handleWheel, {
       passive: false,
       capture: true,
@@ -351,17 +375,15 @@ const Hero = () => {
     };
   }, [activeSection]);
 
+  // Initialize autoplay timer
   useLayoutEffect(() => {
-    const interval = setInterval(() => {
-      setActiveSection((prev) => {
-        const next = (prev + 1) % sections.length;
-        animateSection(1, next);
-        return next;
-      });
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, []);
+    resetAutoplayTimer();
+    return () => {
+      if (autoplayTimerRef.current) {
+        clearInterval(autoplayTimerRef.current);
+      }
+    };
+  }, [autoplayEnabled]);
 
   return (
     <div
