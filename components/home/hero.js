@@ -44,9 +44,10 @@ const Hero = () => {
 
   // Create continuous background zoom animation
   const startBackgroundAnimation = (index) => {
+    gsap.killTweensOf(bgRefs.current[index]); // Kill existing animation
     gsap.to(bgRefs.current[index], {
       scale: 1.2,
-      duration: 4,
+      duration: 3,
       ease: "none",
       repeat: -1,
       yoyo: true,
@@ -55,7 +56,7 @@ const Hero = () => {
 
   // Create zoom animation for images
   const startZoomAnimation = (index) => {
-    // Main image zoom animation
+    gsap.killTweensOf(imageRefs.current[index]); // Kill existing animation
     gsap.to(imageRefs.current[index], {
       scale: 1.1, // Zoom to 110% of original size
       duration: 3,
@@ -63,17 +64,6 @@ const Hero = () => {
       repeat: -1,
       yoyo: true,
     });
-
-    // Overlay images zoom animation (if they exist)
-    if (sections[index].content.overlayImages) {
-      gsap.to(overlayRefs.current[index][1], {
-        scale: 1.1,
-        duration: 3,
-        ease: "sine.inOut",
-        repeat: -1,
-        yoyo: true,
-      });
-    }
   };
 
   const animateSection = (direction, nextIndex) => {
@@ -147,7 +137,7 @@ const Hero = () => {
       }
     );
   };
-  // Initial load animation
+
   // Initial load animation
   useLayoutEffect(() => {
     if (isInitialLoad) {
@@ -344,7 +334,7 @@ const Hero = () => {
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-screen overflow-hidden bg-black isolate"
+      className="relative w-full h-screen overflow-hidden bg-black isolate bg-[url('/images/home/home-hero-bg-1.png')]"
     >
       {sections.map((section, index) => (
         <div
