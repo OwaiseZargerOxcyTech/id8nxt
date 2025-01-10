@@ -1,3 +1,4 @@
+import { Footer } from "@/components/footer/footer";
 import HeroSection from "@/components/our-work/hero-section";
 import PortfolioGrid1 from "@/components/our-work/portfolio-grid-1";
 import PortfolioGrid2 from "@/components/our-work/portfolio-grid-2";
@@ -12,6 +13,7 @@ export default function TechSolutions() {
       <PortfolioGrid1 />
       <PortfolioGrid2 />
       <PortfolioGrid3 />
+      <Footer color={"white"} textColor={"black"} />
     </main>
   );
 }

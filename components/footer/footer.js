@@ -36,10 +36,10 @@ export function Footer({ color, textColor }) {
       style={{ backgroundColor: color }}
     >
       <footer ref={footerRef}>
-        <FooterNav />
+        <FooterNav textColor={textColor} />
         <FooterBanner color={color} textColor={textColor} />
-        <SocialLinks />
-        <Copyright />
+        <SocialLinks textColor={textColor} />
+        <Copyright textColor={textColor} />
       </footer>
     </main>
   );

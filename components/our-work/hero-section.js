@@ -6,7 +6,7 @@ export default function HeroSection() {
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image
-          src="/images/our-work/istockphoto-1300760288-612x612.jpg"
+          src="/images/home/home-hero-bg-1.png"
           alt="Ancient Greek temple on a mountainous landscape"
           fill
           layout="fill"
