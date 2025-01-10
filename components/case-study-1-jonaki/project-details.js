@@ -1,7 +1,8 @@
 export default function ProjectDetails() {
   return (
-    <div className="bg-[#33371a] text-white py-24 px-6 md:px-12 lg:px-24">
-      <div className="max-w-7xl mx-auto -space-y-8 md:space-y-32">
+    <div className="relative bg-[#33371a] text-white py-24 px-6 md:px-12 lg:px-24">
+      <div className="absolute top-0 left-0 w-full h-[500px] bg-gradient-to-b from-black to-[#33371a] z-0"></div>
+      <div className="max-w-7xl mx-auto -space-y-8 md:space-y-32 relative z-10">
         {/* Metadata Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 mb-24">
           {/* Metadata Labels and Values */}
@@ -12,11 +13,15 @@ export default function ProjectDetails() {
             </div>
             <div className="flex items-center space-x-4">
               <h2 className="text-lg font-medium w-1/3">Filter by solution</h2>
-              <p className="text-sm text-gray-300 w-2/3">Brand launch. Relaunch. Repeat.</p>
+              <p className="text-sm text-gray-300 w-2/3">
+                Brand launch. Relaunch. Repeat.
+              </p>
             </div>
             <div className="flex items-center space-x-4">
               <h2 className="text-lg font-medium w-1/3">Areas</h2>
-              <p className="text-sm text-gray-300 w-2/3">Branding | Packaging | Communication</p>
+              <p className="text-sm text-gray-300 w-2/3">
+                Branding | Packaging | Communication
+              </p>
             </div>
           </div>
 
