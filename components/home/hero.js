@@ -50,25 +50,25 @@ const Hero = () => {
     });
   };
 
-  // Create floating animation for images
-  const startFloatingAnimation = (index) => {
-    // Main image floating animation
+  // Create zoom animation for images
+  const startZoomAnimation = (index) => {
+    // Main image zoom animation
     gsap.to(imageRefs.current[index], {
-      y: "20px",
-      duration: 2,
+      scale: 1.1, // Zoom to 110% of original size
+      duration: 3,
       ease: "sine.inOut",
       repeat: -1,
-      yoyo: true
+      yoyo: true,
     });
 
-    // Overlay images floating animation (if they exist)
+    // Overlay images zoom animation (if they exist)
     if (sections[index].content.overlayImages) {
       gsap.to(overlayRefs.current[index][1], {
-        y: "20px",
-      duration: 2,
-      ease: "sine.inOut",
-      repeat: -1,
-      yoyo: true
+        scale: 1.1,
+        duration: 3,
+        ease: "sine.inOut",
+        repeat: -1,
+        yoyo: true,
       });
     }
   };
@@ -117,7 +117,7 @@ const Hero = () => {
         onComplete: () => {
           // Start continuous animations for new section
           startBackgroundAnimation(nextIndex);
-          startFloatingAnimation(nextIndex);
+          startZoomAnimation(nextIndex);
         },
       }
     );
@@ -130,17 +130,40 @@ const Hero = () => {
       const ease = "power2.out";
 
       // Set initial positions
+      gsap.set(bgRefs.current[0], {
+        y: "-100%", // Background starts from above
+        opacity: 0,
+      });
+
       gsap.set(
-        [titleRefs.current[0], imageRefs.current[0], descRefs.current[0], overlayRefs.current[0]],
+        [
+          titleRefs.current[0],
+          imageRefs.current[0],
+          descRefs.current[0],
+          overlayRefs.current[0],
+        ],
         {
-          y: "100%",
+          y: "100%", // Other elements start from below
           opacity: 0,
         }
       );
 
-      // Animate all content in together
+      // Animate background from top
+      gsap.to(bgRefs.current[0], {
+        y: "0%",
+        opacity: 1,
+        duration: 0.6,
+        ease: ease,
+      });
+
+      // Animate other elements from bottom
       gsap.to(
-        [titleRefs.current[0], imageRefs.current[0], descRefs.current[0], overlayRefs.current[0]],
+        [
+          titleRefs.current[0],
+          imageRefs.current[0],
+          descRefs.current[0],
+          overlayRefs.current[0],
+        ],
         {
           y: "0%",
           opacity: 1,
@@ -149,12 +172,15 @@ const Hero = () => {
           onComplete: () => {
             setIsInitialLoad(false);
             startBackgroundAnimation(0);
-            startFloatingAnimation(0);
+            startZoomAnimation(0);
           },
         }
       );
     }
   }, [isInitialLoad]);
+
+
+
 
   useLayoutEffect(() => {
     const container = containerRef.current;
