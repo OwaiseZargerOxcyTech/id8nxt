@@ -28,12 +28,14 @@ const products = [
 
 const ProductDisplay = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   const containerRef = useRef(null);
   const leftImageRef = useRef(null);
   const centerImageRef = useRef(null);
   const rightImageRef = useRef(null);
   const logoRef = useRef(null);
   const textRef = useRef(null);
+  const timerRef = useRef(null);
 
   const animateImages = () => {
     gsap.set(
@@ -96,8 +98,33 @@ const ProductDisplay = () => {
     return () => ctx.revert();
   }, [currentIndex]);
 
+  // Auto-rotation timer effect
+  useEffect(() => {
+    if (!isPaused) {
+      timerRef.current = setInterval(() => {
+        setCurrentIndex((prev) => (prev + 1) % products.length);
+      }, 6000);
+
+      return () => {
+        if (timerRef.current) {
+          clearInterval(timerRef.current);
+        }
+      };
+    }
+  }, [isPaused]);
+
   const handleNext = () => {
+    // Clear the existing timer
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+    }
+    
+    // Update the index
     setCurrentIndex((prev) => (prev + 1) % products.length);
+    
+    // Pause the auto-rotation briefly
+    setIsPaused(true);
+    setTimeout(() => setIsPaused(false), 4000); // Resume after 4 seconds
   };
 
   const currentProduct = products[currentIndex];
