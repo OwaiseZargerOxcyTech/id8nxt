@@ -46,8 +46,8 @@ const Hero = () => {
   const startBackgroundAnimation = (index) => {
     if (!bgRefs.current[index].animationStarted) {
       gsap.to(bgRefs.current[index], {
-        scale: 1.2,
-        duration: 3,
+        scale: 1.5,
+        duration: 5,
         ease: "none",
         repeat: -1,
         yoyo: true,
@@ -61,13 +61,29 @@ const Hero = () => {
     if (!imageRefs.current[index].animationStarted) {
       gsap.to(imageRefs.current[index], {
         scale: 1.1, // Zoom to 110% of original size
-        duration: 3,
+        duration: 5,
         ease: "sine.inOut",
         repeat: -1,
         yoyo: true,
       });
       imageRefs.current[index].animationStarted = true;
     }
+  };
+
+  const handleImageHover = (index, isEnter) => {
+    if (isEnter) {
+      gsap.to(imageRefs.current[index], {
+        x: "2px",
+        duration: 0.2,
+        repeat: 3,
+        yoyo: true,
+        ease: "power1.inOut",
+        onComplete: () => {
+          gsap.set(imageRefs.current[index], { x: 0 });
+        }
+      });
+    }
+   
   };
 
   const animateSection = (direction, nextIndex) => {
@@ -342,7 +358,7 @@ const Hero = () => {
         animateSection(1, next);
         return next;
       });
-    }, 3000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);
@@ -466,6 +482,8 @@ const Hero = () => {
                     src={section.content.mainImage}
                     alt="Section Visual"
                     className="w-full h-auto relative z-10"
+                    onMouseEnter={() => handleImageHover(index, true)}
+                    onMouseLeave={() => handleImageHover(index, false)}
                   />
                   {index === 0 &&
                     section.content.overlayImages &&
