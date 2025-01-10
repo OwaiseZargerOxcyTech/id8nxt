@@ -9,7 +9,9 @@ export default function TechSolutions() {
     <main>
       <HeroSection />
       <ServicesSection />
-      <ImageGrid data={tech_data} />
+      <div className="max-w-7xl mx-auto">
+        <ImageGrid data={tech_data} />
+      </div>
       <Footer color={"white"} textColor={"black"} />
     </main>
   );
