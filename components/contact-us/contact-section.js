@@ -1,6 +1,9 @@
+"use client";
 import Link from "next/link";
+import { useMediaQuery } from "@/hooks/use-media-query";
 
 export default function ContactSection() {
+  const isMobile = useMediaQuery("(max-width: 768px)");
   return (
     <section className="w-full bg-white text-black">
       <div className="max-w-6xl mx-auto px-4 pb-8 md:pb-12 pt-12 md:pt-28 space-y-12">
@@ -8,13 +11,21 @@ export default function ContactSection() {
         {/* Reduced space-y */}
         {/* Heading */}
         <div className="space-y-2">
-          <h2 className="text-4xl md:text-6xl font-semibold leading-[0.9]">
-            Our doors (and DMs)
-            <br />
-            are always open.
-            <br />
-            Come on in!
-          </h2>
+          {isMobile ? (
+            // Mobile version: Single line without <br>
+            <h2 className="text-3xl leading-[1.4] font-semibold">
+              Our doors (and DMs) are always open. Come on in!
+            </h2>
+          ) : (
+            // Web version: With <br> tags
+            <h2 className="text-4xl md:text-5xl font-semibold leading-[1.0] md:leading-[0.9]">
+              Our doors (and DMs)
+              <br />
+              are always open.
+              <br />
+              Come on in!
+            </h2>
+          )}
         </div>
         {/* Contact Details */}
         <div className="space-y-6">

@@ -60,7 +60,7 @@ export default function ContactForm() {
   };
 
   return (
-    <section className="w-full bg-white">
+    <section className="w-full bg-white mb-10">
       <form
         onSubmit={handleSubmit}
         className="max-w-6xl mx-auto p-6 space-y-12 bg-white"
