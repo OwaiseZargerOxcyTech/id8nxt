@@ -3,14 +3,13 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FooterNav } from "./footer-nav";
-import { FooterBanner, FooterMainBanner } from "./footer-main-banner";
+import { FooterBanner } from "./footer-banner";
 import { SocialLinks } from "./social-links";
 import { Copyright } from "./copyright";
-import { FooterAboutBanner } from "./footer-about-banner";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export function Footer({ backColor, isAbout }) {
+export function Footer({ color, textColor }) {
   const footerRef = useRef(null);
 
   useEffect(() => {
@@ -33,15 +32,14 @@ export function Footer({ backColor, isAbout }) {
 
   return (
     <main
-      className={`w-full py-16 min-h-[100vh] flex flex-col justify-center`}
-      style={{ backgroundColor: backColor }}>
+      className={`w-full py-4 flex flex-col justify-center`}
+      style={{ backgroundColor: color }}
+    >
       <footer ref={footerRef}>
-        <FooterNav />
-
-        {isAbout ? <FooterAboutBanner /> : <FooterMainBanner />}
-
-        <SocialLinks />
-        <Copyright />
+        <FooterNav textColor={textColor} />
+        <FooterBanner color={color} textColor={textColor} />
+        <SocialLinks textColor={textColor} />
+        <Copyright textColor={textColor} />
       </footer>
     </main>
   );

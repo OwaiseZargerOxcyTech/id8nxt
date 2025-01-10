@@ -1,8 +1,8 @@
-export function Copyright() {
+export function Copyright({ textColor }) {
   return (
     <main className="w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-start items-center ">
-        <p className="text-sm text-white/80">
+        <p className="text-sm text-white/80 " style={{ color: textColor }}>
           Developed by ID8NXT - Copyright © 2024 All Rights Reserved.
         </p>
       </div>

@@ -7,32 +7,30 @@ export default function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   return (
-    <nav className="w-full z-50">
+    <nav className="absolute top-0 left-0 bg-transparent w-full z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
         {/* Logo */}
         <div className="flex-shrink-0">
           <Link href="/">
-            <p className="text-xl font-bold">ID8NXT</p>
-            {/* <img src="https://id8nxt.com/wp-content/uploads/2023/08/id8Nxt_logo.png" alt="logo"/> */}
-
+            <img src="/images/ID8-Logo-W.png" alt="logo" className="w-20"/>
           </Link>
         </div>
 
         {/* Menu Items */}
         <div className="hidden md:flex space-x-6 items-center">
           <Link href="/">
-            <p className="hover:text-red-500  hover:font-semibold">Home</p>
+            <p className="text-white hover:text-red-500 hover:font-semibold">Home</p>
           </Link>
           <Link href="/about">
-            <p className="hover:text-red-500 ">About Us</p>
+            <p className="text-white hover:text-red-500 ">About Us</p>
           </Link>
           <Link href="/our-work">
-            <p className="hover:text-red-500 ">Our Work</p>
+            <p className="text-white hover:text-red-500 ">Our Work</p>
           </Link>
           <div className="relative">
             <button
               onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="hover:text-red-500  focus:outline-none"
+              className="text-white hover:text-red-500  focus:outline-none"
             >
               Solutions
             </button>
@@ -44,13 +42,13 @@ export default function Navbar() {
             )}
           </div>
           <Link href="/blog">
-            <p className="hover:text-red-500 ">Blog</p>
+            <p className="text-white hover:text-red-500 ">Blog</p>
           </Link>
           <Link href="/devhub">
-            <p className="hover:text-red-500 ">ID8&#123;DEVHUB&#125;</p>
+            <p className="text-white hover:text-red-500 ">ID8&#123;DEVHUB&#125;</p>
           </Link>
           <Link href="/contact">
-            <p className="hover:text-red-500 ">Contact Us</p>
+            <p className="text-white hover:text-red-500 ">Contact Us</p>
           </Link>
         </div>
 
@@ -61,7 +59,7 @@ export default function Navbar() {
             className="focus:outline-none"
           >
             <svg
-              className="w-6 h-6"
+              className="w-6 h-6 text-white"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
