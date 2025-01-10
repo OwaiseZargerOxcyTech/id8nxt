@@ -485,7 +485,7 @@ const Hero = () => {
                       }}
                       src="/images/home/sec-2-rectangle.png"
                       alt="Decorative Rectangle"
-                      className="absolute w-36 top-28 left-60 z-0"
+                      className="relative w-36 -top-4 left-48 z-0"
                     />
                   )}
                   <h2
