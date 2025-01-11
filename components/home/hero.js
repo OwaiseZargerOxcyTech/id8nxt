@@ -561,7 +561,7 @@ const Hero = () => {
                     src={section.content.mainImage}
                     alt="Section Visual"
                     className={`${
-                      index === 0 ? "w-full sm:w-1/2" : "sm:w-[44%] w-2/3"
+                      index === 0 ? "w-[85%] sm:w-1/2" : "sm:w-[44%] w-2/3"
                     } h-auto relative z-10`}
                   />
                   {/* Mobile overlay images */}
