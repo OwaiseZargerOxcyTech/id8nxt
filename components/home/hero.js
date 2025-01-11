@@ -1,7 +1,6 @@
 "use client";
 import React, { useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
 const Hero = () => {
   const [activeSection, setActiveSection] = useState(0);
@@ -10,14 +9,11 @@ const Hero = () => {
   const containerRef = useRef(null);
   const isScrolling = useRef(false);
   const autoplayTimerRef = useRef(null);
-  const titleRefsMobile = useRef([]);
-  const imageRefsMobile = useRef([]);
-  const descRefsMobile = useRef([]);
-  const titleRefsDesktop = useRef([]);
-  const imageRefsDesktop = useRef([]);
-  const descRefsDesktop = useRef([]);
-  const overlayRefs = useRef([]);
+  const titleRefs = useRef([]);
+  const imageRefs = useRef([]);
+  const descRefs = useRef([]);
   const bgRefs = useRef([]);
+  const overlayRefs = useRef([]);
 
   const sections = [
     {
@@ -48,16 +44,6 @@ const Hero = () => {
     },
   ];
 
-  // Navigation controls for mobile
-  const handleNavigation = (direction) => {
-    const nextIndex = activeSection + direction;
-    if (nextIndex >= 0 && nextIndex < sections.length) {
-      animateSection(direction, nextIndex);
-      setActiveSection(nextIndex);
-      resetAutoplayTimer();
-    }
-  };
-
   // Create continuous background zoom animation
   const startBackgroundAnimation = (index) => {
     if (!bgRefs.current[index].animationStarted) {
@@ -74,108 +60,56 @@ const Hero = () => {
 
   // Create zoom animation for images
   const startZoomAnimation = (index) => {
-    // Handle mobile image
-    if (
-      imageRefsMobile.current[index] &&
-      !imageRefsMobile.current[index].animationStarted
-    ) {
-      gsap.to(imageRefsMobile.current[index], {
-        scale: 1.1,
+    if (!imageRefs.current[index].animationStarted) {
+      gsap.to(imageRefs.current[index], {
+        scale: 1.1, // Zoom to 110% of original size
         duration: 5,
         ease: "sine.inOut",
         repeat: -1,
         yoyo: true,
       });
-      imageRefsMobile.current[index].animationStarted = true;
-    }
-
-    // Handle desktop image
-    if (
-      imageRefsDesktop.current[index] &&
-      !imageRefsDesktop.current[index].animationStarted
-    ) {
-      gsap.to(imageRefsDesktop.current[index], {
-        scale: 1.1,
-        duration: 5,
-        ease: "sine.inOut",
-        repeat: -1,
-        yoyo: true,
-      });
-      imageRefsDesktop.current[index].animationStarted = true;
+      imageRefs.current[index].animationStarted = true;
     }
   };
 
   const handleImageHover = (index, isEnter) => {
     if (isEnter) {
-      gsap.to(imageRefsDesktop.current[index], {
+      gsap.to(imageRefs.current[index], {
         x: "2px",
         duration: 0.4,
         repeat: 3,
         yoyo: true,
         ease: "power1.inOut",
         onComplete: () => {
-          gsap.set(imageRefsDesktop.current[index], { x: 0 });
+          gsap.set(imageRefs.current[index], { x: 0 });
         },
       });
     }
   };
-
-  //animate content
 
   const animateSection = (direction, nextIndex) => {
     const currentSection = activeSection;
     const duration = 0.8;
     const ease = "power2.inOut";
 
-    // Stop current background animation
-    gsap.killTweensOf(bgRefs.current[currentSection]);
-
-    // Hide current background
+    // Current section animations
+    // When scrolling down: bg exits down, content exits down
+    // When scrolling up: bg exits up, content exits up
     gsap.to(bgRefs.current[currentSection], {
       y: direction > 0 ? "100%" : "-100%",
       opacity: 0,
-      scale: 1, // Reset scale
       duration: duration,
       ease: ease,
     });
 
-    // Show and animate next background
-    gsap.fromTo(
-      bgRefs.current[nextIndex],
-      {
-        y: direction > 0 ? "-100%" : "100%",
-        opacity: 0,
-        scale: 1,
-      },
-      {
-        y: "0%",
-        opacity: 1,
-        duration: duration,
-        ease: ease,
-        onComplete: () => {
-          startBackgroundAnimation(nextIndex);
-        },
-      }
-    );
-
-    // Mobile content elements including overlays
-    const mobileContentElements = [
-      titleRefsMobile.current[currentSection],
-      imageRefsMobile.current[currentSection],
-      descRefsMobile.current[currentSection],
-      ...(overlayRefs.current[currentSection]?.mobile || []),
+    const contentElements = [
+      titleRefs.current[currentSection],
+      imageRefs.current[currentSection],
+      descRefs.current[currentSection],
+      ...(overlayRefs.current[currentSection] || []),
     ];
 
-    // Desktop content elements including overlays
-    const desktopContentElements = [
-      titleRefsDesktop.current[currentSection],
-      imageRefsDesktop.current[currentSection],
-      descRefsDesktop.current[currentSection],
-      ...(overlayRefs.current[currentSection]?.desktop || []),
-    ];
-
-    // Animate current section out
-    gsap.to([...mobileContentElements, ...desktopContentElements], {
+    gsap.to(contentElements, {
       y: direction > 0 ? "100%" : "-100%",
       opacity: 0,
       duration: duration,
@@ -183,22 +117,31 @@ const Hero = () => {
     });
 
     // Next section animations
-    const nextMobileElements = [
-      titleRefsMobile.current[nextIndex],
-      imageRefsMobile.current[nextIndex],
-      descRefsMobile.current[nextIndex],
-      ...(overlayRefs.current[nextIndex]?.mobile || []),
-    ];
+    // When scrolling down: bg enters from top, content enters from bottom
+    // When scrolling up: bg enters from bottom, content enters from top
+    gsap.fromTo(
+      bgRefs.current[nextIndex],
+      {
+        y: direction > 0 ? "-100%" : "100%",
+        opacity: 0,
+      },
+      {
+        y: "0%",
+        opacity: 1,
+        duration: duration,
+        ease: ease,
+      }
+    );
 
-    const nextDesktopElements = [
-      titleRefsDesktop.current[nextIndex],
-      imageRefsDesktop.current[nextIndex],
-      descRefsDesktop.current[nextIndex],
-      ...(overlayRefs.current[nextIndex]?.desktop || []),
+    const nextContentElements = [
+      titleRefs.current[nextIndex],
+      imageRefs.current[nextIndex],
+      descRefs.current[nextIndex],
+      ...(overlayRefs.current[nextIndex] || []),
     ];
 
     gsap.fromTo(
-      [...nextMobileElements, ...nextDesktopElements],
+      nextContentElements,
       {
         y: direction > 0 ? "100%" : "-100%",
         opacity: 0,
@@ -209,71 +152,55 @@ const Hero = () => {
         duration: duration,
         ease: ease,
         onComplete: () => {
+          startBackgroundAnimation(nextIndex);
           startZoomAnimation(nextIndex);
         },
       }
     );
   };
 
+  // Initial load animation
   useLayoutEffect(() => {
     if (isInitialLoad) {
       const duration = 0.8;
       const ease = "power2.out";
 
+      // Hide all sections except the first one
       sections.forEach((_, index) => {
         if (index !== 0) {
           gsap.set(bgRefs.current[index], { opacity: 0, y: "100%" });
-
-          // Mobile elements
           gsap.set(
             [
-              titleRefsMobile.current[index],
-              imageRefsMobile.current[index],
-              descRefsMobile.current[index],
-              ...(overlayRefs.current[index]?.mobile || []),
-            ],
-            { opacity: 0, y: "100%" }
-          );
-
-          // Desktop elements
-          gsap.set(
-            [
-              titleRefsDesktop.current[index],
-              imageRefsDesktop.current[index],
-              descRefsDesktop.current[index],
-              ...(overlayRefs.current[index]?.desktop || []),
+              titleRefs.current[index],
+              imageRefs.current[index],
+              descRefs.current[index],
+              ...(overlayRefs.current[index] || []),
             ],
             { opacity: 0, y: "100%" }
           );
         }
       });
 
-      // Initial positions for first section
-      gsap.set(bgRefs.current[0], { y: "-100%", opacity: 0 });
+      // Set initial positions for first section
+      gsap.set(bgRefs.current[0], {
+        y: "-100%",
+        opacity: 0,
+      });
 
-      // Mobile first section
       gsap.set(
         [
-          titleRefsMobile.current[0],
-          imageRefsMobile.current[0],
-          descRefsMobile.current[0],
-          ...(overlayRefs.current[0]?.mobile || []),
+          titleRefs.current[0],
+          imageRefs.current[0],
+          descRefs.current[0],
+          ...(overlayRefs.current[0] || []),
         ],
-        { y: "100%", opacity: 0 }
+        {
+          y: "100%",
+          opacity: 0,
+        }
       );
 
-      // Desktop first section
-      gsap.set(
-        [
-          titleRefsDesktop.current[0],
-          imageRefsDesktop.current[0],
-          descRefsDesktop.current[0],
-          ...(overlayRefs.current[0]?.desktop || []),
-        ],
-        { y: "100%", opacity: 0 }
-      );
-
-      // Animate background
+      // Animate background from top
       gsap.to(bgRefs.current[0], {
         y: "0%",
         opacity: 1,
@@ -281,29 +208,13 @@ const Hero = () => {
         ease: ease,
       });
 
-      // Animate mobile elements
+      // Animate other elements from bottom
       gsap.to(
         [
-          titleRefsMobile.current[0],
-          imageRefsMobile.current[0],
-          descRefsMobile.current[0],
-          ...(overlayRefs.current[0]?.mobile || []),
-        ],
-        {
-          y: "0%",
-          opacity: 1,
-          duration: duration,
-          ease: ease,
-        }
-      );
-
-      // Animate desktop elements
-      gsap.to(
-        [
-          titleRefsDesktop.current[0],
-          imageRefsDesktop.current[0],
-          descRefsDesktop.current[0],
-          ...(overlayRefs.current[0]?.desktop || []),
+          titleRefs.current[0],
+          imageRefs.current[0],
+          descRefs.current[0],
+          ...(overlayRefs.current[0] || []),
         ],
         {
           y: "0%",
@@ -347,9 +258,7 @@ const Hero = () => {
       if (isScrolling.current || now - lastScrollTime < scrollCooldown) return;
 
       const rect = container.getBoundingClientRect();
-      let isInView = rect.top <= 0 && rect.bottom + 1 >= window.innerHeight;
-
-      if (window.innerHeight > 768) isInView = false;
+      const isInView = rect.top <= 0 && rect.bottom + 1 >= window.innerHeight;
 
       if (!isInView) return;
 
@@ -382,10 +291,7 @@ const Hero = () => {
 
     const handleScrollIntoView = () => {
       const rect = container.getBoundingClientRect();
-      let isInView = rect.top <= 0 && rect.bottom + 1 >= window.innerHeight;
-
-      // Make isInView false for small screens
-      if (window.innerHeight > 768) isInView = false;
+      const isInView = rect.top <= 0 && rect.bottom + 1 >= window.innerHeight;
 
       if (isInView) {
         document.body.style.overflow = "hidden";
@@ -393,19 +299,15 @@ const Hero = () => {
         resetAutoplayTimer();
       } else {
         document.body.style.overflow = "auto";
-        if (window.innerHeight > 768) {
-          setAutoplayEnabled(true);
-        } else {
-          setAutoplayEnabled(false);
-        }
+        setAutoplayEnabled(false);
       }
     };
 
     // Rest of the event handlers remain the same
     const handleWheel = (e) => {
       const rect = container.getBoundingClientRect();
-      let isInView = rect.top <= 0 && rect.bottom + 1 >= window.innerHeight;
-      if (window.innerHeight > 768) isInView = false;
+      const isInView = rect.top <= 0 && rect.bottom + 1 >= window.innerHeight;
+
       if (isInView) {
         const direction = e.deltaY > 0 ? 1 : -1;
 
@@ -428,8 +330,7 @@ const Hero = () => {
 
     const handleTouchMove = (e) => {
       const rect = container.getBoundingClientRect();
-      let isInView = rect.top <= 0 && rect.bottom + 1 >= window.innerHeight;
-      if (window.innerHeight > 768) isInView = false;
+      const isInView = rect.top <= 0 && rect.bottom + 1 >= window.innerHeight;
 
       if (isInView) {
         const touchEndY = e.touches[0].clientY;
@@ -507,8 +408,7 @@ const Hero = () => {
             style={{
               backgroundImage: `url(${section.bgImage})`,
               willChange: "transform",
-              opacity: index === activeSection ? 1 : 0,
-              visibility: index === activeSection ? "visible" : "hidden",
+              opacity: index === 0 ? 1 : 0, // Initially hide all backgrounds except first
             }}
           />
 
@@ -520,10 +420,10 @@ const Hero = () => {
               }`}
             >
               {/* Mobile Layout */}
-              <div className="flex flex-col h-full lg:hidden px-4 pt-16">
+              <div className="flex flex-col h-full md:hidden px-4 pt-16">
                 <div className="flex-none section-text z-20 mb-8">
                   <h2
-                    ref={(el) => (titleRefsMobile.current[index] = el)}
+                    ref={(el) => (titleRefs.current[index] = el)}
                     className="text-4xl text-left text-white whitespace-pre-line"
                   >
                     {section.content.title}
@@ -532,42 +432,35 @@ const Hero = () => {
 
                 <div className="flex-1 flex items-center justify-center relative">
                   <img
-                    ref={(el) => (imageRefsMobile.current[index] = el)}
+                    ref={(el) => (imageRefs.current[index] = el)}
                     src={section.content.mainImage}
                     alt="Section Visual"
-                    className={`${
-                      index === 0 ? "w-full sm:w-1/2" : "sm:w-[44%] w-2/3"
-                    } h-auto relative z-10`}
+                    className={`${index === 0 ? "w-full" : "w-2/3"} h-auto relative z-10`}
                   />
-                  {/* Mobile overlay images */}
                   {index === 0 &&
                     section.content.overlayImages &&
                     section.content.overlayImages.map((img, i) => (
                       <img
                         key={i}
                         ref={(el) => {
-                          if (!overlayRefs.current[index]) {
-                            overlayRefs.current[index] = {
-                              mobile: [],
-                              desktop: [],
-                            };
-                          }
-                          overlayRefs.current[index].mobile[i] = el;
+                          if (!overlayRefs.current[index])
+                            overlayRefs.current[index] = [];
+                          overlayRefs.current[index][i] = el;
                         }}
                         src={img}
                         alt={`Overlay ${i + 1}`}
                         className={`absolute ${
                           i === 0
-                            ? "top-2/3 w-3/4 sm:w-1/2 sm:left-32 left-4 -translate-y-1/4 scale-[1.5]"
-                            : "top-20 w-3/4 sm:w-1/3"
+                            ? "top-2/3 w-3/4 left-4 -translate-y-1/4 scale-[1.6]"
+                            : "top-20 w-3/4"
                         } w-1/2 h-auto z-${9 - i}`}
                       />
                     ))}
                 </div>
 
                 <div
-                  ref={(el) => (descRefsMobile.current[index] = el)}
-                  className="flex-none section-text z-20 mt-20 mb-24"
+                  ref={(el) => (descRefs.current[index] = el)}
+                  className="flex-none section-text z-20 mt-6 mb-24"
                 >
                   <p className="text-white/80 text-sm text-right px-4">
                     {section.content.description}
@@ -581,18 +474,14 @@ const Hero = () => {
               </div>
 
               {/* Desktop Layout */}
-              <div className="hidden lg:grid lg:grid-cols-3 gap-8 px-4 h-full items-center">
+              <div className="hidden md:grid md:grid-cols-3 gap-8 px-4 h-full items-center">
                 <div className="section-text z-20">
                   {index === 1 && (
                     <img
                       ref={(el) => {
-                        if (!overlayRefs.current[index]) {
-                          overlayRefs.current[index] = {
-                            mobile: [],
-                            desktop: [],
-                          };
-                        }
-                        overlayRefs.current[index].desktop[0] = el;
+                        if (!overlayRefs.current[1])
+                          overlayRefs.current[1] = [];
+                        overlayRefs.current[1][0] = el;
                       }}
                       src="/images/home/sec-2-rectangle.png"
                       alt="Decorative Rectangle"
@@ -600,7 +489,7 @@ const Hero = () => {
                     />
                   )}
                   <h2
-                    ref={(el) => (titleRefsDesktop.current[index] = el)}
+                    ref={(el) => (titleRefs.current[index] = el)}
                     className={`relative ${
                       index === 0 ? "top-0 left-0" : "-top-20 left-0"
                     } text-7xl text-white font-uni whitespace-pre-line`}
@@ -611,27 +500,22 @@ const Hero = () => {
 
                 <div className="relative">
                   <img
-                    ref={(el) => (imageRefsDesktop.current[index] = el)}
+                    ref={(el) => (imageRefs.current[index] = el)}
                     src={section.content.mainImage}
                     alt="Section Visual"
                     className="w-full h-auto relative z-10"
                     onMouseEnter={() => handleImageHover(index, true)}
                     onMouseLeave={() => handleImageHover(index, false)}
                   />
-                  {/* Desktop overlay images */}
                   {index === 0 &&
                     section.content.overlayImages &&
                     section.content.overlayImages.map((img, i) => (
                       <img
                         key={i}
                         ref={(el) => {
-                          if (!overlayRefs.current[index]) {
-                            overlayRefs.current[index] = {
-                              mobile: [],
-                              desktop: [],
-                            };
-                          }
-                          overlayRefs.current[index].desktop[i] = el;
+                          if (!overlayRefs.current[index])
+                            overlayRefs.current[index] = [];
+                          overlayRefs.current[index][i] = el;
                         }}
                         src={img}
                         alt={`Overlay ${i + 1}`}
@@ -643,7 +527,7 @@ const Hero = () => {
                 </div>
 
                 <div
-                  ref={(el) => (descRefsDesktop.current[index] = el)}
+                  ref={(el) => (descRefs.current[index] = el)}
                   className={`relative ${
                     index === 0 ? "top-40 right-0" : "top-40 right-0"
                   } section-text z-20`}
@@ -660,31 +544,6 @@ const Hero = () => {
           </div>
         </div>
       ))}
-      {/* Mobile Navigation Controls */}
-      <div className="lg:hidden absolute bottom-16 left-8 flex flex-col gap-2 z-50">
-        <button
-          onClick={() => handleNavigation(-1)}
-          disabled={activeSection === 0}
-          className={`p-2 rounded-full bg-white/10 backdrop-blur-sm transition-opacity ${
-            activeSection === 0
-              ? "opacity-50 cursor-not-allowed"
-              : "opacity-100"
-          }`}
-        >
-          <FaChevronUp className="w-3 h-3 text-white" />
-        </button>
-        <button
-          onClick={() => handleNavigation(1)}
-          disabled={activeSection === sections.length - 1}
-          className={`p-2 rounded-full bg-white/10 backdrop-blur-sm transition-opacity ${
-            activeSection === sections.length - 1
-              ? "opacity-50 cursor-not-allowed"
-              : "opacity-100"
-          }`}
-        >
-          <FaChevronDown className="w-3 h-3 text-white" />
-        </button>
-      </div>
     </div>
   );
 };
