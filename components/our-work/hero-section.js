@@ -1,27 +1,13 @@
-import Image from "next/image";
+import React from "react";
 
-export default function HeroSection() {
+const HeroSection = () => {
   return (
-    <div className="relative min-h-screen w-full overflow-hidden">
-      {/* Background Image */}
-      <div className="absolute inset-0">
-        <Image
-          src="/images/home/home-hero-bg-1.png"
-          alt="Ancient Greek temple on a mountainous landscape"
-          fill
-          layout="fill"
-          priority
-        />
-        {/* Dark overlay */}
-        <div className="absolute inset-0 bg-black/30" />
-      </div>
-
-      {/* Content Container */}
-      <div className="relative z-10 mx-auto max-w-7xl px-4 py-28 sm:px-6 lg:px-8">
-        <div className="grid gap-8 lg:grid-cols-2 lg:gap-16">
-          {/* Left Column - Main Heading */}
-          <div className="flex items-center">
-            <h1 className="text-4xl font-light leading-tight text-white sm:text-5xl md:text-6xl lg:text-8xl">
+    <div className="w-full h-screen bg-[url('https://c1.wallpaperflare.com/preview/574/566/410/596c866363b50.jpg')] bg-cover bg-center bg-no-repeat">
+      <div className="w-full h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="h-full flex flex-col md:flex-row md:items-center justify-center md:justify-between gap-8 md:gap-4">
+          {/* Main Heading */}
+          <div className="max-w-2xl">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-light text-white leading-tight text-left">
               Your digital
               <br />
               odyssey
@@ -30,15 +16,17 @@ export default function HeroSection() {
             </h1>
           </div>
 
-          {/* Right Column - Description */}
-          <div className="flex items-center">
-            <p className="text-lg text-white/90 sm:text-xl md:text-xl md:mt-64 ml-32 max-w-[420px]">
+          {/* Subtext - Below on mobile, Right-aligned on desktop */}
+          <div className="max-w-md">
+            <p className="text-lg md:text-xl text-gray-200 md:mt-40 text-left">
               Here are our standout projects that highlight the impactful
-              digital marketing strategies we&apos;ve implemented at ID8NXT.
+              digital marketing strategies we've implemented at ID8NXT.
             </p>
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default HeroSection;
