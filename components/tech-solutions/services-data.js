@@ -33,3 +33,7 @@ export const services_data = [
     description: "Automating repetitive marketing tasks for efficiency.",
   },
 ];
+
+export const tech_solution_title = "Tech Solutions";
+export const tech_solution_desc =
+  "Our digital alchemysts turn your digital dreams into reality. By leveraging cutting-edge technology, we create integrated ecosystems that nurture customer relationships and drive growth.";

@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import { useMediaQuery } from "@/hooks/use-media-query";
 
@@ -10,7 +11,7 @@ const CommonServicesSection = ({ initialService, services_data }) => {
   };
 
   return (
-    <div className="mt-8">
+    <div className="max-w-7xl mx-4 md:mx-auto">
       <div className="relative">
         {/* Separating Line */}
         <div className="absolute top-0 left-0 w-full h-[1px] bg-black" />
