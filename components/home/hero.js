@@ -343,7 +343,7 @@ const Hero = () => {
           animateSection(1, next);
           return next;
         });
-      }, 5000);
+      }, 10000);
     }
   };
 
