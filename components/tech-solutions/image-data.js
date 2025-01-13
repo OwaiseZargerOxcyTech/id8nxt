@@ -25,7 +25,7 @@ export const tech_data = [
     title: "4ppo _ Dynamic salon",
   },
   {
-    id: "flightronics",
+    id: "flightron",
     image: "/images/tech-solutions/rome-image.jpg",
     title: "Flightronics _ Perfume",
   },
