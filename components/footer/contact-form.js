@@ -49,9 +49,9 @@ export function ContactForm({ backColor }) {
 
   return (
     <main className="w-full" style={{ backgroundColor: backColor }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center min-h-[100vh]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center min-h-screen">
         <div ref={formRef} className="w-full mx-auto ">
-          <div className="space-y-4 mb-8">
+          <div className="space-y-4 mt-8 sm:mt-0 mb-8">
             <h1 className="text-3xl font-bold text-white">How can we help?</h1>
             <p className="text-gray-200">
               Request a no-obligation appointment. Our team will contact you as
@@ -145,7 +145,7 @@ export function ContactForm({ backColor }) {
               )}
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-6 sm:items-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="flex items-center space-x-2">
                 <label htmlFor="privacy" className="text-sm text-gray-200">
                   I give my consent, in accordance with the{" "}
@@ -164,7 +164,7 @@ export function ContactForm({ backColor }) {
                   className="w-4 h-4 text-red-600 bg-transparent border-white/20 rounded focus:ring-red-500"
                 />
                 <label htmlFor="newsletter" className="text-sm text-gray-200">
-                  I want to receive regular updates
+                  I want to receive regular updates on Playground activities
                 </label>
               </div>
             </div>

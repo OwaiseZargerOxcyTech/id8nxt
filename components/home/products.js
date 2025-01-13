@@ -130,7 +130,7 @@ const ProductDisplay = () => {
   const currentProduct = products[currentIndex];
 
   return (
-    <div ref={containerRef} className="w-full px-4 py-12">
+    <div ref={containerRef} className="w-full">
       <div className="grid grid-cols-3 gap-4">
         {/* Left Section */}
         <div className="relative overflow-hidden">
