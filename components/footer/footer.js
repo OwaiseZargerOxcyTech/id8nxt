@@ -32,7 +32,7 @@ export function Footer({ color, textColor }) {
 
   return (
     <main
-      className={`w-full py-4 flex flex-col justify-center`}
+      className={`w-full h-screen py-4 flex flex-col justify-center`}
       style={{ backgroundColor: color }}
     >
       <footer ref={footerRef}>

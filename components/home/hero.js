@@ -33,8 +33,6 @@ const Hero = () => {
     );
   };
 
-
-
   const sections = [
     {
       bgImage: "/images/home/home-hero-bg-1.png",
@@ -347,7 +345,7 @@ const Hero = () => {
     }
   };
 
- useLayoutEffect(() => {
+  useLayoutEffect(() => {
     const container = containerRef.current;
     let touchStartY = 0;
     let lastScrollTime = Date.now();
@@ -419,7 +417,7 @@ const Hero = () => {
 
       const rect = container.getBoundingClientRect();
       const isInView = rect.top <= 0 && rect.bottom + 1 >= window.innerHeight;
-      
+
       if (isInView) {
         const direction = e.deltaY > 0 ? 1 : -1;
 
@@ -483,7 +481,7 @@ const Hero = () => {
         passive: false,
       });
     }
-    
+
     window.addEventListener("scroll", handleScrollIntoView);
 
     handleScrollIntoView();
@@ -538,7 +536,7 @@ const Hero = () => {
           />
 
           {/* Content */}
-          <div className="relative z-10 h-full max-w-7xl 3xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-4">
+          <div className="relative z-10 h-full xl:max-w-6xl 1xl:max-w-7xl 3xl:max-w-screen-2xl 4xl:max-w-[1760px] mx-auto px-4 sm:px-6 lg:px-4">
             <div
               className={`container mx-auto h-full ${
                 index === activeSection ? "opacity-100" : "opacity-0"

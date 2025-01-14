@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useState } from "react";
 import Link from "next/link";
 
@@ -8,18 +8,20 @@ export default function Navbar() {
 
   return (
     <nav className="absolute top-0 left-0 bg-transparent w-full z-50">
-      <div className="max-w-7xl 3xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+      <div className="xl:max-w-6xl 1xl:max-w-7xl 3xl:max-w-screen-2xl 4xl:max-w-[1760px] mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
         {/* Logo */}
         <div className="flex-shrink-0">
           <Link href="/">
-            <img src="/images/ID8-Logo-W.png" alt="logo" className="w-20"/>
+            <img src="/images/ID8-Logo-W.png" alt="logo" className="w-20" />
           </Link>
         </div>
 
         {/* Menu Items */}
         <div className="hidden md:flex space-x-12 items-center">
           <Link href="/">
-            <p className="text-white hover:text-red-500 hover:font-semibold">Home</p>
+            <p className="text-white hover:text-red-500 hover:font-semibold">
+              Home
+            </p>
           </Link>
           <Link href="/about">
             <p className="text-white hover:text-red-500 ">About Us</p>
@@ -45,7 +47,9 @@ export default function Navbar() {
             <p className="text-white hover:text-red-500 ">Blog</p>
           </Link>
           <Link href="/devhub">
-            <p className="text-white hover:text-red-500 ">ID8&#123;DEVHUB&#125;</p>
+            <p className="text-white hover:text-red-500 ">
+              ID8&#123;DEVHUB&#125;
+            </p>
           </Link>
           <Link href="/contact">
             <p className="text-white hover:text-red-500 ">Contact Us</p>

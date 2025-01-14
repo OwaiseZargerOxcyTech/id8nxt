@@ -97,7 +97,7 @@ export default function FeatureCards() {
       gsap.to(descriptionRefs.current[index], {
         x: 0,
         opacity: 1,
-        duration: 0.5,
+        duration: 0.8,
         ease: "power2.out",
       });
     }
