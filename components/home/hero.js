@@ -624,9 +624,10 @@ const Hero = () => {
                   )} */}
                   <h2
                     ref={(el) => (titleRefsDesktop.current[index] = el)}
-                    className={`relative ${
-                      index === 0 ? "top-0 left-0" : "-top-20 left-0"
-                    } text-7xl text-white font-uni whitespace-pre-line`}
+                    className={
+                      `relative text-90px text-white whitespace-pre-line items-center text-nowrap`
+                      //  ${index === 0 ? "top-0 left-0" : "-top-20 left-0"}
+                    }
                   >
                     {section.content.title}
                   </h2>
@@ -669,14 +670,15 @@ const Hero = () => {
 
                 <div
                   ref={(el) => (descRefsDesktop.current[index] = el)}
-                  className={`relative ${
-                    index === 0 ? "top-40 right-0" : "top-40 right-0"
-                  } section-text z-20`}
+                  className={`relative
+                     ${
+                       index === 0 ? "top-40 right-0" : "top-40 right-0"
+                     } section-text z-20`}
                 >
-                  <p className="text-white/80 text-lg text-right">
+                  <p className="text-white/80 text-22px text-right">
                     {section.content.description}
                   </p>
-                  <button className="absolute top-30 right-0 border-b border-red-500 text-white px-4 py-2 rounded hover:bg-red-500/20 transition duration-300">
+                  <button className="absolute text-base top-30 right-0 border-b border-red-500 text-white px-4 py-2 rounded hover:bg-red-500/20 transition duration-300">
                     View Portfolio
                   </button>
                 </div>
