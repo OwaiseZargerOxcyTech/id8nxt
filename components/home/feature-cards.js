@@ -2,41 +2,67 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaSignOutAlt } from "react-icons/fa";
 import gsap from "gsap";
+import _ from "lodash";
 
 export default function FeatureCards() {
   const [hoveredCard, setHoveredCard] = useState(null);
   const descriptionRefs = useRef([]);
+  const timeoutRefs = useRef({});
 
   const features = [
     {
-      title: "Performance Marketing",
-      description: "Drive results with targeted campaigns.",
+      title: "Social Media Management",
+      description:
+        "We're your digital whisperers, guiding you through the social labyrinth.",
+      hoverClass: "hover:bg-primary-red",
+    },
+    {
+      title: "Creative Copy and Content",
+      description:
+        "Wordsmiths extraordinaire, weaving tales that captivate and convert.",
+      hoverClass: "hover:bg-secondary-lime",
+    },
+    {
+      title: "Graphics Designs, Iconography & Illustrations",
+      description:
+        "Visual architects, crafting stunning visuals that leave a lasting impression.",
+      hoverClass: "hover:bg-primary-navy",
+    },
+    {
+      title: "Video Editing & Animation",
+      description:
+        "Storytellers of the screen, bringing your vision to life with dynamic visuals",
+      hoverClass: "hover:bg-secondary-lime",
+    },
+    {
+      title: "Films. Production and Beyond",
+      description:
+        "Lights, camera, action! We're your behind-the-scenes maestros.\nImprove your search rankings.",
+      hoverClass: "hover:bg-primary-navy",
+    },
+    {
+      title: "Campaign Planning",
+      description:
+        "Strategists extraordinaire, orchestrating campaigns that hit all the right notes.",
       hoverClass: "hover:bg-primary-red",
     },
     {
       title: "Influencer Marketing",
-      description: "Our team collaborates with influencers.",
-      hoverClass: "hover:bg-secondary-lime",
-    },
-    {
-      title: "Social Media Marketing",
-      description: "Engage your audience effectively.",
-      hoverClass: "hover:bg-primary-navy",
-    },
-    {
-      title: "Branding Strategy & Development",
-      description: "Build a strong brand identity.",
-      hoverClass: "hover:bg-secondary-lime",
-    },
-    {
-      title: "Search Engine Optimization (SEO)",
-      description: "Improve your search rankings.",
-      hoverClass: "hover:bg-primary-navy",
-    },
-    {
-      title: "Film Production",
-      description: "Create compelling video content.",
+      description:
+        "Partnering with influencers to amplify your reach and impact.",
       hoverClass: "hover:bg-primary-red",
+    },
+    {
+      title: "Old But Gold: Print, OOH & More",
+      description:
+        "Classic charm meets modern flair. We're masters of both modern and  traditional marketing",
+      hoverClass: "hover:bg-secondary-lime",
+    },
+    {
+      title: "Brand Launch. Relaunch. Repeat",
+      description:
+        "From birth to rebirth, we're your brand's eternal companion.",
+      hoverClass: "hover:bg-primary-navy",
     },
   ];
 
@@ -50,9 +76,22 @@ export default function FeatureCards() {
         });
       }
     });
+
+    // Cleanup timeouts on unmount
+    return () => {
+      Object.values(timeoutRefs.current).forEach((timeout) => {
+        if (timeout) clearTimeout(timeout);
+      });
+    };
   }, []);
 
   const handleMouseEnter = (index) => {
+    // Clear any existing timeout for this card
+    if (timeoutRefs.current[index]) {
+      clearTimeout(timeoutRefs.current[index]);
+      timeoutRefs.current[index] = null;
+    }
+
     setHoveredCard(index);
     if (descriptionRefs.current[index]) {
       gsap.to(descriptionRefs.current[index], {
@@ -65,15 +104,18 @@ export default function FeatureCards() {
   };
 
   const handleMouseLeave = (index) => {
-    setHoveredCard(null);
-    if (descriptionRefs.current[index]) {
-      gsap.to(descriptionRefs.current[index], {
-        x: -100,
-        opacity: 0,
-        duration: 0.1,
-        ease: "power2.in",
-      });
-    }
+    // Set a timeout for the leave animation
+    timeoutRefs.current[index] = setTimeout(() => {
+      setHoveredCard(null);
+      if (descriptionRefs.current[index]) {
+        gsap.to(descriptionRefs.current[index], {
+          x: -100,
+          opacity: 0,
+          duration: 0.1,
+          ease: "power2.in",
+        });
+      }
+    }, 500); // 500ms delay before triggering leave animation
   };
 
   return (
@@ -96,10 +138,6 @@ export default function FeatureCards() {
               <p className="text-gray-600 group-hover:text-white mt-8">
                 {feature.description}
               </p>
-              {/* <FaSignOutAlt
-                className="text-gray-400 group-hover:text-white mt-4 mx-auto"
-                size={64}
-              /> */}
               <img
                 src="/images/home/asset1.svg"
                 alt="logo"
