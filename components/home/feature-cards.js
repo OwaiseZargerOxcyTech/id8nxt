@@ -11,58 +11,40 @@ export default function FeatureCards() {
 
   const features = [
     {
-      title: "Social Media Management",
+      title: "Performance Marketing",
       description:
-        "We're your digital whisperers, guiding you through the social labyrinth.",
-      hoverClass: "hover:bg-primary-red",
-    },
-    {
-      title: "Creative Copy and Content",
-      description:
-        "Wordsmiths extraordinaire, weaving tales that captivate and convert.",
-      hoverClass: "hover:bg-secondary-lime",
-    },
-    {
-      title: "Graphics Designs, Iconography & Illustrations",
-      description:
-        "Visual architects, crafting stunning visuals that leave a lasting impression.",
-      hoverClass: "hover:bg-primary-navy",
-    },
-    {
-      title: "Video Editing & Animation",
-      description:
-        "Storytellers of the screen, bringing your vision to life with dynamic visuals",
-      hoverClass: "hover:bg-secondary-lime",
-    },
-    {
-      title: "Films. Production and Beyond",
-      description:
-        "Lights, camera, action! We're your behind-the-scenes maestros.\nImprove your search rankings.",
-      hoverClass: "hover:bg-primary-navy",
-    },
-    {
-      title: "Campaign Planning",
-      description:
-        "Strategists extraordinaire, orchestrating campaigns that hit all the right notes.",
+        "Our experts create campaigns specifically tailored to achieve your business goals.",
       hoverClass: "hover:bg-primary-red",
     },
     {
       title: "Influencer Marketing",
       description:
-        "Partnering with influencers to amplify your reach and impact.",
-      hoverClass: "hover:bg-primary-red",
-    },
-    {
-      title: "Old But Gold: Print, OOH & More",
-      description:
-        "Classic charm meets modern flair. We're masters of both modern and  traditional marketing",
+        "Our team collaborates with influencers who resonate with your brand values.",
       hoverClass: "hover:bg-secondary-lime",
     },
     {
-      title: "Brand Launch. Relaunch. Repeat",
+      title: "Social Media Marketing",
       description:
-        "From birth to rebirth, we're your brand's eternal companion.",
+        "Expand your reach and engage with your potential customers.",
       hoverClass: "hover:bg-primary-navy",
+    },
+    {
+      title: "Branding Strategy & Development",
+      description:
+        "We craft compelling brand stories to design your brand strategies.",
+      hoverClass: "hover:bg-secondary-lime",
+    },
+    {
+      title: "Search Engine Optimization (SEO)",
+      description:
+        "We optimise your website for higher search engine rankings.",
+      hoverClass: "hover:bg-primary-navy",
+    },
+    {
+      title: "Film Production",
+      description:
+        "Lights, camera, action! We're your behind-the-scenes maestros.",
+      hoverClass: "hover:bg-primary-red",
     },
   ];
 
@@ -119,11 +101,11 @@ export default function FeatureCards() {
   };
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 h-screen">
       {features.map((feature, index) => (
         <div
           key={index}
-          className={`group relative bg-white border border-gray-200 overflow-hidden ${feature.hoverClass} transition-colors duration-300 ease-in-out aspect-square`}
+          className={`group relative bg-white border border-gray-200 overflow-hidden ${feature.hoverClass} transition-colors duration-300 ease-in-out`}
           onMouseEnter={() => handleMouseEnter(index)}
           onMouseLeave={() => handleMouseLeave(index)}
         >
