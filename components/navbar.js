@@ -1,10 +1,14 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const pathname = usePathname();
+
+  const isActive = (path) => pathname === path;
 
   return (
     <nav className="absolute top-0 left-0 bg-transparent w-full z-50">
@@ -19,40 +23,81 @@ export default function Navbar() {
         {/* Menu Items */}
         <div className="hidden md:flex space-x-12 items-center">
           <Link href="/">
-            <p className="text-white hover:text-red-500 hover:font-semibold">
+            <p
+              className={`${
+                isActive("/") ? "text-red-500 font-semibold" : "text-white"
+              } hover:text-red-500`}
+            >
               Home
             </p>
           </Link>
           <Link href="/about">
-            <p className="text-white hover:text-red-500 ">About Us</p>
+            <p
+              className={`${
+                isActive("/about") ? "text-red-500 font-semibold" : "text-white"
+              } hover:text-red-500`}
+            >
+              About Us
+            </p>
           </Link>
           <Link href="/our-work">
-            <p className="text-white hover:text-red-500 ">Our Work</p>
+            <p
+              className={`${
+                isActive("/our-work")
+                  ? "text-red-500 font-semibold"
+                  : "text-white"
+              } hover:text-red-500`}
+            >
+              Our Work
+            </p>
           </Link>
           <div className="relative">
             <button
               onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="text-white hover:text-red-500  focus:outline-none"
+              className={`${
+                pathname.startsWith("/solutions")
+                  ? "text-red-500 font-semibold"
+                  : "text-white"
+              } hover:text-red-500 focus:outline-none`}
             >
               Solutions
             </button>
             {dropdownOpen && (
               <div className="absolute bg-gray-800 text-white rounded mt-2 shadow-lg">
-                {/* Dropdown items go here */}
                 <div className="p-4">Dropdown Content</div>
               </div>
             )}
           </div>
           <Link href="/blog">
-            <p className="text-white hover:text-red-500 ">Blog</p>
+            <p
+              className={`${
+                isActive("/blog") ? "text-red-500 font-semibold" : "text-white"
+              } hover:text-red-500`}
+            >
+              Blog
+            </p>
           </Link>
           <Link href="/devhub">
-            <p className="text-white hover:text-red-500 ">
+            <p
+              className={`${
+                isActive("/devhub")
+                  ? "text-red-500 font-semibold"
+                  : "text-white"
+              } hover:text-red-500`}
+            >
               ID8&#123;DEVHUB&#125;
             </p>
           </Link>
           <Link href="/contact">
-            <p className="text-white hover:text-red-500 ">Contact Us</p>
+            <p
+              className={`${
+                isActive("/contact")
+                  ? "text-red-500 font-semibold"
+                  : "text-white"
+              } hover:text-red-500`}
+            >
+              Contact Us
+            </p>
           </Link>
         </div>
 
@@ -84,34 +129,73 @@ export default function Navbar() {
       {isOpen && (
         <div className="md:hidden bg-black text-white space-y-4 px-4 py-4">
           <Link href="/">
-            <p className="block hover:text-red-500 ">Home</p>
+            <p
+              className={`block ${
+                isActive("/") ? "text-red-500 font-semibold" : ""
+              } hover:text-red-500`}
+            >
+              Home
+            </p>
           </Link>
           <Link href="/about">
-            <p className="block hover:text-red-500 ">About Us</p>
+            <p
+              className={`block ${
+                isActive("/about") ? "text-red-500 font-semibold" : ""
+              } hover:text-red-500`}
+            >
+              About Us
+            </p>
           </Link>
           <Link href="/our-work">
-            <p className="block hover:text-red-500 ">Our Work</p>
+            <p
+              className={`block ${
+                isActive("/our-work") ? "text-red-500 font-semibold" : ""
+              } hover:text-red-500`}
+            >
+              Our Work
+            </p>
           </Link>
           <button
             onClick={() => setDropdownOpen(!dropdownOpen)}
-            className="block w-full text-left hover:text-red-500  focus:outline-none"
+            className={`block w-full text-left ${
+              pathname.startsWith("/solutions")
+                ? "text-red-500 font-semibold"
+                : ""
+            } hover:text-red-500 focus:outline-none`}
           >
             Solutions
           </button>
           {dropdownOpen && (
             <div className="bg-gray-800 text-white rounded mt-2 shadow-lg p-4">
-              {/* Dropdown items go here */}
               Dropdown Content
             </div>
           )}
           <Link href="/blog">
-            <p className="block hover:text-red-500 ">Blog</p>
+            <p
+              className={`block ${
+                isActive("/blog") ? "text-red-500 font-semibold" : ""
+              } hover:text-red-500`}
+            >
+              Blog
+            </p>
           </Link>
           <Link href="/devhub">
-            <p className="block hover:text-red-500 ">ID8&#123;DEVHUB&#125;</p>
+            <p
+              className={`block ${
+                isActive("/devhub") ? "text-red-500 font-semibold" : ""
+              } hover:text-red-500`}
+            >
+              ID8&#123;DEVHUB&#125;
+            </p>
           </Link>
           <Link href="/contact">
-            <p className="block hover:text-red-500 ">Contact Us</p>
+            <p
+              className={`block ${
+                isActive("/contact") ? "text-red-500 font-semibold" : ""
+              } hover:text-red-500`}
+            >
+              Contact Us
+            </p>
           </Link>
         </div>
       )}
