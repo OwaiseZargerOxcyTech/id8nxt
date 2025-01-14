@@ -536,7 +536,7 @@ const Hero = () => {
           />
 
           {/* Content */}
-          <div className="relative z-10 h-full xl:max-w-6xl 1xl:max-w-7xl 3xl:max-w-screen-2xl 4xl:max-w-[1760px] mx-auto px-4 sm:px-6 lg:px-4">
+          <div className="relative z-10 h-full mx-[80px] px-4 sm:px-6 lg:px-4">
             <div
               className={`container mx-auto h-full ${
                 index === activeSection ? "opacity-100" : "opacity-0"

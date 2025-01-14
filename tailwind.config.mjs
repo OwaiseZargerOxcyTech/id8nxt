@@ -12,11 +12,6 @@ export default {
         "22px": ["22px", "1.5"], // 25px font size with 1.5 line-height (optional)
         "55px": ["55px", "1.1"], // 55px font size with 1.1 line-height (optional)
       },
-      screens: {
-        "1xl": "1400px",
-        "3xl": "1700px", // Adding the 3xl breakpoint
-        "4xl": "1920px",
-      },
       fontFamily: {
         sans: ["Poppins", "sans-serif"], // Add Poppins as the primary font
         uni: ['"Uni Neue"', "sans-serif"],
