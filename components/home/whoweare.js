@@ -47,10 +47,10 @@ export default function WhoWeAre() {
   return (
     <section
       ref={sectionRef}
-      className="flex flex-col md:flex-row items-center justify-center py-12 px-4 md:px-20 bg-white"
+      className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center py-12 px-4 bg-white"
     >
       {/* Left Section */}
-      <div ref={leftTextRef} className="text-6xl font-light text-black p-4 w-full md:w-1/3">
+      <div ref={leftTextRef} className="text-8xl font-light text-black p-4 w-full md:w-1/3">
         Who <br /> we are
       </div>
       {/* Right Section */}

@@ -17,7 +17,7 @@ export default function Navbar() {
         </div>
 
         {/* Menu Items */}
-        <div className="hidden md:flex space-x-6 items-center">
+        <div className="hidden md:flex space-x-12 items-center">
           <Link href="/">
             <p className="text-white hover:text-red-500 hover:font-semibold">Home</p>
           </Link>

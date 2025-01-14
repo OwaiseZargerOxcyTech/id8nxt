@@ -64,7 +64,7 @@ const ProductDisplay = () => {
       {
         y: 0,
         opacity: 1,
-        duration: 2.5,
+        duration: 1.5,
         ease: "power2.out",
         stagger: {
           amount: 0.3,
@@ -75,7 +75,7 @@ const ProductDisplay = () => {
       {
         y: 0,
         opacity: 1,
-        duration: 1.5,
+        duration: 2.5,
         ease: "power2.out",
         stagger: 0.2,
       },
@@ -103,7 +103,7 @@ const ProductDisplay = () => {
     if (!isPaused) {
       timerRef.current = setInterval(() => {
         setCurrentIndex((prev) => (prev + 1) % products.length);
-      }, 6000);
+      }, 3000);
 
       return () => {
         if (timerRef.current) {
@@ -130,10 +130,10 @@ const ProductDisplay = () => {
   const currentProduct = products[currentIndex];
 
   return (
-    <div ref={containerRef} className="w-full px-4 py-12">
+    <div ref={containerRef} className="w-full">
       <div className="grid grid-cols-3 gap-4">
         {/* Left Section */}
-        <div className="relative overflow-hidden shadow-lg">
+        <div className="relative overflow-hidden">
           {/* Main Image */}
           <img
             ref={leftImageRef}
@@ -175,7 +175,7 @@ const ProductDisplay = () => {
         </div>
 
         {/* Center Image */}
-        <div className="relative overflow-hidden shadow-lg">
+        <div className="relative overflow-hidden">
           <img
             ref={centerImageRef}
             src={currentProduct.centerImage}
@@ -185,7 +185,7 @@ const ProductDisplay = () => {
         </div>
 
         {/* Right Image */}
-        <div className="relative overflow-hidden shadow-lg">
+        <div className="relative overflow-hidden">
           <img
             ref={rightImageRef}
             src={currentProduct.rightImage}

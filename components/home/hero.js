@@ -79,7 +79,7 @@ const Hero = () => {
     if (!bgRefs.current[index].animationStarted) {
       gsap.to(bgRefs.current[index], {
         scale: 1.5,
-        duration: 5,
+        duration: 15,
         ease: "none",
         repeat: -1,
         yoyo: true,
@@ -125,7 +125,7 @@ const Hero = () => {
     if (isEnter) {
       gsap.to(imageRefsDesktop.current[index], {
         x: "2px",
-        duration: 0.4,
+        duration: 0.7,
         repeat: 3,
         yoyo: true,
         ease: "power1.inOut",
@@ -343,7 +343,7 @@ const Hero = () => {
           animateSection(1, next);
           return next;
         });
-      }, 5000);
+      }, 10000);
     }
   };
 
@@ -608,7 +608,7 @@ const Hero = () => {
               {/* Desktop Layout */}
               <div className="hidden lg:grid lg:grid-cols-3 gap-8 px-4 h-full items-center">
                 <div className="section-text z-20">
-                  {index === 1 && (
+                  {/* {index === 1 && (
                     <img
                       ref={(el) => {
                         if (!overlayRefs.current[index]) {
@@ -623,7 +623,7 @@ const Hero = () => {
                       alt="Decorative Rectangle"
                       className="relative w-36 -top-4 left-48 z-0"
                     />
-                  )}
+                  )} */}
                   <h2
                     ref={(el) => (titleRefsDesktop.current[index] = el)}
                     className={`relative ${
@@ -639,7 +639,9 @@ const Hero = () => {
                     ref={(el) => (imageRefsDesktop.current[index] = el)}
                     src={section.content.mainImage}
                     alt="Section Visual"
-                    className="w-full h-auto relative z-10"
+                    className={`w-full  ${
+                      index === 0 ? "top-0 left-0" : "top-20 left-0"
+                    } h-auto relative z-10`}
                     onMouseEnter={() => handleImageHover(index, true)}
                     onMouseLeave={() => handleImageHover(index, false)}
                   />
