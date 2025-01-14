@@ -7,6 +7,9 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        '3xl': '1700px', // Adding the 3xl breakpoint
+      },
       fontFamily: {
         sans: ['Poppins', 'sans-serif'], // Add Poppins as the primary font
         uni: ['"Uni Neue"', 'sans-serif'],

@@ -1,7 +1,7 @@
-"use client"
-import React, { useState, useEffect, useRef } from 'react';
+"use client";
+import React, { useState, useEffect, useRef } from "react";
 import { FaSignOutAlt } from "react-icons/fa";
-import gsap from 'gsap';
+import gsap from "gsap";
 
 export default function FeatureCards() {
   const [hoveredCard, setHoveredCard] = useState(null);
@@ -11,33 +11,33 @@ export default function FeatureCards() {
     {
       title: "Performance Marketing",
       description: "Drive results with targeted campaigns.",
-      hoverClass: "hover:bg-primary-red"
+      hoverClass: "hover:bg-primary-red",
     },
     {
       title: "Influencer Marketing",
       description: "Our team collaborates with influencers.",
-      hoverClass: "hover:bg-secondary-lime"
+      hoverClass: "hover:bg-secondary-lime",
     },
     {
       title: "Social Media Marketing",
       description: "Engage your audience effectively.",
-      hoverClass: "hover:bg-primary-navy"
+      hoverClass: "hover:bg-primary-navy",
     },
     {
       title: "Branding Strategy & Development",
       description: "Build a strong brand identity.",
-      hoverClass: "hover:bg-secondary-lime"
+      hoverClass: "hover:bg-secondary-lime",
     },
     {
       title: "Search Engine Optimization (SEO)",
       description: "Improve your search rankings.",
-      hoverClass: "hover:bg-primary-navy"
+      hoverClass: "hover:bg-primary-navy",
     },
     {
       title: "Film Production",
       description: "Create compelling video content.",
-      hoverClass: "hover:bg-primary-red"
-    }
+      hoverClass: "hover:bg-primary-red",
+    },
   ];
 
   useEffect(() => {
@@ -46,7 +46,7 @@ export default function FeatureCards() {
       if (ref) {
         gsap.set(ref, {
           x: -100,
-          opacity: 0
+          opacity: 0,
         });
       }
     });
@@ -59,7 +59,7 @@ export default function FeatureCards() {
         x: 0,
         opacity: 1,
         duration: 0.5,
-        ease: "power2.out"
+        ease: "power2.out",
       });
     }
   };
@@ -71,7 +71,7 @@ export default function FeatureCards() {
         x: -100,
         opacity: 0,
         duration: 0.1,
-        ease: "power2.in"
+        ease: "power2.in",
       });
     }
   };
@@ -89,16 +89,21 @@ export default function FeatureCards() {
             <h3 className="text-5xl text-gray-400 group-hover:text-white transition-colors duration-300">
               {feature.title}
             </h3>
-            <div 
-              ref={el => descriptionRefs.current[index] = el}
+            <div
+              ref={(el) => (descriptionRefs.current[index] = el)}
               className="transition-colors duration-300"
             >
-              <p className="text-gray-600 group-hover:text-white mt-4">
+              <p className="text-gray-600 group-hover:text-white mt-8">
                 {feature.description}
               </p>
-              <FaSignOutAlt
+              {/* <FaSignOutAlt
                 className="text-gray-400 group-hover:text-white mt-4 mx-auto"
                 size={64}
+              /> */}
+              <img
+                src="/images/home/asset1.svg"
+                alt="logo"
+                className="text-gray-400 group-hover:text-white w-16 mt-8 mx-auto"
               />
             </div>
           </div>

@@ -49,7 +49,7 @@ export function ContactForm({ backColor }) {
 
   return (
     <main className="w-full" style={{ backgroundColor: backColor }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center min-h-screen">
+      <div className="max-w-7xl 3xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center min-h-screen">
         <div ref={formRef} className="w-full mx-auto ">
           <div className="space-y-4 mt-8 sm:mt-0 mb-8">
             <h1 className="text-3xl font-bold text-white">How can we help?</h1>
