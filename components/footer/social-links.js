@@ -16,22 +16,21 @@ export function SocialLinks() {
 
   return (
     <main className=" w-full">
-      <div className="max-w-7xl 3xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center items-end ">
+      <div className="max-w-7xl 3xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-0 flex flex-col justify-center items-end ">
         <div className="flex justify-end gap-4">
           {socialLinks.map((social) => (
             <Link
               key={social.label}
               href={social.href}
               className="text-white hover:text-gray-200 transition-colors duration-300"
-              aria-label={social.label}>
+              aria-label={social.label}
+            >
               <social.icon className="w-6 h-6" />
             </Link>
           ))}
-               
         </div>
         <div className="w-full border-t border-white/20 my-6"></div>
       </div>
     </main>
   );
 }
-
