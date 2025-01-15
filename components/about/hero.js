@@ -1,33 +1,61 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const HeroAbout = () => {
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
   const headerRef = useRef(null);
   const titleRef = useRef(null);
   const statuesRef = useRef(null);
   const bgElementsRef = useRef(null);
 
   useEffect(() => {
-    // Set transform origin for statues to scale from bottom
-    gsap.set(statuesRef.current.children, {
-      transformOrigin: "bottom center",
-    });
+    if (isInitialLoad) {
+      // Initial load animations
+      const duration = 0.8;
+      const ease = "power2.out";
 
+      // Set initial positions
+      gsap.set(bgElementsRef.current, { opacity: 0, y: "100%" });
+      gsap.set(titleRef.current, { opacity: 0, y: "100%" });
+      gsap.set(statuesRef.current.children, {
+        opacity: 0,
+        y: "100%",
+        transformOrigin: "bottom center",
+      });
+
+      // Animate everything at once
+      gsap.to(
+        [bgElementsRef.current, titleRef.current, statuesRef.current.children],
+        {
+          y: "0%",
+          opacity: 1,
+          duration: duration,
+          ease: ease,
+          onComplete: () => {
+            setIsInitialLoad(false);
+            startOngoingAnimations();
+          },
+        }
+      );
+    }
+  }, [isInitialLoad]);
+
+  const startOngoingAnimations = () => {
     // Scroll animation for revealing effect with bottom anchoring
-    gsap.to(statuesRef.current.children, {
-      scrollTrigger: {
-        trigger: headerRef.current,
-        start: "top top",
-        end: "bottom center",
-        scrub: 1,
-      },
-      scale: 1.1,
-      ease: "none",
-    });
+    // gsap.to(statuesRef.current.children, {
+    //   scrollTrigger: {
+    //     trigger: headerRef.current,
+    //     start: "top top",
+    //     end: "bottom center",
+    //     scrub: 1,
+    //   },
+    //   scale: 1.1,
+    //   ease: "none",
+    // });
 
     // Create floating animation for leaf
     const floatingTl = gsap.timeline({
@@ -56,11 +84,21 @@ const HeroAbout = () => {
       yoyo: true,
       ease: "sine.inOut",
     });
+  };
 
-    // Cleanup function
+  // Cleanup function
+  useEffect(() => {
     return () => {
+      // Kill all GSAP animations for specific elements
+      gsap.killTweensOf([
+        bgElementsRef.current,
+        titleRef.current,
+        statuesRef.current?.children,
+      ]);
+      // Kill all ScrollTrigger instances
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-      floatingTl.kill();
+      // Kill any remaining animations in case we missed any
+      gsap.killTweensOf(headerRef.current, true);
     };
   }, []);
 
