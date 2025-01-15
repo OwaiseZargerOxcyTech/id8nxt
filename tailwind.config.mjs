@@ -13,9 +13,9 @@ export default {
         "55px": ["55px", "1.1"], // 55px font size with 1.1 line-height (optional)
       },
       screens: {
-        "1xl": "1400px",
-        "3xl": "1700px", // Adding the 3xl breakpoint
-        "4xl": "1920px",
+        "2xl": "1376px",
+        "3xl": "1536px",
+        "4xl": "1760px",
       },
       fontFamily: {
         sans: ["Poppins", "sans-serif"], // Add Poppins as the primary font

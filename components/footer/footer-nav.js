@@ -13,7 +13,7 @@ export function FooterNav() {
 
   return (
     <main className="w-full">
-      <div className="xl:max-w-6xl 1xl:max-w-7xl 3xl:max-w-screen-2xl 4xl:max-w-[1760px] mx-auto px-4 sm:px-6 lg:px-0 flex justify-between items-center ">
+      <div className="xl:max-w-6xl 2xl:max-w-screen-xl 3xl:max-w-screen-2xl 4xl:max-w-screen-4xl mx-auto px-4 sm:px-6 lg:px-0 flex justify-between items-center ">
         <nav className=" w-full ">
           <div className="flex flex-wrap md:flex-nowrap justify-between items-center gap-4">
             {links.map((link) => (

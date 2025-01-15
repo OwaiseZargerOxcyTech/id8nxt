@@ -97,7 +97,7 @@ export default function ClientLogos() {
 
   return (
     <div className="py-12 bg-white">
-      <div className="xl:max-w-6xl 1xl:max-w-7xl 3xl:max-w-screen-2xl 4xl:max-w-[1760px] mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden space-y-8">
+      <div className="xl:max-w-6xl 2xl:max-w-screen-xl 3xl:max-w-screen-2xl 4xl:max-w-screen-4xl mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden space-y-8">
         {/* Row 1 - First half of clients */}
         <div
           ref={containerRef1}
