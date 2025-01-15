@@ -218,7 +218,7 @@ export default function OurTeam() {
 
   return (
     <main className="w-full min-h-screen bg-white py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="xl:max-w-6xl 1xl:max-w-7xl 3xl:max-w-screen-2xl 4xl:max-w-[1760px] mx-auto px-4 sm:px-6 lg:px-0">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-black">
           <div className="text-3xl md:text-6xl font-normal text-black">
             Our
@@ -253,7 +253,8 @@ export default function OurTeam() {
               onClick={() => setCategory(cat)}
               className={`flex-1 px-4 py-2  text-start ${
                 category === cat ? "bg-black text-white" : "bg-white text-black"
-              }`}>
+              }`}
+            >
               {cat}
             </button>
           ))}
@@ -287,7 +288,8 @@ export default function OurTeam() {
               slidesPerView: 3.7,
               spaceBetween: 40,
             },
-          }}>
+          }}
+        >
           {teamData[category].map((member, index) => (
             <SwiperSlide key={index}>
               <div className=" flex flex-col items-start h-full ">
@@ -307,7 +309,8 @@ export default function OurTeam() {
                   <p className="text-gray-500 text-left">{member.mobile}</p>
                   <a
                     href={`mailto:${member.email}`}
-                    className="text-gray-500 text-left">
+                    className="text-gray-500 text-left"
+                  >
                     {member.email}
                   </a>
                 </div>

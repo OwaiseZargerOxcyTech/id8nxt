@@ -10,12 +10,13 @@ export default function WhoWeAre() {
           style={{
             backgroundImage:
               "url('https://www.isixsigma.com/wp-content/uploads/2018/11/shutterstock_1687550977-scaled.jpg')", // Replace with your image URL
-          }}></div>
+          }}
+        ></div>
         <div className="absolute inset-0 bg-red-600 opacity-80"></div>
       </div>
 
       {/* Text Content */}
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-center items-center min-h-[100vh]">
+      <div className="relative xl:max-w-6xl 1xl:max-w-7xl 3xl:max-w-screen-2xl 4xl:max-w-[1760px] mx-auto px-4 sm:px-6 lg:px-0 flex justify-center items-center min-h-[100vh]">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 h-auto w-full">
           {/* Left Section */}
           <div className="flex justify-start items-start md:h-[50vh]">
