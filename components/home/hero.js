@@ -625,7 +625,7 @@ const Hero = () => {
                   <h2
                     ref={(el) => (titleRefsDesktop.current[index] = el)}
                     className={
-                      `relative text-90px text-white whitespace-pre-line items-center text-nowrap`
+                      `relative xl:text-78px 2xl:text-86px 3xl:text-90px 4xl:text-110px text-white whitespace-pre-line items-center text-nowrap`
                       //  ${index === 0 ? "top-0 left-0" : "-top-20 left-0"}
                     }
                   >

@@ -8,8 +8,10 @@ export default {
   theme: {
     extend: {
       fontSize: {
-        "110px": ["110px", "1.2"], // 110px font size with 1.2 line-height (optional)
+        "78px": ["76px", "1"], // 78px font size with 1.2 line-height (optional)
+        "86px": ["86px", "1"], // 86px font size with 1.2 line-height (optional)
         "90px": ["90px", "1.2"], // 90px font size with 1.2 line-height (optional)
+        "110px": ["110px", "1.2"], // 110px font size with 1.2 line-height (optional)
         "22px": ["22px", "1.5"], // 25px font size with 1.5 line-height (optional)
         "55px": ["55px", "1.1"], // 55px font size with 1.1 line-height (optional)
       },
