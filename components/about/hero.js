@@ -103,90 +103,63 @@ const HeroAbout = () => {
   }, []);
 
   return (
-    <div
-      ref={headerRef}
-      className="relative min-h-screen bg-black overflow-hidden -z-20"
-    >
+    <div className="relative w-full min-h-screen bg-black overflow-hidden">
+      {/* Main content container */}
       <div
         className="mx-auto px-4 xl:px-6 2xl:px-8
         xl:max-w-6xl 
         2xl:max-w-screen-xl 
         3xl:max-w-screen-2xl 
-        4xl:max-w-screen-4xl"
+        4xl:max-w-screen-4xl flex items-center"
       >
-        {/* Title */}
-        <div
-          ref={titleRef}
-          className="
-            mt-32 xl:mt-72 2xl:mt-52 3xl:mt-48 4xl:mt-80 
-            z-50"
-        >
-          <h1
-            className="text-4xl xl:text-6xl 2xl:text-7xl 3xl:text-7xl 4xl:text-110px
-            font-light text-white mb-2 xl:mb-3 2xl:mb-4"
-          >
-            Creatively Led.
-          </h1>
-          <h1
-            className="text-4xl xl:text-6xl 2xl:text-7xl 3xl:text-7xl 4xl:text-110px
-            font-light text-white"
-          >
-            Results Driven.
+        {/* Text section */}
+        <div className="w-[45%] z-10 absolute top-[30%]" ref={titleRef}>
+          <h1 className="text-white text-6xl 3xl:text-78px font-normal leading-tight tracking-wide">
+            <span className="block">Creatively Led.</span>
+            <span className="block mt-2">Results Driven.</span>
           </h1>
         </div>
-      </div>
 
-      {/* Background Elements (Leaves and Bulbs) */}
-      <div
-        ref={bgElementsRef}
-        className="absolute bottom-0 right-0
-          w-[80%] xl:w-[50%] 2xl:w-[60%] 4xl:w-[68%]
-          -z-10"
-      >
-        <img
-          src="/images/about/about-hero/leaf.png"
-          alt="Decorative leaves and light bulbs"
-          className="object-cover w-full h-full"
-        />
-      </div>
+        {/* Images section */}
+        <div className="absolute right-0 bottom-0 w-[65%] h-full">
+          {/* Decorative image with leaves and bulbs */}
+          <img
+            ref={bgElementsRef}
+            src="/images/about/about-hero/leaf.png"
+            alt="Decorative elements"
+            className="absolute top-20 right-0 w-full h-full object-contain z-0"
+          />
 
-      {/* Statues */}
-      <div
-        ref={statuesRef}
-        className="absolute bottom-0 right-0 
-          w-[90%] xl:w-[75%] 2xl:w-[66%]
-          flex items-end z-10"
-      >
-        <img
-          src="/images/about/about-hero/mon-2.png"
-          alt="Classical statue 2"
-          className="object-cover relative 
-            top-8 xl:top-12 2xl:top-12
-            right-16 xl:left-40 2xl:-left-20 3xl:right-60 4xl:right-64
-            xl:w-1/3 2xl:w-1/2 
-            xl:scale-75 3xl:scale-100 
-            h-full z-10"
-        />
-        <img
-          src="/images/about/about-hero/mon-1.png"
-          alt="Classical statue 1"
-          className="object-cover relative 
-            right-48 xl:right-[0rem] 2xl:right-[22rem] 3xl:right-[26rem] 4xl:right-[32rem]
-            top-4
-            xl:w-1/2 2xl:w-2/3 
-            xl:scale-75 3xl:scale-100 
-            h-full z-20"
-        />
-        <img
-          src="/images/about/about-hero/mon-3.png"
-          alt="Classical statue 3"
-          className="object-cover absolute 
-            top-10 xl:top-20 2xl:top-24 4xl:top-36
-            -right-10 
-            w-[45%] xl:w-[42%] 2xl:w-[46%] 
-            xl:scale-75 3xl:scale-100 
-            h-full z-10"
-        />
+          {/* Statues container */}
+          <div className="relative h-full w-full " ref={statuesRef}>
+            {/* First statue */}
+            <div className="absolute -bottom-12 right-[60%] w-[25rem] 4xl:w-[40rem]">
+              <img
+                src="/images/about/about-hero/mon-1.png"
+                alt="Classical statue 1"
+                className="w-full h-auto"
+              />
+            </div>
+
+            {/* Middle statue */}
+            <div className="absolute bottom-0 right-[25%] w-[33rem] 4xl:w-[50rem] z-20">
+              <img
+                src="/images/about/about-hero/mon-2.png"
+                alt="Classical statue 2"
+                className="w-full h-auto"
+              />
+            </div>
+
+            {/* Last statue */}
+            <div className="absolute -bottom-10 -right-10 w-[26rem] 4xl:w-[40rem]">
+              <img
+                src="/images/about/about-hero/mon-3.png"
+                alt="Classical statue 3"
+                className="w-full h-auto"
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
