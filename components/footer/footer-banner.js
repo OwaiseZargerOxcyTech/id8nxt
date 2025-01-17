@@ -1,18 +1,15 @@
-export function FooterBanner({ 
-  color,
-  textColor
-}) {
+export function FooterBanner({ color, textColor }) {
   return (
     <div className="relative mx-4 mt-24 mb-12 group cursor-pointer flex items-center justify-center">
       {/* Sliding background */}
       <div className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-in-out origin-left"></div>
 
       {/* Text content */}
-      <div 
-        className="relative z-10 text-[14vw] font-normal text-center tracking-widest transition-colors duration-300 ease-in-out leading-none"
+      <div
+        className="relative z-10 text-[16vw] 2xl:text-[16.9vw] 3xl:text[17.5vw] pl-2 font-normal text-center tracking-widest transition-colors duration-300 ease-in-out leading-none"
         style={{
-          ['--hover-color']: color,
-          ['--text-color']: textColor,
+          ["--hover-color"]: color,
+          ["--text-color"]: textColor,
         }}
       >
         <style>{`

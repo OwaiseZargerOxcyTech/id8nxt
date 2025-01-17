@@ -118,7 +118,7 @@ const HeroAbout = () => {
         <div
           ref={titleRef}
           className="
-            mt-32 xl:mt-72 2xl:mt-64 3xl:mt-48 4xl:mt-80 
+            mt-32 xl:mt-72 2xl:mt-52 3xl:mt-48 4xl:mt-80 
             z-50"
         >
           <h1
@@ -139,9 +139,8 @@ const HeroAbout = () => {
       {/* Background Elements (Leaves and Bulbs) */}
       <div
         ref={bgElementsRef}
-        className="absolute top-8 xl:top-32 3xl:top-20 4xl:top-44
-          right-0
-          w-[80%] xl:w-[70%] 2xl:w-[60%] 
+        className="absolute bottom-0 right-0
+          w-[80%] xl:w-[50%] 2xl:w-[60%] 4xl:w-[68%]
           -z-10"
       >
         <img
@@ -163,19 +162,19 @@ const HeroAbout = () => {
           alt="Classical statue 2"
           className="object-cover relative 
             top-8 xl:top-12 2xl:top-12
-            right-16 xl:right-32 2xl:right-40 3xl:right-60 4xl:right-64
-            w-1/2 
-            xl:scale-90 3xl:scale-100 
+            right-16 xl:left-40 2xl:-left-20 3xl:right-60 4xl:right-64
+            xl:w-1/3 2xl:w-1/2 
+            xl:scale-75 3xl:scale-100 
             h-full z-10"
         />
         <img
           src="/images/about/about-hero/mon-1.png"
           alt="Classical statue 1"
           className="object-cover relative 
-            right-48 xl:right-[22rem] 2xl:right-[22rem] 3xl:right-[26rem] 4xl:right-[32rem]
+            right-48 xl:right-[0rem] 2xl:right-[22rem] 3xl:right-[26rem] 4xl:right-[32rem]
             top-4
-            w-2/3 
-            xl:scale-90 3xl:scale-100 
+            xl:w-1/2 2xl:w-2/3 
+            xl:scale-75 3xl:scale-100 
             h-full z-20"
         />
         <img
@@ -184,8 +183,8 @@ const HeroAbout = () => {
           className="object-cover absolute 
             top-10 xl:top-20 2xl:top-24 4xl:top-36
             -right-10 
-            w-[45%] xl:w-[42%] 2xl:w-[44%] 
-            xl:scale-90 3xl:scale-100 
+            w-[45%] xl:w-[42%] 2xl:w-[46%] 
+            xl:scale-75 3xl:scale-100 
             h-full z-10"
         />
       </div>
