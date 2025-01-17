@@ -22,10 +22,10 @@ export function SocialLinks({ textColor }) {
             <Link
               key={social.label}
               href={social.href}
-              className="text-white hover:text-gray-200 transition-colors duration-300"
+              className="hover:opacity-80 transition-colors duration-300"
               aria-label={social.label}
             >
-              <social.icon className="w-6 h-6" />
+              <social.icon className="w-6 h-6" style={{ color: textColor }} />
             </Link>
           ))}
         </div>

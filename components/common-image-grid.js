@@ -2,7 +2,7 @@ import React from "react";
 
 const ImageGrid = ({ data }) => {
   return (
-    <div className="container mx-auto p-4 mb-24">
+    <div className="container mx-auto p-4 my-4 md:my-20">
       <div className="flex flex-col space-y-16">
         {/* First row */}
         <div className="flex flex-col md:flex-row space-y-8 md:space-y-0">
@@ -23,7 +23,9 @@ const ImageGrid = ({ data }) => {
           </div>
           {/* Third image with gap */}
           <div className="md:ml-24 w-full md:w-1/3">
-            <p className="text-sm text-gray-600 mt-2">{data[2].title}</p>
+            <p className="text-sm text-gray-600 -mt-6 md:mt-2">
+              {data[2].title}
+            </p>
             <div className="relative aspect-[4/3] w-full overflow-hidden bg-gray-100">
               <img
                 src={data[2].image}
@@ -38,7 +40,9 @@ const ImageGrid = ({ data }) => {
         <div className="flex flex-col md:flex-row space-y-8 md:space-y-0">
           {/* First image */}
           <div className="w-full md:w-1/3">
-            <p className="text-sm text-gray-600 mt-2">{data[3].title}</p>
+            <p className="text-sm text-gray-600 -mt-14 md:mt-2">
+              {data[3].title}
+            </p>
             <div className="relative aspect-[4/3] w-full overflow-hidden bg-gray-100">
               <img
                 src={data[3].image}
@@ -49,8 +53,13 @@ const ImageGrid = ({ data }) => {
           </div>
           {/* Last two close images */}
           <div className="flex flex-col md:flex-row md:space-x-4 md:ml-24 md:w-2/3">
-            {data.slice(4, 6).map((image) => (
-              <div key={image.id} className="w-full md:w-1/2">
+            {data.slice(4, 6).map((image, index) => (
+              <div
+                key={image.id}
+                className={`w-full md:w-1/2 ${
+                  index === 0 ? "-mt-8 md:mt-0" : "" // Apply a different margin for the first item
+                }`}
+              >
                 <p className="text-sm text-gray-600 mt-2">{image.title}</p>
                 <div className="relative aspect-[4/3] w-full overflow-hidden bg-gray-100">
                   <img

@@ -1,4 +1,7 @@
 export function FooterBanner({ color, textColor }) {
+  // Determine background color based on hover color
+  const bgColor = color?.toLowerCase() === "white" ? "black" : "white";
+
   return (
     <div className="relative mx-4 mt-24 mb-12 group cursor-pointer flex items-center justify-center">
       {/* Sliding background */}

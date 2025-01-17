@@ -20,7 +20,8 @@ export function FooterNav({ textColor }) {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-white hover:underline text-sm md:text-base whitespace-nowrap"
+                className="hover:underline text-sm md:text-base whitespace-nowrap"
+                style={{ color: textColor }}
               >
                 {link.label}
               </Link>
