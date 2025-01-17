@@ -33,8 +33,6 @@ const Hero = () => {
     );
   };
 
-
-
   const sections = [
     {
       bgImage: "/images/home/home-hero-bg-1.png",
@@ -347,7 +345,7 @@ const Hero = () => {
     }
   };
 
- useLayoutEffect(() => {
+  useLayoutEffect(() => {
     const container = containerRef.current;
     let touchStartY = 0;
     let lastScrollTime = Date.now();
@@ -419,7 +417,7 @@ const Hero = () => {
 
       const rect = container.getBoundingClientRect();
       const isInView = rect.top <= 0 && rect.bottom + 1 >= window.innerHeight;
-      
+
       if (isInView) {
         const direction = e.deltaY > 0 ? 1 : -1;
 
@@ -483,7 +481,7 @@ const Hero = () => {
         passive: false,
       });
     }
-    
+
     window.addEventListener("scroll", handleScrollIntoView);
 
     handleScrollIntoView();
@@ -538,7 +536,7 @@ const Hero = () => {
           />
 
           {/* Content */}
-          <div className="relative z-10 h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="relative z-10 h-full xl:max-w-6xl 2xl:max-w-screen-xl 3xl:max-w-screen-2xl 4xl:max-w-screen-4xl mx-auto px-4 sm:px-6 lg:px-4">
             <div
               className={`container mx-auto h-full ${
                 index === activeSection ? "opacity-100" : "opacity-0"
@@ -626,9 +624,10 @@ const Hero = () => {
                   )} */}
                   <h2
                     ref={(el) => (titleRefsDesktop.current[index] = el)}
-                    className={`relative ${
-                      index === 0 ? "top-0 left-0" : "-top-20 left-0"
-                    } text-7xl text-white font-uni whitespace-pre-line`}
+                    className={
+                      `relative xl:text-78px 2xl:text-86px 3xl:text-90px 4xl:text-110px text-white whitespace-pre-line items-center text-nowrap`
+                      //  ${index === 0 ? "top-0 left-0" : "-top-20 left-0"}
+                    }
                   >
                     {section.content.title}
                   </h2>
@@ -671,14 +670,15 @@ const Hero = () => {
 
                 <div
                   ref={(el) => (descRefsDesktop.current[index] = el)}
-                  className={`relative ${
-                    index === 0 ? "top-40 right-0" : "top-40 right-0"
-                  } section-text z-20`}
+                  className={`relative
+                     ${
+                       index === 0 ? "top-40 right-0" : "top-40 right-0"
+                     } section-text z-20`}
                 >
-                  <p className="text-white/80 text-lg text-right">
+                  <p className="text-white/80 text-22px text-right">
                     {section.content.description}
                   </p>
-                  <button className="absolute top-30 right-0 border-b border-red-500 text-white px-4 py-2 rounded hover:bg-red-500/20 transition duration-300">
+                  <button className="absolute text-base top-30 right-0 border-b border-red-500 text-white px-4 py-2 rounded hover:bg-red-500/20 transition duration-300">
                     View Portfolio
                   </button>
                 </div>

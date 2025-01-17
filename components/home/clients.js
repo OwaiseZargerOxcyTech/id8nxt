@@ -35,12 +35,21 @@ export default function ClientLogos() {
 
   const containerRef1 = useRef(null);
   const containerRef2 = useRef(null);
+  const animation1Ref = useRef(null);
+  const animation2Ref = useRef(null);
 
   useEffect(() => {
     const container1 = containerRef1.current;
     const container2 = containerRef2.current;
 
     if (container1 && container2) {
+      // Kill any existing animations first
+      if (animation1Ref.current) animation1Ref.current.kill();
+      if (animation2Ref.current) animation2Ref.current.kill();
+
+      // Reset containers
+      gsap.set([container1, container2], { x: 0 });
+
       // Duplicate the content for both rows
       const clone1 = container1.innerHTML;
       const clone2 = container2.innerHTML;
@@ -51,7 +60,7 @@ export default function ClientLogos() {
       const rowWidth2 = container2.scrollWidth / 2;
 
       // Row 1: Right to left
-      gsap.to(container1, {
+      animation1Ref.current = gsap.to(container1, {
         x: -rowWidth1,
         ease: "none",
         duration: 40,
@@ -62,7 +71,7 @@ export default function ClientLogos() {
       });
 
       // Row 2: Left to right
-      gsap.to(container2, {
+      animation2Ref.current = gsap.to(container2, {
         x: rowWidth2,
         ease: "none",
         duration: 40,
@@ -72,11 +81,23 @@ export default function ClientLogos() {
         },
       });
     }
+
+    // Cleanup function
+    return () => {
+      if (animation1Ref.current) {
+        animation1Ref.current.kill();
+        animation1Ref.current = null;
+      }
+      if (animation2Ref.current) {
+        animation2Ref.current.kill();
+        animation2Ref.current = null;
+      }
+    };
   }, []);
 
   return (
     <div className="py-12 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden space-y-8">
+      <div className="xl:max-w-6xl 2xl:max-w-screen-xl 3xl:max-w-screen-2xl 4xl:max-w-screen-4xl mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden space-y-8">
         {/* Row 1 - First half of clients */}
         <div
           ref={containerRef1}
