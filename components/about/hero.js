@@ -127,13 +127,13 @@ const HeroAbout = () => {
             ref={bgElementsRef}
             src="/images/about/about-hero/leaf.png"
             alt="Decorative elements"
-            className="absolute top-20 right-0 w-full h-full object-contain z-0"
+            className="absolute top-20 right-0 w-full h-full object-contain z-0 opacity-50"
           />
 
           {/* Statues container */}
           <div className="relative h-full w-full " ref={statuesRef}>
             {/* First statue */}
-            <div className="absolute -bottom-12 right-[60%] 4xl:right-[75%] w-[25rem] 4xl:w-[40rem]">
+            <div className="absolute -bottom-12 right-[70%] 4xl:right-[75%] w-[25rem] 4xl:w-[40rem]">
               <img
                 src="/images/about/about-hero/mon-1.png"
                 alt="Classical statue 1"
@@ -142,7 +142,7 @@ const HeroAbout = () => {
             </div>
 
             {/* Middle statue */}
-            <div className="absolute bottom-0 right-[25%] 4xl:right-[30%] w-[33rem] 4xl:w-[53rem] z-20">
+            <div className="absolute bottom-0 right-[28%] 4xl:right-[30%] w-[32rem] 4xl:w-[53rem] z-20">
               <img
                 src="/images/about/about-hero/mon-2.png"
                 alt="Classical statue 2"
@@ -151,7 +151,7 @@ const HeroAbout = () => {
             </div>
 
             {/* Last statue */}
-            <div className="absolute -bottom-10 -right-10 w-[26rem] 4xl:w-[44rem]">
+            <div className="absolute -bottom-16 -right-10 w-[30rem] 4xl:w-[44rem]">
               <img
                 src="/images/about/about-hero/mon-3.png"
                 alt="Classical statue 3"
