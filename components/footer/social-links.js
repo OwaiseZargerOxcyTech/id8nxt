@@ -15,29 +15,17 @@ export function SocialLinks({ textColor }) {
   ];
 
   return (
-<<<<<<< HEAD
-    <main className="w-full">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center items-end">
-=======
     <main className=" w-full">
       <div className="xl:max-w-6xl 2xl:max-w-screen-xl 3xl:max-w-screen-2xl 4xl:max-w-screen-4xl mx-auto px-4 sm:px-6 lg:px-0 flex flex-col justify-center items-end ">
->>>>>>> 1456e058d5d971c323f79d7d621db77a97301644
         <div className="flex justify-end gap-4">
           {socialLinks.map((social) => (
             <Link
               key={social.label}
               href={social.href}
-<<<<<<< HEAD
               className="hover:opacity-80 transition-colors duration-300"
               aria-label={social.label}
             >
               <social.icon className="w-6 h-6" style={{ color: textColor }} />
-=======
-              className="text-white hover:text-gray-200 transition-colors duration-300"
-              aria-label={social.label}
-            >
-              <social.icon className="w-6 h-6" />
->>>>>>> 1456e058d5d971c323f79d7d621db77a97301644
             </Link>
           ))}
         </div>
