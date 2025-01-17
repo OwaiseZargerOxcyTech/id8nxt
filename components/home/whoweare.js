@@ -47,14 +47,20 @@ export default function WhoWeAre() {
   return (
     <section
       ref={sectionRef}
-      className="flex flex-col md:flex-row items-center justify-center py-12 px-4 md:px-20 bg-white"
+      className="xl:max-w-6xl 2xl:max-w-screen-xl 3xl:max-w-screen-2xl 4xl:max-w-screen-4xl mx-auto flex flex-col md:flex-row items-center justify-center py-12 px-4 bg-white"
     >
       {/* Left Section */}
-      <div ref={leftTextRef} className="text-6xl font-light text-black p-4 w-full md:w-1/3">
+      <div
+        ref={leftTextRef}
+        className="text-8xl font-light text-black p-4 w-full md:w-1/3"
+      >
         Who <br /> we are
       </div>
       {/* Right Section */}
-      <div ref={rightTextRef} className="mt-6 md:mt-0 md:ml-12 text-gray-600 p-4 w-full md:w-2/3 flex items-center justify-center">
+      <div
+        ref={rightTextRef}
+        className="mt-6 md:mt-0 md:ml-12 text-gray-600 p-4 w-full md:w-2/3 flex items-center justify-center"
+      >
         <p className="text-lg text-left">
           We&#39;re more than just a digital agency. We&#39;re a creative
           powerhouse, dedicated to crafting unique and innovative solutions that

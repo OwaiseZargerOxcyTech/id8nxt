@@ -16,10 +16,10 @@ export default function ClientLogos() {
     { name: "CelerityX", logo: "/images/home/client-logos/CelerityX@2x.png" },
     { name: "Opentext", logo: "/images/home/client-logos/opentext@2x.png" },
     { name: "NComputing", logo: "/images/home/client-logos/Ncomputing@2x.png" },
-    { name: "Adobe", logo: "/images/home/client-logos/Redington@2x.png" },
-    { name: "Academy", logo: "/images/home/client-logos/Adobe@2x.png" },
-    { name: "Snowflake", logo: "/images/home/client-logos/SAS@2x.png" },
-    { name: "Hubblee", logo: "/images/home/client-logos/Snowflake@2x.png" },
+    { name: "Redington", logo: "/images/home/client-logos/Redington@2x.png" },
+    { name: "Adobe", logo: "/images/home/client-logos/Adobe@2x.png" },
+    { name: "SAS", logo: "/images/home/client-logos/SAS@2x.png" },
+    { name: "SnowFlake", logo: "/images/home/client-logos/Snowflake@2x.png" },
     { name: "OmaniVibe", logo: "/images/home/client-logos/Omani-Vibe@2x.png" },
     { name: "Smaack", logo: "/images/home/client-logos/Smaack@2x.png" },
     {
@@ -28,56 +28,82 @@ export default function ClientLogos() {
     },
   ];
 
+  // Split clients array into two halves
+  const halfLength = Math.ceil(clients.length / 2);
+  const firstHalfClients = clients.slice(0, halfLength);
+  const secondHalfClients = clients.slice(halfLength);
+
   const containerRef1 = useRef(null);
   const containerRef2 = useRef(null);
+  const animation1Ref = useRef(null);
+  const animation2Ref = useRef(null);
 
   useEffect(() => {
     const container1 = containerRef1.current;
     const container2 = containerRef2.current;
 
     if (container1 && container2) {
+      // Kill any existing animations first
+      if (animation1Ref.current) animation1Ref.current.kill();
+      if (animation2Ref.current) animation2Ref.current.kill();
+
+      // Reset containers
+      gsap.set([container1, container2], { x: 0 });
+
       // Duplicate the content for both rows
       const clone1 = container1.innerHTML;
       const clone2 = container2.innerHTML;
       container1.innerHTML += clone1;
       container2.innerHTML += clone2;
 
-      const rowWidth1 = container1.scrollWidth / 2; // Half the scroll width for row 1
-      const rowWidth2 = container2.scrollWidth / 2; // Half the scroll width for row 2
+      const rowWidth1 = container1.scrollWidth / 2;
+      const rowWidth2 = container2.scrollWidth / 2;
 
       // Row 1: Right to left
-      gsap.to(container1, {
-        x: -rowWidth1, // Scroll to the left
+      animation1Ref.current = gsap.to(container1, {
+        x: -rowWidth1,
         ease: "none",
-        duration: 40, // Adjust speed
-        repeat: -1, // Infinite loop
+        duration: 40,
+        repeat: -1,
         modifiers: {
-          x: (x) => `${parseFloat(x) % rowWidth1}px`, // Reset x for seamless looping
+          x: (x) => `${parseFloat(x) % rowWidth1}px`,
         },
       });
 
       // Row 2: Left to right
-      gsap.to(container2, {
-        x: rowWidth2, // Scroll to the right
+      animation2Ref.current = gsap.to(container2, {
+        x: rowWidth2,
         ease: "none",
-        duration: 40, // Adjust speed
-        repeat: -1, // Infinite loop
+        duration: 40,
+        repeat: -1,
         modifiers: {
-          x: (x) => `${(parseFloat(x) % rowWidth2) - rowWidth2}px`, // Reset x for seamless looping
+          x: (x) => `${(parseFloat(x) % rowWidth2) - rowWidth2}px`,
         },
       });
     }
+
+    // Cleanup function
+    return () => {
+      if (animation1Ref.current) {
+        animation1Ref.current.kill();
+        animation1Ref.current = null;
+      }
+      if (animation2Ref.current) {
+        animation2Ref.current.kill();
+        animation2Ref.current = null;
+      }
+    };
   }, []);
 
   return (
     <div className="py-12 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden space-y-8">
-        {/* Row 1 */}
+      <div className="xl:max-w-6xl 2xl:max-w-screen-xl 3xl:max-w-screen-2xl 4xl:max-w-screen-4xl mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden space-y-8">
+        {/* Row 1 - First half of clients */}
         <div
           ref={containerRef1}
           className="flex space-x-8 md:space-x-12 lg:space-x-16"
         >
-          {clients.map((client, index) => (
+          {firstHalfClients.map((client, index) => (
             <div
               key={index}
               className="flex-shrink-0 flex justify-center items-center relative group"
@@ -94,12 +120,12 @@ export default function ClientLogos() {
           ))}
         </div>
 
-        {/* Row 2 */}
+        {/* Row 2 - Second half of clients */}
         <div
           ref={containerRef2}
           className="flex space-x-8 md:space-x-12 lg:space-x-16"
         >
-          {clients.map((client, index) => (
+          {secondHalfClients.map((client, index) => (
             <div
               key={index}
               className="flex-shrink-0 flex justify-center items-center relative group"
