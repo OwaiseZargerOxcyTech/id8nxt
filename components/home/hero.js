@@ -604,7 +604,7 @@ const Hero = () => {
               </div>
 
               {/* Desktop Layout */}
-              <div className="hidden lg:grid lg:grid-cols-3 gap-8 px-4 h-full items-center">
+              <div className="hidden lg:grid lg:grid-cols-3 gap-8 px-12 h-full items-center">
                 <div className="section-text z-20">
                   {/* {index === 1 && (
                     <img

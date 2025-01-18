@@ -12,10 +12,12 @@ const HeroAbout = () => {
   const statuesRef = useRef(null);
   const bgElementsRef = useRef(null);
 
+  const statueRefs = useRef([]);
+
   useEffect(() => {
     if (isInitialLoad) {
       // Initial load animations
-      const duration = 0.8;
+      const duration = 1;
       const ease = "power2.out";
 
       // Set initial positions
@@ -43,6 +45,21 @@ const HeroAbout = () => {
       );
     }
   }, [isInitialLoad]);
+
+  const handleStatueHover = (index, isEnter) => {
+    if (isEnter) {
+      gsap.to(statueRefs.current[index], {
+        x: "2px",
+        duration: 0.7,
+        repeat: 3,
+        yoyo: true,
+        ease: "power1.inOut",
+        onComplete: () => {
+          gsap.set(statueRefs.current[index], { x: 0 });
+        },
+      });
+    }
+  };
 
   const startOngoingAnimations = () => {
     // Scroll animation for revealing effect with bottom anchoring
@@ -79,7 +96,7 @@ const HeroAbout = () => {
     // Add subtle rotation for more natural movement
     gsap.to(bgElementsRef.current, {
       rotate: 2,
-      duration: 3,
+      duration: 6,
       repeat: -1,
       yoyo: true,
       ease: "sine.inOut",
@@ -106,7 +123,7 @@ const HeroAbout = () => {
     <div className="relative w-full min-h-screen bg-black overflow-hidden">
       {/* Main content container */}
       <div
-        className="mx-auto px-4 xl:px-6 2xl:px-8
+        className="mx-auto px-4 xl:px-6 2xl:px-16
         xl:max-w-6xl 
         2xl:max-w-screen-xl 
         3xl:max-w-screen-2xl 
@@ -133,7 +150,12 @@ const HeroAbout = () => {
           {/* Statues container */}
           <div className="relative h-full w-full " ref={statuesRef}>
             {/* First statue */}
-            <div className="absolute -bottom-12 right-[70%] 4xl:right-[75%] w-[25rem] 4xl:w-[40rem]">
+            <div
+              className="absolute -bottom-12 right-[70%] 4xl:right-[75%] w-[25rem] 4xl:w-[40rem]"
+              ref={(el) => (statueRefs.current[0] = el)}
+              onMouseEnter={() => handleStatueHover(0, true)}
+              onMouseLeave={() => handleStatueHover(0, false)}
+            >
               <img
                 src="/images/about/about-hero/mon-1.png"
                 alt="Classical statue 1"
@@ -142,7 +164,12 @@ const HeroAbout = () => {
             </div>
 
             {/* Middle statue */}
-            <div className="absolute bottom-0 right-[28%] 4xl:right-[30%] w-[32rem] 4xl:w-[53rem] z-20">
+            <div
+              className="absolute bottom-0 right-[28%] 4xl:right-[30%] w-[32rem] 4xl:w-[53rem] z-20"
+              ref={(el) => (statueRefs.current[1] = el)}
+              onMouseEnter={() => handleStatueHover(1, true)}
+              onMouseLeave={() => handleStatueHover(1, false)}
+            >
               <img
                 src="/images/about/about-hero/mon-2.png"
                 alt="Classical statue 2"
@@ -151,7 +178,12 @@ const HeroAbout = () => {
             </div>
 
             {/* Last statue */}
-            <div className="absolute -bottom-16 -right-10 w-[30rem] 4xl:w-[44rem]">
+            <div
+              className="absolute -bottom-16 -right-10 w-[30rem] 4xl:w-[44rem]"
+              ref={(el) => (statueRefs.current[2] = el)}
+              onMouseEnter={() => handleStatueHover(2, true)}
+              onMouseLeave={() => handleStatueHover(2, false)}
+            >
               <img
                 src="/images/about/about-hero/mon-3.png"
                 alt="Classical statue 3"
