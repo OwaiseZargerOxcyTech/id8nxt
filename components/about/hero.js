@@ -49,8 +49,8 @@ const HeroAbout = () => {
   const handleStatueHover = (index, isEnter) => {
     if (isEnter) {
       gsap.to(statueRefs.current[index], {
-        x: "2px",
-        duration: 0.7,
+        x: "3px",
+        duration: 0.5,
         repeat: 3,
         yoyo: true,
         ease: "power1.inOut",
@@ -84,12 +84,12 @@ const HeroAbout = () => {
     floatingTl
       .to(bgElementsRef.current, {
         y: -20,
-        duration: 2,
+        duration: 6,
         ease: "sine.inOut",
       })
       .to(bgElementsRef.current, {
         y: 0,
-        duration: 2,
+        duration: 6,
         ease: "sine.inOut",
       });
 
@@ -120,7 +120,10 @@ const HeroAbout = () => {
   }, []);
 
   return (
-    <div className="relative w-full min-h-screen bg-black overflow-hidden">
+    <div
+      className="relative w-full min-h-screen bg-black overflow-hidden"
+      ref={headerRef}
+    >
       {/* Main content container */}
       <div
         className="mx-auto px-4 xl:px-6 2xl:px-16
