@@ -604,7 +604,7 @@ const Hero = () => {
               </div>
 
               {/* Desktop Layout */}
-              <div className="hidden lg:grid lg:grid-cols-3 gap-8 px-4 h-full items-center">
+              <div className="hidden lg:grid lg:grid-cols-3 gap-8 px-12 h-full items-center">
                 <div className="section-text z-20">
                   {/* {index === 1 && (
                     <img
@@ -625,7 +625,7 @@ const Hero = () => {
                   <h2
                     ref={(el) => (titleRefsDesktop.current[index] = el)}
                     className={
-                      `relative xl:text-78px 2xl:text-86px 3xl:text-90px 4xl:text-110px text-white whitespace-pre-line items-center text-nowrap`
+                      `relative xl:text-78px 2xl:text-80px 3xl:text-90px 4xl:text-110px text-white whitespace-pre-line items-center text-nowrap`
                       //  ${index === 0 ? "top-0 left-0" : "-top-20 left-0"}
                     }
                   >

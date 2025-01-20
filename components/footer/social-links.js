@@ -16,7 +16,7 @@ export function SocialLinks({ textColor }) {
 
   return (
     <main className=" w-full">
-      <div className="xl:max-w-6xl 2xl:max-w-screen-xl 3xl:max-w-screen-2xl 4xl:max-w-screen-4xl mx-auto px-4 sm:px-6 lg:px-0 flex flex-col justify-center items-end ">
+      <div className="xl:max-w-6xl 2xl:max-w-screen-xl 3xl:max-w-screen-2xl 4xl:max-w-screen-4xl mx-auto px-4 sm:px-6 lg:px-16 flex flex-col justify-center items-end ">
         <div className="flex justify-end gap-4">
           {socialLinks.map((social) => (
             <Link

@@ -47,7 +47,7 @@ export default function WhoWeAre() {
   return (
     <section
       ref={sectionRef}
-      className="xl:max-w-6xl 2xl:max-w-screen-xl 3xl:max-w-screen-2xl 4xl:max-w-screen-4xl mx-auto flex flex-col md:flex-row items-center justify-center py-12 px-4 bg-white"
+      className="xl:max-w-6xl 2xl:max-w-screen-xl 3xl:max-w-screen-2xl 4xl:max-w-screen-4xl mx-auto flex flex-col md:flex-row items-center justify-center py-12 px-16 bg-white"
     >
       {/* Left Section */}
       <div

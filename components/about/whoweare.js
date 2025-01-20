@@ -15,7 +15,7 @@ export default function WhoWeAre() {
       </div>
 
       {/* Text Content */}
-      <div className="relative xl:max-w-6xl 2xl:max-w-screen-xl 3xl:max-w-screen-2xl 4xl:max-w-screen-4xl mx-auto px-4 sm:px-6 lg:px-0 flex justify-center items-center min-h-[100vh]">
+      <div className="relative xl:max-w-6xl 2xl:max-w-screen-xl 3xl:max-w-screen-2xl 4xl:max-w-screen-4xl mx-auto px-4 sm:px-6 lg:px-16 flex justify-center items-center min-h-[100vh]">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 h-auto w-full">
           {/* Left Section */}
           <div className="flex justify-start items-start md:h-[50vh]">
