@@ -13,9 +13,9 @@ export default function ProjectsFilter() {
   };
 
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-4 pt-12 md:pt-28 pb-10">
+    <div className="xl:max-w-6xl 2xl:max-w-screen-xl 3xl:max-w-screen-2xl 4xl:max-w-screen-4xl mx-auto px-4 sm:px-6 lg:px-16 ">
       {/* Title */}
-      <h2 className="mb-12 md:mb-24 text-4xl font-light sm:text-5xl lg:text-5xl">
+      <h2 className="my-24 text-4xl font-light lg:text-5xl">
         Our Recent
         <br />
         Projects
