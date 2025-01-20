@@ -2,7 +2,7 @@ import React from "react";
 
 const HeroSection = () => {
   return (
-    <div className="w-full h-screen  bg-[url('https://c1.wallpaperflare.com/preview/574/566/410/596c866363b50.jpg')] bg-cover bg-center bg-no-repeat">
+    <div className="w-full h-screen  bg-[url('/images/our-work/hero-img/our-work.png')] bg-cover bg-center bg-no-repeat">
       <div className="h-full xl:max-w-6xl 2xl:max-w-screen-xl 3xl:max-w-screen-2xl 4xl:max-w-screen-4xl mx-auto px-4 sm:px-6 lg:px-16 flex flex-col md:flex-row md:items-center justify-center md:justify-between gap-8 md:gap-4">
         {/* Main Heading */}
         <div className="max-w-2xl">

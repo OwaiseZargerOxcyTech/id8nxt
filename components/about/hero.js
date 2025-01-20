@@ -62,7 +62,7 @@ const HeroAbout = () => {
   };
 
   const startOngoingAnimations = () => {
-    // Scroll animation for revealing effect with bottom anchoring
+    //----------------------------- Scroll animation for revealing effect with bottom anchoring
     // gsap.to(statuesRef.current.children, {
     //   scrollTrigger: {
     //     trigger: headerRef.current,
@@ -73,33 +73,44 @@ const HeroAbout = () => {
     //   scale: 1.1,
     //   ease: "none",
     // });
+    //------------------------------------ Create floating animation for leaf
+    // const floatingTl = gsap.timeline({
+    //   repeat: -1,
+    //   yoyo: true,
+    //   ease: "power1.inOut",
+    // });
+    // floatingTl
+    //   .to(bgElementsRef.current, {
+    //     y: -20,
+    //     duration: 6,
+    //     ease: "sine.inOut",
+    //   })
+    //   .to(bgElementsRef.current, {
+    //     y: 0,
+    //     duration: 6,
+    //     ease: "sine.inOut",
+    //   });
+    // // Add subtle rotation for more natural movement
+    // gsap.to(bgElementsRef.current, {
+    //   rotate: 2,
+    //   duration: 6,
+    //   repeat: -1,
+    //   yoyo: true,
+    //   ease: "sine.inOut",
+    // });
 
-    // Create floating animation for leaf
-    const floatingTl = gsap.timeline({
+    //------------------------------------ statues zoom
+
+    const zoomTl = gsap.timeline({
       repeat: -1,
       yoyo: true,
-      ease: "power1.inOut",
+      ease: "none",
     });
-
-    floatingTl
-      .to(bgElementsRef.current, {
-        y: -20,
-        duration: 6,
-        ease: "sine.inOut",
-      })
-      .to(bgElementsRef.current, {
-        y: 0,
-        duration: 6,
-        ease: "sine.inOut",
-      });
-
-    // Add subtle rotation for more natural movement
-    gsap.to(bgElementsRef.current, {
-      rotate: 2,
-      duration: 6,
-      repeat: -1,
-      yoyo: true,
-      ease: "sine.inOut",
+    zoomTl.to(statuesRef.current, {
+      y: 0,
+      duration: 5,
+      ease: "none",
+      scale: 1.1,
     });
   };
 
@@ -111,6 +122,7 @@ const HeroAbout = () => {
         bgElementsRef.current,
         titleRef.current,
         statuesRef.current?.children,
+        statuesRef.current,
       ]);
       // Kill all ScrollTrigger instances
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
@@ -126,8 +138,8 @@ const HeroAbout = () => {
     >
       {/* Main content container */}
       <div
-        className="mx-auto px-4 xl:px-6 2xl:px-16
-        xl:max-w-6xl 
+        className="mx-auto px-4 xl:px-0 2xl:px-16
+        xl:max-w-screen-lg 
         2xl:max-w-screen-xl 
         3xl:max-w-screen-2xl 
         4xl:max-w-screen-4xl flex items-center"
