@@ -6,7 +6,6 @@ const ParallaxHero = () => {
   const containerRef = useRef(null);
   const initialImageRef = useRef(null);
   const waveImageRef = useRef(null);
-  const castleImageRef = useRef(null);
   const textRef = useRef(null);
   const [isSecondImageVisible, setIsSecondImageVisible] = useState(false);
   const scrollTimeoutRef = useRef(null);
@@ -21,51 +20,51 @@ const ParallaxHero = () => {
       const container = containerRef.current;
       const initialImage = initialImageRef.current;
       const waveImage = waveImageRef.current;
-      const castleImage = castleImageRef.current;
       const text = textRef.current;
 
-      if (!container || !initialImage || !waveImage || !castleImage || !text)
-        return;
+      if (!container || !initialImage || !waveImage || !text) return;
 
-      // Initial state setup for both images
-      gsap.set([waveImage, castleImage], {
-        opacity: 0,
-        y: "100%",
-      });
+      // Add SVG filter for ripple effect with reduced distortion
+      const filterId = "ripple-effect";
+      const svgFilter = `
+        <svg xmlns="http://www.w3.org/2000/svg" class="absolute w-0 h-0">
+          <filter id="${filterId}">
+            <feTurbulence
+              id="turbulence"
+              type="fractalNoise"
+              baseFrequency="0.005 0.01"
+              numOctaves="1"
+              seed="1"
+              stitchTiles="stitch"
+              result="noise"
+            />
+            <feDisplacementMap
+              in="SourceGraphic"
+              in2="noise"
+              scale="3"
+              xChannelSelector="R"
+              yChannelSelector="G"
+            />
+          </filter>
+        </svg>
+      `;
+      document.body.insertAdjacentHTML("beforeend", svgFilter);
 
-      // Liquid-like water animation
-      const waterAnimation = gsap.timeline({
+      waveImage.style.filter = `url(#${filterId})`;
+
+      // Create an ultra-smooth ripple animation
+      const rippleAnimation = gsap.timeline({
         repeat: -1,
-        yoyo: true,
-        paused: true,
+        defaults: { ease: "sine.inOut" },
       });
 
-      // Create a more natural underwater effect with subtle distortion
-      waterAnimation
-        .to(waveImage, {
-          scale: 1.02,
-          rotation: 0.3,
-          x: "0.5%",
-          y: "0.3%",
-          duration: 5,
-          ease: "power1.inOut",
-        })
-        .to(waveImage, {
-          scale: 1.01,
-          rotation: -0.2,
-          x: "-0.3%",
-          y: "-0.2%",
-          duration: 4.5,
-          ease: "power1.inOut",
-        })
-        .to(waveImage, {
-          scale: 1.015,
-          rotation: 0.1,
-          x: "0.2%",
-          y: "0.4%",
-          duration: 4,
-          ease: "power1.inOut",
-        });
+      // Multi-step animation for smoother transitions
+      rippleAnimation.to("#turbulence", {
+        attr: {
+          baseFrequency: "0.007 0.03",
+        },
+        duration: 1,
+      });
 
       // Text animation timeline
       const textTimeline = gsap.timeline({ paused: true });
@@ -76,49 +75,45 @@ const ParallaxHero = () => {
         ease: "power2.inOut",
       });
 
-      // Combined timeline for both images
-      const combinedTimeline = gsap.timeline({ paused: true });
-      combinedTimeline.to([waveImage, castleImage], {
+      // Wave image fade-in animation
+      const waveTimeline = gsap.timeline({ paused: true });
+      waveTimeline.to(waveImage, {
         y: "0%",
         opacity: 1,
         duration: 1,
         ease: "power2.out",
         onComplete: () => {
-          waterAnimation.play(); // Start water animation after both images appear
+          rippleAnimation.play();
         },
       });
 
       // Wheel event handler
       const handleWheel = (e) => {
         const currentTime = Date.now();
-        if (currentTime - lastScrollTime.current < 500) return; // Debounce wheel events
+        if (currentTime - lastScrollTime.current < 500) return;
         lastScrollTime.current = currentTime;
 
         if (e.deltaY > 0 && !isSecondImageVisible) {
-          // Scrolling down
           setIsSecondImageVisible(true);
           textTimeline.play();
-          combinedTimeline.play();
+          waveTimeline.play();
+          rippleAnimation.play();
         } else if (e.deltaY < 0 && !isSecondImageVisible) {
-          // Scrolling up
           setIsSecondImageVisible(false);
           textTimeline.reverse();
-          combinedTimeline.reverse();
-          waterAnimation.pause();
+          waveTimeline.reverse();
+          rippleAnimation.pause();
         }
 
-        // Clear previous timeout
         if (scrollTimeoutRef.current) {
           clearTimeout(scrollTimeoutRef.current);
         }
 
-        // Set new timeout
         scrollTimeoutRef.current = setTimeout(() => {
           lastScrollTime.current = 0;
         }, 500);
       };
 
-      // Add wheel event listener
       window.addEventListener("wheel", handleWheel, { passive: true });
 
       return () => {
@@ -126,9 +121,9 @@ const ParallaxHero = () => {
         if (scrollTimeoutRef.current) {
           clearTimeout(scrollTimeoutRef.current);
         }
-        waterAnimation.kill();
+        rippleAnimation.kill();
         textTimeline.kill();
-        combinedTimeline.kill();
+        waveTimeline.kill();
       };
     };
 
@@ -180,21 +175,6 @@ const ParallaxHero = () => {
           </div>
         </div>
 
-        {/* Castle Image */}
-        <div
-          ref={castleImageRef}
-          className="absolute inset-0 w-full h-full"
-          style={{
-            backgroundImage: `url('/images/our-work/hero-img/our-work-2.png')`,
-            backgroundSize: "contain",
-            backgroundPosition: "center",
-            willChange: "transform",
-            zIndex: 10,
-            height: "200vh",
-            backgroundRepeat: "no-repeat",
-          }}
-        />
-
         {/* Wave Image */}
         <div
           ref={waveImageRef}
@@ -208,6 +188,7 @@ const ParallaxHero = () => {
             zIndex: 10,
             height: "240vh",
             backgroundRepeat: "no-repeat",
+            opacity: 0,
           }}
         />
       </div>
