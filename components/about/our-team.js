@@ -11,6 +11,7 @@ import "swiper/css/pagination";
 // import required modules
 import { FreeMode } from "swiper/modules";
 import { teamData } from "./team-data";
+import Image from "next/image";
 
 export default function OurTeam() {
   const [category, setCategory] = useState("Stratcom");
@@ -95,25 +96,33 @@ export default function OurTeam() {
                   onMouseEnter={() => setHoveredMember(index)}
                   onMouseLeave={() => setHoveredMember(null)}
                 >
-                  <img
-                    src={member.img}
-                    alt={member.name}
-                    className="w-full h-full object-cover transition-opacity duration-300"
-                    style={{
-                      opacity:
-                        hoveredMember === index && member.hoverImg ? 0 : 1,
-                    }}
-                  />
-                  {member.hoverImg && (
-                    <img
-                      src={member.hoverImg}
-                      alt={`${member.name} hover`}
-                      className="w-full h-full object-cover absolute top-0 left-0 transition-opacity duration-300"
+                  <div className="relative w-full h-full">
+                    <Image
+                      src={member.img}
+                      alt={member.name}
+                      className="transition-opacity duration-300 object-cover"
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      priority={index < 4} // Prioritize loading for first 4 members
                       style={{
-                        opacity: hoveredMember === index ? 1 : 0,
+                        opacity:
+                          hoveredMember === index && member.hoverImg ? 0 : 1,
                       }}
                     />
-                  )}
+                    {member.hoverImg && (
+                      <Image
+                        src={member.hoverImg}
+                        alt={`${member.name} hover`}
+                        className="transition-opacity duration-300 object-cover"
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        priority={index < 4}
+                        style={{
+                          opacity: hoveredMember === index ? 1 : 0,
+                        }}
+                      />
+                    )}
+                  </div>
                 </div>
 
                 <div className="mt-4">
@@ -124,7 +133,7 @@ export default function OurTeam() {
                   <p className="text-gray-500 text-left">{member.mobile}</p>
                   <a
                     href={`mailto:${member.email}`}
-                    className="text-gray-500 text-left"
+                    className="text-gray-500 text-left hover:text-gray-700 transition-colors"
                   >
                     {member.email}
                   </a>

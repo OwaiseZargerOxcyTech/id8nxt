@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
+import Image from "next/image";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -49,7 +50,7 @@ const HeroAbout = () => {
   const handleStatueHover = (index, isEnter) => {
     if (isEnter) {
       gsap.to(statueRefs.current[index], {
-        x: "3px",
+        x: "2px",
         duration: 0.5,
         repeat: 3,
         yoyo: true,
@@ -155,15 +156,18 @@ const HeroAbout = () => {
         {/* Images section */}
         <div className="absolute right-0 bottom-0 w-[65%] h-full">
           {/* Decorative image with leaves and bulbs */}
-          <img
+          <Image
             ref={bgElementsRef}
             src="/images/about/about-hero/leaf.png"
             alt="Decorative elements"
             className="absolute top-20 right-0 w-full h-full object-contain z-0 opacity-50"
+            fill
+            sizes="65vw"
+            priority
           />
 
           {/* Statues container */}
-          <div className="relative h-full w-full " ref={statuesRef}>
+          <div className="relative h-full w-full" ref={statuesRef}>
             {/* First statue */}
             <div
               className="absolute -bottom-12 right-[70%] 4xl:right-[75%] w-[25rem] 4xl:w-[40rem]"
@@ -171,10 +175,13 @@ const HeroAbout = () => {
               onMouseEnter={() => handleStatueHover(0, true)}
               onMouseLeave={() => handleStatueHover(0, false)}
             >
-              <img
+              <Image
                 src="/images/about/about-hero/mon-1.png"
                 alt="Classical statue 1"
                 className="w-full h-auto"
+                width={640}
+                height={960}
+                priority
               />
             </div>
 
@@ -185,10 +192,13 @@ const HeroAbout = () => {
               onMouseEnter={() => handleStatueHover(1, true)}
               onMouseLeave={() => handleStatueHover(1, false)}
             >
-              <img
+              <Image
                 src="/images/about/about-hero/mon-2.png"
                 alt="Classical statue 2"
                 className="w-full h-auto"
+                width={848}
+                height={1272}
+                priority
               />
             </div>
 
@@ -199,10 +209,13 @@ const HeroAbout = () => {
               onMouseEnter={() => handleStatueHover(2, true)}
               onMouseLeave={() => handleStatueHover(2, false)}
             >
-              <img
+              <Image
                 src="/images/about/about-hero/mon-3.png"
                 alt="Classical statue 3"
                 className="w-full h-auto"
+                width={704}
+                height={1056}
+                priority
               />
             </div>
           </div>
