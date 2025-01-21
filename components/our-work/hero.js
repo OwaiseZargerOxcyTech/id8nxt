@@ -6,6 +6,7 @@ const ParallaxHero = () => {
   const containerRef = useRef(null);
   const initialImageRef = useRef(null);
   const waveImageRef = useRef(null);
+  const castleImageRef = useRef(null);
   const textRef = useRef(null);
   const [isSecondImageVisible, setIsSecondImageVisible] = useState(false);
   const scrollTimeoutRef = useRef(null);
@@ -20,23 +21,24 @@ const ParallaxHero = () => {
       const container = containerRef.current;
       const initialImage = initialImageRef.current;
       const waveImage = waveImageRef.current;
+      const castleImage = castleImageRef.current;
       const text = textRef.current;
 
-      if (!container || !initialImage || !waveImage || !text) return;
+      if (!container || !initialImage || !waveImage || !castleImage || !text)
+        return;
 
-      // Initial state setup
-      gsap.set(waveImage, {
+      // Initial state setup for both images
+      gsap.set([waveImage, castleImage], {
         opacity: 0,
-        scale: 1,
         y: "100%",
       });
 
-      // Wave animation
+      // Wave continuous animation
       const waveAnimation = gsap.to(waveImage, {
         skewX: "1deg",
-        skewY: "2deg",
+        skewY: "1deg",
         scale: 1,
-        duration: 4,
+        duration: 3,
         ease: "sine.inOut",
         repeat: -1,
         yoyo: true,
@@ -52,15 +54,15 @@ const ParallaxHero = () => {
         ease: "power2.inOut",
       });
 
-      // Second image animation timeline
-      const imageTimeline = gsap.timeline({ paused: true });
-      imageTimeline.to(waveImage, {
+      // Combined timeline for both images
+      const combinedTimeline = gsap.timeline({ paused: true });
+      combinedTimeline.to([waveImage, castleImage], {
         y: "0%",
         opacity: 1,
         duration: 1,
         ease: "power2.out",
         onComplete: () => {
-          waveAnimation.play();
+          waveAnimation.play(); // Start wave animation after both images appear
         },
       });
 
@@ -72,15 +74,14 @@ const ParallaxHero = () => {
 
         if (e.deltaY > 0 && !isSecondImageVisible) {
           // Scrolling down
-
           setIsSecondImageVisible(true);
           textTimeline.play();
-          imageTimeline.play();
+          combinedTimeline.play();
         } else if (e.deltaY < 0 && !isSecondImageVisible) {
           // Scrolling up
           setIsSecondImageVisible(false);
           textTimeline.reverse();
-          imageTimeline.reverse();
+          combinedTimeline.reverse();
           waveAnimation.pause();
         }
 
@@ -105,7 +106,7 @@ const ParallaxHero = () => {
         }
         waveAnimation.kill();
         textTimeline.kill();
-        imageTimeline.kill();
+        combinedTimeline.kill();
       };
     };
 
@@ -157,18 +158,33 @@ const ParallaxHero = () => {
           </div>
         </div>
 
-        {/* Wave Animation Image */}
+        {/* Castle Image */}
         <div
-          ref={waveImageRef}
+          ref={castleImageRef}
           className="absolute inset-0 w-full h-full"
           style={{
             backgroundImage: `url('/images/our-work/hero-img/our-work-2.png')`,
             backgroundSize: "contain",
             backgroundPosition: "center",
-            transformOrigin: "center",
             willChange: "transform",
             zIndex: 10,
             height: "200vh",
+            backgroundRepeat: "no-repeat",
+          }}
+        />
+
+        {/* Wave Image */}
+        <div
+          ref={waveImageRef}
+          className="absolute inset-0 w-full h-full"
+          style={{
+            backgroundImage: `url('/images/our-work/hero-img/water.png')`,
+            backgroundSize: "contain",
+            backgroundPosition: "center",
+            transformOrigin: "center",
+            willChange: "transform",
+            zIndex: 10,
+            height: "240vh",
             backgroundRepeat: "no-repeat",
           }}
         />
