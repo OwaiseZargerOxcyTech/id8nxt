@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { FaSignOutAlt } from "react-icons/fa";
 import gsap from "gsap";
 import _ from "lodash";
+import Image from "next/image";
 
 export default function FeatureCards() {
   const [hoveredCard, setHoveredCard] = useState(null);
@@ -101,36 +102,39 @@ export default function FeatureCards() {
   };
 
   return (
-    <div className="">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 h-screen">
-        {features.map((feature, index) => (
-          <div
-            key={index}
-            className={`group relative bg-white border border-gray-200 overflow-hidden ${feature.hoverClass} transition-colors duration-300 ease-in-out min-h-[300px]`}
-            onMouseEnter={() => handleMouseEnter(index)}
-            onMouseLeave={() => handleMouseLeave(index)}
-          >
-            <div className="p-6 text-center flex flex-col justify-center h-full">
-              <h3 className="text-2xl md:text-3xl lg:text-4xl 4xl:text-6xl text-gray-400 group-hover:text-white transition-colors duration-300">
-                {feature.title}
-              </h3>
-              <div
-                ref={(el) => (descriptionRefs.current[index] = el)}
-                className="transition-colors duration-300"
-              >
-                <p className="text-gray-600 group-hover:text-white mt-4">
-                  {feature.description}
-                </p>
-                <img
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 h-screen">
+      {features.map((feature, index) => (
+        <div
+          key={index}
+          className={`group relative bg-white border border-gray-200 overflow-hidden ${feature.hoverClass} transition-colors duration-300 ease-in-out min-h-[300px]`}
+          onMouseEnter={() => handleMouseEnter(index)}
+          onMouseLeave={() => handleMouseLeave(index)}
+        >
+          <div className="p-6 text-center flex flex-col justify-center h-full">
+            <h3 className="text-2xl md:text-3xl lg:text-4xl 4xl:text-6xl text-gray-400 group-hover:text-white transition-colors duration-300">
+              {feature.title}
+            </h3>
+            <div
+              ref={(el) => (descriptionRefs.current[index] = el)}
+              className="transition-colors duration-300"
+            >
+              <p className="text-gray-600 group-hover:text-white mt-4">
+                {feature.description}
+              </p>
+              <div className="relative w-12 h-12 mt-4 mx-auto">
+                <Image
                   src="/images/home/asset1.svg"
                   alt="logo"
-                  className="text-gray-400 group-hover:text-white w-12 mt-4 mx-auto"
+                  fill
+                  sizes="48px"
+                  className="text-gray-400 group-hover:text-white object-contain"
+                  priority={index === 0}
                 />
               </div>
             </div>
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
     </div>
   );
 }

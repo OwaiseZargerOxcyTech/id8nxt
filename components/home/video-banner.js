@@ -1,12 +1,13 @@
-"use client"
+"use client";
+import Image from "next/image";
 import { useState } from "react";
 
 export default function VideoBanner() {
   const [isPlaying, setIsPlaying] = useState(false);
 
   return (
-    <div className="relative w-full h-[500px] md:h-[700px] lg:h-[800px] bg-gray-800 flex items-center justify-center">
-     {/* Video */}
+    <div className="relative w-full h-screen bg-gray-800 flex items-center justify-center">
+      {/* Video */}
       {isPlaying ? (
         <iframe
           src="https://www.youtube.com/embed/N8kbO9TPelo?autoplay=1&controls=0"
@@ -17,9 +18,10 @@ export default function VideoBanner() {
         />
       ) : (
         <>
-          <img
-        src="./images/home/designer-concept.jpg"
+          <Image
+            src="/images/home/designer-concept.jpg"
             alt="Video Thumbnail"
+            fill
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 w-full h-full bg-black bg-opacity-50"></div>
@@ -39,9 +41,7 @@ export default function VideoBanner() {
             viewBox="0 0 24 24"
             stroke="none"
           >
-            <path
-              d="M8 5v14l11-7z"
-            />
+            <path d="M8 5v14l11-7z" />
           </svg>
         </button>
       )}

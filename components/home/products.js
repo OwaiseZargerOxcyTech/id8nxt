@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FaChevronRight } from "react-icons/fa";
@@ -13,7 +14,7 @@ const products = [
     leftImage: "/images/home/Tata-Coffee-3.png",
     centerImage: "/images/home/Tata-Coffee-2.png",
     rightImage: "/images/home/Tata-Coffee-1.png",
-    logo: "./images/home/Tata-Coffee-Logo.png",
+    logo: "/images/home/Tata-Coffee-Logo.png",
     description:
       "Short product description goes here. This is a test description.",
   },
@@ -21,7 +22,7 @@ const products = [
     leftImage: "/images/home/Tata-Coffee-3.png",
     centerImage: "/images/home/Tata-Coffee-2.png",
     rightImage: "/images/home/Tata-Coffee-1.png",
-    logo: "./images/home/Tata-Coffee-Logo.png",
+    logo: "/images/home/Tata-Coffee-Logo.png",
     description: "Short product description goes here.",
   },
 ];
@@ -98,7 +99,6 @@ const ProductDisplay = () => {
     return () => ctx.revert();
   }, [currentIndex]);
 
-  // Auto-rotation timer effect
   useEffect(() => {
     if (!isPaused) {
       timerRef.current = setInterval(() => {
@@ -114,49 +114,55 @@ const ProductDisplay = () => {
   }, [isPaused]);
 
   const handleNext = () => {
-    // Clear the existing timer
     if (timerRef.current) {
       clearInterval(timerRef.current);
     }
-    
-    // Update the index
     setCurrentIndex((prev) => (prev + 1) % products.length);
-    
-    // Pause the auto-rotation briefly
     setIsPaused(true);
-    setTimeout(() => setIsPaused(false), 4000); // Resume after 4 seconds
+    setTimeout(() => setIsPaused(false), 4000);
   };
 
   const currentProduct = products[currentIndex];
 
   return (
     <div ref={containerRef} className="w-full">
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-3 gap-4 h-screen">
+        {/* change height if needed */}
         {/* Left Section */}
-        <div className="relative overflow-hidden">
+        <div className="relative overflow-hidden h-full">
           {/* Main Image */}
-          <img
+          <div
             ref={leftImageRef}
-            src={currentProduct.leftImage}
-            alt="Left product view"
-            className="w-full h-full"
-          />
+            className="relative w-full h-full aspect-[3/4]"
+          >
+            <Image
+              src={currentProduct.leftImage}
+              alt="Left product view"
+              fill
+              style={{ objectFit: "cover" }}
+              sizes="(max-width: 768px) 100vw, 33vw"
+              priority
+            />
+          </div>
 
           {/* Top Logo */}
           <div className="absolute top-12 left-0 w-full px-6 z-10">
             <div ref={logoRef} className="mb-4">
-              <img
-                src={currentProduct.logo}
-                alt="Product Logo"
-                className="h-8 mx-auto w-auto object-contain"
-              />
+              <div className="relative h-8 w-full">
+                <Image
+                  src={currentProduct.logo}
+                  alt="Product Logo"
+                  fill
+                  style={{ objectFit: "contain" }}
+                  sizes="(max-width: 768px) 100vw, 200px"
+                />
+              </div>
             </div>
           </div>
 
           {/* Bottom Text and Navigation */}
           <div className="absolute bottom-6 left-0 w-full px-6 z-10">
             <div className="flex items-start gap-4">
-              {/* Navigation Arrow */}
               <button
                 onClick={handleNext}
                 className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors -mt-1"
@@ -164,7 +170,6 @@ const ProductDisplay = () => {
               >
                 <FaChevronRight className="w-4 h-4" />
               </button>
-              {/* Text Content */}
               <div ref={textRef} className="flex-1">
                 <p className="text-black hidden md:block text-sm break-words max-w-[80%]">
                   {currentProduct.description}
@@ -175,23 +180,37 @@ const ProductDisplay = () => {
         </div>
 
         {/* Center Image */}
-        <div className="relative overflow-hidden">
-          <img
+        <div className="relative overflow-hidden h-full">
+          <div
             ref={centerImageRef}
-            src={currentProduct.centerImage}
-            alt="Center product view"
-            className="w-full h-full"
-          />
+            className="relative w-full h-full aspect-[3/4]"
+          >
+            <Image
+              src={currentProduct.centerImage}
+              alt="Center product view"
+              fill
+              style={{ objectFit: "cover" }}
+              sizes="(max-width: 768px) 100vw, 33vw"
+              priority
+            />
+          </div>
         </div>
 
         {/* Right Image */}
-        <div className="relative overflow-hidden">
-          <img
+        <div className="relative overflow-hidden h-full">
+          <div
             ref={rightImageRef}
-            src={currentProduct.rightImage}
-            alt="Right product view"
-            className="w-full h-full"
-          />
+            className="relative w-full h-full aspect-[3/4]"
+          >
+            <Image
+              src={currentProduct.rightImage}
+              alt="Right product view"
+              fill
+              style={{ objectFit: "cover" }}
+              sizes="(max-width: 768px) 100vw, 33vw"
+              priority
+            />
+          </div>
         </div>
       </div>
     </div>

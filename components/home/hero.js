@@ -1,5 +1,6 @@
 "use client";
 import React, { useLayoutEffect, useRef, useState } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
@@ -40,7 +41,7 @@ const Hero = () => {
         title: "Digital\n& Beyond",
         description:
           "ID8NXT is a Digital Marketing agency in Mumbai, India. We specialize in boosting businesses by focusing on their brand, using strategies, and harnessing digital tools.",
-        mainImage: "./images/home/V1.png",
+        mainImage: "/images/home/V1.png",
         overlayImages: [
           "/images/home/new-cloud.png",
           "/images/home/rectangle-1.png",
@@ -554,37 +555,53 @@ const Hero = () => {
                 </div>
 
                 <div className="flex-1 flex items-center justify-center relative">
-                  <img
-                    ref={(el) => (imageRefsMobile.current[index] = el)}
-                    src={section.content.mainImage}
-                    alt="Section Visual"
+                  <div
                     className={`${
                       index === 0 ? "w-[85%] sm:w-1/2" : "sm:w-[44%] w-2/3"
-                    } h-auto relative z-10`}
-                  />
+                    } relative`}
+                  >
+                    <Image
+                      ref={(el) => (imageRefsMobile.current[index] = el)}
+                      src={section.content.mainImage}
+                      alt="Section Visual"
+                      width={500}
+                      height={300}
+                      className="relative z-10"
+                      priority={index === 0}
+                      quality={90}
+                    />
+                  </div>
+
                   {/* Mobile overlay images */}
                   {index === 0 &&
                     section.content.overlayImages &&
                     section.content.overlayImages.map((img, i) => (
-                      <img
+                      <div
                         key={i}
-                        ref={(el) => {
-                          if (!overlayRefs.current[index]) {
-                            overlayRefs.current[index] = {
-                              mobile: [],
-                              desktop: [],
-                            };
-                          }
-                          overlayRefs.current[index].mobile[i] = el;
-                        }}
-                        src={img}
-                        alt={`Overlay ${i + 1}`}
                         className={`absolute ${
                           i === 0
                             ? "top-2/3 w-3/4 sm:w-1/2 sm:left-32 left-4 -translate-y-1/4 scale-[1.5]"
                             : "top-20 w-3/4 sm:w-1/3"
-                        } w-1/2 h-auto z-${9 - i}`}
-                      />
+                        }`}
+                      >
+                        <Image
+                          ref={(el) => {
+                            if (!overlayRefs.current[index]) {
+                              overlayRefs.current[index] = {
+                                mobile: [],
+                                desktop: [],
+                              };
+                            }
+                            overlayRefs.current[index].mobile[i] = el;
+                          }}
+                          src={img}
+                          alt={`Overlay ${i + 1}`}
+                          width={400}
+                          height={300}
+                          className={`w-full h-auto z-${9 - i}`}
+                          priority={index === 0}
+                        />
+                      </div>
                     ))}
                 </div>
 
@@ -606,74 +623,68 @@ const Hero = () => {
               {/* Desktop Layout */}
               <div className="hidden lg:grid lg:grid-cols-3 gap-8 px-12 h-full items-center">
                 <div className="section-text z-20">
-                  {/* {index === 1 && (
-                    <img
-                      ref={(el) => {
-                        if (!overlayRefs.current[index]) {
-                          overlayRefs.current[index] = {
-                            mobile: [],
-                            desktop: [],
-                          };
-                        }
-                        overlayRefs.current[index].desktop[0] = el;
-                      }}
-                      src="/images/home/sec-2-rectangle.png"
-                      alt="Decorative Rectangle"
-                      className="relative w-36 -top-4 left-48 z-0"
-                    />
-                  )} */}
                   <h2
                     ref={(el) => (titleRefsDesktop.current[index] = el)}
-                    className={
-                      `relative xl:text-78px 2xl:text-80px 3xl:text-90px 4xl:text-110px text-white whitespace-pre-line items-center text-nowrap`
-                      //  ${index === 0 ? "top-0 left-0" : "-top-20 left-0"}
-                    }
+                    className={`relative xl:text-72px 2xl:text-80px 3xl:text-86px 4xl:text-110px text-white whitespace-pre-line items-center text-nowrap`}
                   >
                     {section.content.title}
                   </h2>
                 </div>
 
                 <div className="relative">
-                  <img
-                    ref={(el) => (imageRefsDesktop.current[index] = el)}
-                    src={section.content.mainImage}
-                    alt="Section Visual"
-                    className={`w-full  ${
-                      index === 0 ? "top-0 left-0" : "top-20 left-0"
-                    } h-auto relative z-10`}
-                    onMouseEnter={() => handleImageHover(index, true)}
-                    onMouseLeave={() => handleImageHover(index, false)}
-                  />
+                  <div className="w-full relative">
+                    <Image
+                      ref={(el) => (imageRefsDesktop.current[index] = el)}
+                      src={section.content.mainImage}
+                      alt="Section Visual"
+                      width={800}
+                      height={600}
+                      className={`w-full ${
+                        index === 0 ? "top-0 left-0" : "top-20 left-0"
+                      } h-auto relative z-10`}
+                      priority={index === 0}
+                      quality={90}
+                      onMouseEnter={() => handleImageHover(index, true)}
+                      onMouseLeave={() => handleImageHover(index, false)}
+                    />
+                  </div>
+
                   {/* Desktop overlay images */}
                   {index === 0 &&
                     section.content.overlayImages &&
                     section.content.overlayImages.map((img, i) => (
-                      <img
+                      <div
                         key={i}
-                        ref={(el) => {
-                          if (!overlayRefs.current[index]) {
-                            overlayRefs.current[index] = {
-                              mobile: [],
-                              desktop: [],
-                            };
-                          }
-                          overlayRefs.current[index].desktop[i] = el;
-                        }}
-                        src={img}
-                        alt={`Overlay ${i + 1}`}
                         className={`absolute ${
                           i === 0 ? "top-60 scale-[2]" : "top-6"
-                        } w-full h-auto z-${9 - i}`}
-                      />
+                        } w-full`}
+                      >
+                        <Image
+                          ref={(el) => {
+                            if (!overlayRefs.current[index]) {
+                              overlayRefs.current[index] = {
+                                mobile: [],
+                                desktop: [],
+                              };
+                            }
+                            overlayRefs.current[index].desktop[i] = el;
+                          }}
+                          src={img}
+                          alt={`Overlay ${i + 1}`}
+                          width={600}
+                          height={400}
+                          className={`w-full h-auto z-${9 - i}`}
+                          priority={index === 0}
+                        />
+                      </div>
                     ))}
                 </div>
 
                 <div
                   ref={(el) => (descRefsDesktop.current[index] = el)}
-                  className={`relative
-                     ${
-                       index === 0 ? "top-40 right-0" : "top-40 right-0"
-                     } section-text z-20`}
+                  className={`relative ${
+                    index === 0 ? "top-40 right-0" : "top-40 right-0"
+                  } section-text z-20`}
                 >
                   <p className="text-white/80 text-22px text-right">
                     {section.content.description}
@@ -687,6 +698,7 @@ const Hero = () => {
           </div>
         </div>
       ))}
+
       {/* Mobile Navigation Controls */}
       <div className="lg:hidden absolute bottom-16 left-8 flex flex-col gap-2 z-50">
         <button
