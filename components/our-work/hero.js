@@ -33,17 +33,39 @@ const ParallaxHero = () => {
         y: "100%",
       });
 
-      // Wave continuous animation
-      const waveAnimation = gsap.to(waveImage, {
-        skewX: "1deg",
-        skewY: "1deg",
-        scale: 1,
-        duration: 3,
-        ease: "sine.inOut",
+      // Liquid-like water animation
+      const waterAnimation = gsap.timeline({
         repeat: -1,
         yoyo: true,
         paused: true,
       });
+
+      // Create a more natural underwater effect with subtle distortion
+      waterAnimation
+        .to(waveImage, {
+          scale: 1.02,
+          rotation: 0.3,
+          x: "0.5%",
+          y: "0.3%",
+          duration: 5,
+          ease: "power1.inOut",
+        })
+        .to(waveImage, {
+          scale: 1.01,
+          rotation: -0.2,
+          x: "-0.3%",
+          y: "-0.2%",
+          duration: 4.5,
+          ease: "power1.inOut",
+        })
+        .to(waveImage, {
+          scale: 1.015,
+          rotation: 0.1,
+          x: "0.2%",
+          y: "0.4%",
+          duration: 4,
+          ease: "power1.inOut",
+        });
 
       // Text animation timeline
       const textTimeline = gsap.timeline({ paused: true });
@@ -62,7 +84,7 @@ const ParallaxHero = () => {
         duration: 1,
         ease: "power2.out",
         onComplete: () => {
-          waveAnimation.play(); // Start wave animation after both images appear
+          waterAnimation.play(); // Start water animation after both images appear
         },
       });
 
@@ -82,7 +104,7 @@ const ParallaxHero = () => {
           setIsSecondImageVisible(false);
           textTimeline.reverse();
           combinedTimeline.reverse();
-          waveAnimation.pause();
+          waterAnimation.pause();
         }
 
         // Clear previous timeout
@@ -104,7 +126,7 @@ const ParallaxHero = () => {
         if (scrollTimeoutRef.current) {
           clearTimeout(scrollTimeoutRef.current);
         }
-        waveAnimation.kill();
+        waterAnimation.kill();
         textTimeline.kill();
         combinedTimeline.kill();
       };
