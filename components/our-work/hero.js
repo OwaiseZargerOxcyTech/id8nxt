@@ -44,16 +44,16 @@ const ParallaxHero = () => {
             <feTurbulence
               id="turbulence"
               type="fractalNoise"
-              baseFrequency="0.005 0.01"
-              numOctaves="4"
-              seed="8"
+              baseFrequency="0.003 0.001"
+              numOctaves="1"
+              seed="2"
               stitchTiles="stitch"
               result="noise"
             />
             <feDisplacementMap
               in="SourceGraphic"
               in2="noise"
-              scale="3"
+              scale="4"
               xChannelSelector="R"
               yChannelSelector="G"
             />
@@ -83,9 +83,9 @@ const ParallaxHero = () => {
 
         rippleAnimationRef.current.to("#turbulence", {
           attr: {
-            baseFrequency: "0.03 0.03",
+            baseFrequency: "0.006 0.009",
           },
-          duration: 1,
+          repeat: -1,
         });
 
         rippleAnimationRef.current.pause();
