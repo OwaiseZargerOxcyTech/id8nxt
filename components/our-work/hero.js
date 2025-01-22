@@ -10,6 +10,7 @@ const ParallaxHero = () => {
   const [isSecondImageVisible, setIsSecondImageVisible] = useState(false);
   const scrollTimeoutRef = useRef(null);
   const lastScrollTime = useRef(0);
+  const rippleAnimationRef = useRef(null);
 
   useEffect(() => {
     const loadGSAP = async () => {
@@ -24,7 +25,7 @@ const ParallaxHero = () => {
 
       if (!container || !initialImage || !waveImage || !text) return;
 
-      // Add SVG filter for ripple effect with reduced distortion
+      // Add SVG filter for ripple effect
       const filterId = "ripple-effect";
       const svgFilter = `
         <svg xmlns="http://www.w3.org/2000/svg" class="absolute w-0 h-0">
@@ -48,23 +49,39 @@ const ParallaxHero = () => {
           </filter>
         </svg>
       `;
-      document.body.insertAdjacentHTML("beforeend", svgFilter);
 
+      // Remove existing filter if it exists
+      const existingFilter = document.getElementById(filterId);
+      if (existingFilter) {
+        existingFilter.remove();
+      }
+
+      document.body.insertAdjacentHTML("beforeend", svgFilter);
       waveImage.style.filter = `url(#${filterId})`;
 
-      // Create an ultra-smooth ripple animation
-      const rippleAnimation = gsap.timeline({
-        repeat: -1,
-        defaults: { ease: "sine.inOut" },
-      });
+      // Create ripple animation
+      const createRippleAnimation = () => {
+        if (rippleAnimationRef.current) {
+          rippleAnimationRef.current.kill();
+        }
 
-      // Multi-step animation for smoother transitions
-      rippleAnimation.to("#turbulence", {
-        attr: {
-          baseFrequency: "0.007 0.03",
-        },
-        duration: 1,
-      });
+        rippleAnimationRef.current = gsap.timeline({
+          repeat: -1,
+          defaults: { ease: "sine.inOut" },
+        });
+
+        rippleAnimationRef.current.to("#turbulence", {
+          attr: {
+            baseFrequency: "0.0003 0.03",
+          },
+          duration: 1,
+        });
+
+        // Pause the animation initially
+        rippleAnimationRef.current.pause();
+      };
+
+      createRippleAnimation();
 
       // Text animation timeline
       const textTimeline = gsap.timeline({ paused: true });
@@ -83,7 +100,9 @@ const ParallaxHero = () => {
         duration: 1,
         ease: "power2.out",
         onComplete: () => {
-          rippleAnimation.play();
+          if (rippleAnimationRef.current) {
+            rippleAnimationRef.current.play();
+          }
         },
       });
 
@@ -97,12 +116,16 @@ const ParallaxHero = () => {
           setIsSecondImageVisible(true);
           textTimeline.play();
           waveTimeline.play();
-          rippleAnimation.play();
+          if (rippleAnimationRef.current) {
+            rippleAnimationRef.current.play();
+          }
         } else if (e.deltaY < 0 && !isSecondImageVisible) {
           setIsSecondImageVisible(false);
           textTimeline.reverse();
           waveTimeline.reverse();
-          rippleAnimation.pause();
+          if (rippleAnimationRef.current) {
+            rippleAnimationRef.current.pause();
+          }
         }
 
         if (scrollTimeoutRef.current) {
@@ -121,7 +144,9 @@ const ParallaxHero = () => {
         if (scrollTimeoutRef.current) {
           clearTimeout(scrollTimeoutRef.current);
         }
-        rippleAnimation.kill();
+        if (rippleAnimationRef.current) {
+          rippleAnimationRef.current.kill();
+        }
         textTimeline.kill();
         waveTimeline.kill();
       };
@@ -178,7 +203,7 @@ const ParallaxHero = () => {
         {/* Wave Image */}
         <div
           ref={waveImageRef}
-          className="absolute inset-0 w-full h-full"
+          className="absolute inset-0 w-full h-full xl:h-[237vh] 2xl:h-[245vh] 3xl:h-[245vh] 4xl:h-[239vh]"
           style={{
             backgroundImage: `url('/images/our-work/hero-img/water.png')`,
             backgroundSize: "contain",
@@ -186,7 +211,6 @@ const ParallaxHero = () => {
             transformOrigin: "center",
             willChange: "transform",
             zIndex: 10,
-            height: "240vh",
             backgroundRepeat: "no-repeat",
             opacity: 0,
           }}
