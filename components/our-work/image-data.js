@@ -44,8 +44,8 @@ export const data2 = [
   },
   {
     id: 3,
-    image: null,
-    title: "",
+    image: "/images/our-work/pepsodent_3-662x665.png",
+    title: "Pepsodent Toothpaste _ Print Ads",
   },
   {
     id: 4,
@@ -54,13 +54,13 @@ export const data2 = [
   },
   {
     id: 5,
-    image: null,
-    title: "",
+    image: "/images/our-work/msblogathon.png",
+    title: "Blogathon _ Microsoft",
   },
   {
     id: 6,
-    image: "/images/our-work/pepsodent_3-662x665.png",
-    title: "Pepsodent Toothpaste _ Print Ads",
+    image: "/images/our-work/robo_6-615x665.png",
+    title: "Good Little Robots _ Logo Design",
   },
 ];
 
@@ -77,22 +77,22 @@ export const data3 = [
   },
   {
     id: 3,
-    image: null,
-    title: "",
+    image: "/images/our-work/nutting.png",
+    title: "Jonki _ Perfume",
   },
   {
     id: 4,
-    image: null,
-    title: "",
+    image: "/images/our-work/robo_6-615x665.png",
+    title: "Good Little Robots _ Logo Design | Brand Visualization",
   },
   {
     id: 5,
-    image: null,
-    title: "",
+    image: "/images/our-work/appo_cover-3.png",
+    title: "Appo _ Dynamic salon",
   },
   {
     id: 6,
-    image: null,
-    title: "",
+    image: "/images/our-work/rrtboard-1-copy-29.png",
+    title: "Flightronics _ Perfume",
   },
 ];

@@ -6,8 +6,12 @@ const ParallaxHero = () => {
   const containerRef = useRef(null);
   const initialImageRef = useRef(null);
   const waveImageRef = useRef(null);
+  const headingRef = useRef(null);
+  const paragraphRef = useRef(null);
+  const overlayRef = useRef(null);
   const [isSecondImageVisible, setIsSecondImageVisible] = useState(false);
   const rippleAnimationRef = useRef(null);
+  const textAnimationRef = useRef(null);
 
   useEffect(() => {
     const loadGSAP = async () => {
@@ -18,8 +22,19 @@ const ParallaxHero = () => {
       const container = containerRef.current;
       const initialImage = initialImageRef.current;
       const waveImage = waveImageRef.current;
+      const heading = headingRef.current;
+      const paragraph = paragraphRef.current;
+      const overlay = overlayRef.current;
 
-      if (!container || !initialImage || !waveImage) return;
+      if (
+        !container ||
+        !initialImage ||
+        !waveImage ||
+        !heading ||
+        !paragraph ||
+        !overlay
+      )
+        return;
 
       // Add SVG filter for ripple effect
       const filterId = "ripple-effect";
@@ -30,8 +45,8 @@ const ParallaxHero = () => {
               id="turbulence"
               type="fractalNoise"
               baseFrequency="0.005 0.01"
-              numOctaves="1"
-              seed="1"
+              numOctaves="4"
+              seed="8"
               stitchTiles="stitch"
               result="noise"
             />
@@ -68,7 +83,7 @@ const ParallaxHero = () => {
 
         rippleAnimationRef.current.to("#turbulence", {
           attr: {
-            baseFrequency: "0.0003 0.03",
+            baseFrequency: "0.03 0.03",
           },
           duration: 1,
         });
@@ -78,6 +93,28 @@ const ParallaxHero = () => {
 
       createRippleAnimation();
 
+      // Text scaling animation based on scroll
+      const handleTextScaling = () => {
+        const scrolled = container.scrollTop;
+        const maxScroll = container.scrollHeight - container.clientHeight;
+        const scrollProgress = Math.min(scrolled / maxScroll, 1);
+
+        // Calculate scale factor (from 1 to 0.5)
+        const scaleFactor = 1 - scrollProgress * 0.5;
+
+        // Apply scaling to heading and paragraph
+        heading.style.transform = `scale(${scaleFactor})`;
+        paragraph.style.transform = `scale(${Math.max(scaleFactor, 0.7)})`;
+
+        // Handle overlay opacity
+        const overlayStartThreshold = 0.2; // Start showing overlay at 20% scroll
+        const overlayOpacity = Math.max(
+          0,
+          Math.min(1, (scrollProgress - overlayStartThreshold) / 0.3)
+        );
+        overlay.style.opacity = overlayOpacity;
+      };
+
       // Handle scroll animation
       const handleScroll = () => {
         const scrolled = container.scrollTop;
@@ -85,7 +122,10 @@ const ParallaxHero = () => {
         const contentHeight = container.scrollHeight;
         const scrollProgress = scrolled / (contentHeight - containerHeight);
 
-        // Threshold for when water should appear (adjusted for better alignment)
+        // Handle text scaling and overlay
+        handleTextScaling();
+
+        // Threshold for when water should appear
         if (scrollProgress > 0.4 && !isSecondImageVisible) {
           setIsSecondImageVisible(true);
           gsap.to(waveImage, {
@@ -150,23 +190,49 @@ const ParallaxHero = () => {
           }}
         />
 
-        {/* Text Overlay */}
-        <div className="relative -top-20 z-20 h-screen">
-          <div className="h-full xl:max-w-6xl 2xl:max-w-screen-xl 3xl:max-w-screen-2xl 4xl:max-w-screen-4xl mx-auto px-4 sm:px-6 lg:px-16 flex flex-col md:flex-row md:items-center justify-center md:justify-between gap-8 md:gap-4">
-            <div className="max-w-2xl">
-              <h1 className="text-4xl md:text-6xl lg:text-7xl 4xl:text-110px font-light text-white leading-tight text-left">
-                Your digital
-                <br />
-                odyssey
-                <br />
-                starts here
-              </h1>
-            </div>
-            <div className="max-w-md">
-              <p className="text-lg md:text-xl 4xl:text-2xl text-gray-200 md:mt-0 text-left">
-                Here are our standout projects that highlight the impactful
-                digital marketing strategies we've implemented at ID8NXT.
-              </p>
+        {/* Black Overlay - Right Half */}
+        <div
+          ref={overlayRef}
+          className="absolute bottom-0 right-0 w-full h-full  bg-black/30 z-10"
+          style={{
+            opacity: 0,
+            transition: "opacity 0.3s ease-out",
+          }}
+        />
+
+        {/* Text Overlay Wrapper */}
+        <div className="relative" style={{ height: "120vh" }}>
+          <div className="sticky top-0 z-20 h-screen">
+            <div className="h-full xl:max-w-6xl 2xl:max-w-screen-xl 3xl:max-w-screen-2xl 4xl:max-w-screen-4xl mx-auto px-4 sm:px-6 lg:px-16 flex flex-col md:flex-row md:items-center justify-center md:justify-between gap-8 md:gap-4">
+              <div
+                className="max-w-2xl"
+                style={{ transformOrigin: "left center" }}
+              >
+                <h1
+                  ref={headingRef}
+                  className="text-4xl md:text-6xl lg:text-7xl 4xl:text-110px font-light text-white leading-tight text-left"
+                  style={{ willChange: "transform" }}
+                >
+                  Your digital
+                  <br />
+                  odyssey
+                  <br />
+                  starts here
+                </h1>
+              </div>
+              <div
+                className="max-w-md"
+                style={{ transformOrigin: "left center" }}
+              >
+                <p
+                  ref={paragraphRef}
+                  className="text-lg md:text-xl 4xl:text-2xl text-gray-200 md:mt-40 text-left"
+                  style={{ willChange: "transform" }}
+                >
+                  Here are our standout projects that highlight the impactful
+                  digital marketing strategies we've implemented at ID8NXT.
+                </p>
+              </div>
             </div>
           </div>
         </div>
