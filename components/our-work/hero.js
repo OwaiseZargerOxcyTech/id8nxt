@@ -6,10 +6,7 @@ const ParallaxHero = () => {
   const containerRef = useRef(null);
   const initialImageRef = useRef(null);
   const waveImageRef = useRef(null);
-  const textRef = useRef(null);
   const [isSecondImageVisible, setIsSecondImageVisible] = useState(false);
-  const scrollTimeoutRef = useRef(null);
-  const lastScrollTime = useRef(0);
   const rippleAnimationRef = useRef(null);
 
   useEffect(() => {
@@ -21,9 +18,8 @@ const ParallaxHero = () => {
       const container = containerRef.current;
       const initialImage = initialImageRef.current;
       const waveImage = waveImageRef.current;
-      const text = textRef.current;
 
-      if (!container || !initialImage || !waveImage || !text) return;
+      if (!container || !initialImage || !waveImage) return;
 
       // Add SVG filter for ripple effect
       const filterId = "ripple-effect";
@@ -77,78 +73,51 @@ const ParallaxHero = () => {
           duration: 1,
         });
 
-        // Pause the animation initially
         rippleAnimationRef.current.pause();
       };
 
       createRippleAnimation();
 
-      // Text animation timeline
-      const textTimeline = gsap.timeline({ paused: true });
-      textTimeline.to(text, {
-        y: "-100%",
-        opacity: 0,
-        duration: 0.5,
-        ease: "power2.inOut",
-      });
+      // Handle scroll animation
+      const handleScroll = () => {
+        const scrolled = container.scrollTop;
+        const containerHeight = container.clientHeight;
+        const contentHeight = container.scrollHeight;
+        const scrollProgress = scrolled / (contentHeight - containerHeight);
 
-      // Wave image fade-in animation
-      const waveTimeline = gsap.timeline({ paused: true });
-      waveTimeline.to(waveImage, {
-        y: "0%",
-        opacity: 1,
-        duration: 1,
-        ease: "power2.out",
-        onComplete: () => {
-          if (rippleAnimationRef.current) {
-            rippleAnimationRef.current.play();
-          }
-        },
-      });
-
-      // Wheel event handler
-      const handleWheel = (e) => {
-        const currentTime = Date.now();
-        if (currentTime - lastScrollTime.current < 500) return;
-        lastScrollTime.current = currentTime;
-
-        if (e.deltaY > 0 && !isSecondImageVisible) {
+        // Threshold for when water should appear (adjusted for better alignment)
+        if (scrollProgress > 0.4 && !isSecondImageVisible) {
           setIsSecondImageVisible(true);
-          textTimeline.play();
-          waveTimeline.play();
-          if (rippleAnimationRef.current) {
-            rippleAnimationRef.current.play();
-          }
-        } else if (e.deltaY < 0 && !isSecondImageVisible) {
+          gsap.to(waveImage, {
+            opacity: 1,
+            duration: 0.5,
+            onStart: () => {
+              if (rippleAnimationRef.current) {
+                rippleAnimationRef.current.play();
+              }
+            },
+          });
+        } else if (scrollProgress <= 0.3 && isSecondImageVisible) {
           setIsSecondImageVisible(false);
-          textTimeline.reverse();
-          waveTimeline.reverse();
-          if (rippleAnimationRef.current) {
-            rippleAnimationRef.current.pause();
-          }
+          gsap.to(waveImage, {
+            opacity: 0,
+            duration: 0.5,
+            onComplete: () => {
+              if (rippleAnimationRef.current) {
+                rippleAnimationRef.current.pause();
+              }
+            },
+          });
         }
-
-        if (scrollTimeoutRef.current) {
-          clearTimeout(scrollTimeoutRef.current);
-        }
-
-        scrollTimeoutRef.current = setTimeout(() => {
-          lastScrollTime.current = 0;
-        }, 500);
       };
 
-      window.addEventListener("wheel", handleWheel, { passive: true });
+      container.addEventListener("scroll", handleScroll);
 
       return () => {
-        window.removeEventListener("wheel", handleWheel);
-        if (scrollTimeoutRef.current) {
-          clearTimeout(scrollTimeoutRef.current);
-        }
+        container.removeEventListener("scroll", handleScroll);
         if (rippleAnimationRef.current) {
           rippleAnimationRef.current.kill();
         }
-        textTimeline.kill();
-        waveTimeline.kill();
       };
     };
 
@@ -158,29 +127,31 @@ const ParallaxHero = () => {
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-[150vh] overflow-hidden"
+      className="relative w-full h-screen overflow-y-scroll"
+      style={{
+        scrollBehavior: "smooth",
+        perspective: "1px",
+        transformStyle: "preserve-3d",
+      }}
     >
-      <div className="relative h-screen w-full">
+      <div className="relative xl:min-h-[139vh] 2xl:min-h-[133vh] 3xl:min-h-[135vh] 4xl:min-h-[127vh]">
         {/* Initial Image */}
         <div
           ref={initialImageRef}
-          className="absolute inset-0 w-full h-full"
+          className="absolute top-0 left-0 w-full"
           style={{
             backgroundImage: `url('/images/our-work/hero-img/our-work.png')`,
             backgroundSize: "cover",
-            backgroundPosition: "center",
+            backgroundPosition: "top center",
+            backgroundRepeat: "no-repeat",
+            height: "150vh",
             willChange: "transform",
             zIndex: 1,
-            height: "150vh",
           }}
         />
 
         {/* Text Overlay */}
-        <div
-          ref={textRef}
-          className="absolute inset-0 z-20"
-          style={{ willChange: "transform" }}
-        >
+        <div className="relative -top-20 z-20 h-screen">
           <div className="h-full xl:max-w-6xl 2xl:max-w-screen-xl 3xl:max-w-screen-2xl 4xl:max-w-screen-4xl mx-auto px-4 sm:px-6 lg:px-16 flex flex-col md:flex-row md:items-center justify-center md:justify-between gap-8 md:gap-4">
             <div className="max-w-2xl">
               <h1 className="text-4xl md:text-6xl lg:text-7xl 4xl:text-110px font-light text-white leading-tight text-left">
@@ -192,7 +163,7 @@ const ParallaxHero = () => {
               </h1>
             </div>
             <div className="max-w-md">
-              <p className="text-lg md:text-xl 4xl:text-2xl text-gray-200 md:mt-40 text-left">
+              <p className="text-lg md:text-xl 4xl:text-2xl text-gray-200 md:mt-0 text-left">
                 Here are our standout projects that highlight the impactful
                 digital marketing strategies we've implemented at ID8NXT.
               </p>
@@ -203,16 +174,17 @@ const ParallaxHero = () => {
         {/* Wave Image */}
         <div
           ref={waveImageRef}
-          className="absolute inset-0 w-full h-full xl:h-[237vh] 2xl:h-[245vh] 3xl:h-[245vh] 4xl:h-[239vh]"
+          className="absolute bottom-0 left-0 w-full"
           style={{
             backgroundImage: `url('/images/our-work/hero-img/water.png')`,
             backgroundSize: "contain",
-            backgroundPosition: "center",
-            transformOrigin: "center",
+            backgroundPosition: "top center",
+            backgroundRepeat: "no-repeat",
+            height: "75vh",
             willChange: "transform",
             zIndex: 10,
-            backgroundRepeat: "no-repeat",
             opacity: 0,
+            transform: "translateY(50%)",
           }}
         />
       </div>
