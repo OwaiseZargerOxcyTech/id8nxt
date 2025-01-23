@@ -78,21 +78,21 @@ export const data3 = [
   {
     id: 3,
     image: "/images/our-work/nutting.png",
-    title: "Jonki _ Perfume",
+    title: "",
   },
   {
     id: 4,
     image: "/images/our-work/robo_6-615x665.png",
-    title: "Good Little Robots _ Logo Design | Brand Visualization",
+    title: "",
   },
   {
     id: 5,
     image: "/images/our-work/appo_cover-3.png",
-    title: "Appo _ Dynamic salon",
+    title: "",
   },
   {
     id: 6,
     image: "/images/our-work/rrtboard-1-copy-29.png",
-    title: "Flightronics _ Perfume",
+    title: "",
   },
 ];

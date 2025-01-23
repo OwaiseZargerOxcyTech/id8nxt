@@ -167,7 +167,7 @@ const ParallaxHero = () => {
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-screen overflow-y-scroll"
+      className="relative w-full h-screen overflow-y-scroll scrollbar-container"
       style={{
         scrollBehavior: "smooth",
         perspective: "1px",
