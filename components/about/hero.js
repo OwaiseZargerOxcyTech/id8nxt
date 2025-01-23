@@ -51,7 +51,7 @@ const HeroAbout = () => {
     if (isEnter) {
       gsap.to(statueRefs.current[index], {
         x: "2px",
-        duration: 0.5,
+        duration: 0.7,
         repeat: 3,
         yoyo: true,
         ease: "power1.inOut",
