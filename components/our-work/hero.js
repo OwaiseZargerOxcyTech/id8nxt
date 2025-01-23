@@ -106,14 +106,48 @@ const ParallaxHero = () => {
         heading.style.transform = `scale(${scaleFactor})`;
         paragraph.style.transform = `scale(${Math.max(scaleFactor, 0.7)})`;
 
+        // Get window width
+        const windowWidth = window.innerWidth;
+
+        // Define breakpoints (matching Tailwind's default breakpoints)
+        const xlBreakpoint = 1280; // xl
+        const xxlBreakpoint = 1440; // 2xl
+
+        let maxMargin = 0;
+
+        // Apply margins only for xl and 2xl screens with different values
+        if (windowWidth >= xxlBreakpoint) {
+          // 2xl screens
+          maxMargin = 150; // larger margin for 2xl
+        } else if (windowWidth >= xlBreakpoint) {
+          // xl screens
+          maxMargin = 240; // original margin for xl
+        }
+
+        // Calculate margins based on screen size
+        if (maxMargin > 0) {
+          const marginValue = scrollProgress * maxMargin;
+          paragraph.style.marginLeft = `${marginValue}px`;
+          paragraph.style.marginTop = `${marginValue}px`;
+          heading.style.marginTop = `${marginValue}px`;
+        } else {
+          // Reset margins for smaller screens
+          paragraph.style.marginLeft = "0px";
+          paragraph.style.marginTop = "0px";
+          heading.style.marginTop = "0px";
+        }
+
         // Handle overlay opacity
-        const overlayStartThreshold = 0.2; // Start showing overlay at 20% scroll
+        const overlayStartThreshold = 0.2;
         const overlayOpacity = Math.max(
           0,
           Math.min(1, (scrollProgress - overlayStartThreshold) / 0.3)
         );
         overlay.style.opacity = overlayOpacity;
       };
+
+      // Add resize listener to update margins when window is resized
+      window.addEventListener("resize", handleTextScaling);
 
       // Handle scroll animation
       const handleScroll = () => {
