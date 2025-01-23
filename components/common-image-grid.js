@@ -5,7 +5,7 @@ const ImageGrid = ({ data }) => {
     <div className="xl:max-w-6xl 2xl:max-w-screen-xl 3xl:max-w-screen-2xl 4xl:max-w-screen-4xl mx-auto my-4 md:my-20">
       <div className="flex flex-col space-y-16">
         {/* First row */}
-        <div className="flex flex-col md:flex-row space-y-8 md:space-y-0 space-x-20">
+        <div className="flex flex-col md:flex-row space-y-8 md:space-y-0 md:space-x-20">
           <div className="flex flex-col md:flex-row md:space-x-4 md:w-2/3">
             {/* First two close images */}
             {data?.slice(0, 2).map((image) => (
@@ -35,7 +35,7 @@ const ImageGrid = ({ data }) => {
         </div>
 
         {/* Second row */}
-        <div className="flex flex-col md:flex-row space-y-8 md:space-y-0 space-x-20">
+        <div className="flex flex-col md:flex-row space-y-8 md:space-y-0 md:space-x-20">
           {/* First image */}
           <div className="w-full md:w-1/3">
             <p className="text-sm text-gray-600 truncate">{data[3].title}</p>

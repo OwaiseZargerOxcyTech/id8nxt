@@ -9,9 +9,8 @@ const ParallaxHero = () => {
   const headingRef = useRef(null);
   const paragraphRef = useRef(null);
   const overlayRef = useRef(null);
-  const [isSecondImageVisible, setIsSecondImageVisible] = useState(false);
+  const [isSecondImageVisible, setIsSecondImageVisible] = useState(true);
   const rippleAnimationRef = useRef(null);
-  const textAnimationRef = useRef(null);
 
   useEffect(() => {
     const loadGSAP = async () => {
@@ -53,7 +52,7 @@ const ParallaxHero = () => {
             <feDisplacementMap
               in="SourceGraphic"
               in2="noise"
-              scale="4"
+              scale="5"
               xChannelSelector="R"
               yChannelSelector="G"
             />
@@ -70,7 +69,7 @@ const ParallaxHero = () => {
       document.body.insertAdjacentHTML("beforeend", svgFilter);
       waveImage.style.filter = `url(#${filterId})`;
 
-      // Create ripple animation
+      // Create and start ripple animation immediately
       const createRippleAnimation = () => {
         if (rippleAnimationRef.current) {
           rippleAnimationRef.current.kill();
@@ -86,12 +85,19 @@ const ParallaxHero = () => {
             baseFrequency: "0.006 0.009",
           },
           repeat: -1,
+          yoyo: true,
         });
 
-        rippleAnimationRef.current.pause();
+        rippleAnimationRef.current.play();
       };
 
       createRippleAnimation();
+
+      // Show wave image immediately with animation
+      gsap.to(waveImage, {
+        opacity: 1,
+        duration: 0.5,
+      });
 
       // Text scaling animation based on scroll
       const handleTextScaling = () => {
@@ -106,22 +112,16 @@ const ParallaxHero = () => {
         heading.style.transform = `scale(${scaleFactor})`;
         paragraph.style.transform = `scale(${Math.max(scaleFactor, 0.7)})`;
 
-        // Get window width
         const windowWidth = window.innerWidth;
-
-        // Define breakpoints (matching Tailwind's default breakpoints)
-        const xlBreakpoint = 1280; // xl
-        const xxlBreakpoint = 1440; // 2xl
+        const xlBreakpoint = 1280;
+        const xxlBreakpoint = 1440;
 
         let maxMargin = 0;
 
-        // Apply margins only for xl and 2xl screens with different values
         if (windowWidth >= xxlBreakpoint) {
-          // 2xl screens
-          maxMargin = 150; // larger margin for 2xl
+          maxMargin = 150;
         } else if (windowWidth >= xlBreakpoint) {
-          // xl screens
-          maxMargin = 240; // original margin for xl
+          maxMargin = 220;
         }
 
         // Calculate margins based on screen size
@@ -131,13 +131,12 @@ const ParallaxHero = () => {
           paragraph.style.marginTop = `${marginValue}px`;
           heading.style.marginTop = `${marginValue}px`;
         } else {
-          // Reset margins for smaller screens
           paragraph.style.marginLeft = "0px";
           paragraph.style.marginTop = "0px";
           heading.style.marginTop = "0px";
         }
 
-        // Handle overlay opacity
+        // Handle overlay opacity - now only applies to the main image
         const overlayStartThreshold = 0.2;
         const overlayOpacity = Math.max(
           0,
@@ -146,57 +145,31 @@ const ParallaxHero = () => {
         overlay.style.opacity = overlayOpacity;
       };
 
-      // Add resize listener to update margins when window is resized
       window.addEventListener("resize", handleTextScaling);
 
       // Handle scroll animation
       const handleScroll = () => {
-        const scrolled = container.scrollTop;
-        const containerHeight = container.clientHeight;
-        const contentHeight = container.scrollHeight;
-        const scrollProgress = scrolled / (contentHeight - containerHeight);
-
-        // Handle text scaling and overlay
         handleTextScaling();
-
-        // Threshold for when water should appear
-        if (scrollProgress > 0.4 && !isSecondImageVisible) {
-          setIsSecondImageVisible(true);
-          gsap.to(waveImage, {
-            opacity: 1,
-            duration: 0.5,
-            onStart: () => {
-              if (rippleAnimationRef.current) {
-                rippleAnimationRef.current.play();
-              }
-            },
-          });
-        } else if (scrollProgress <= 0.3 && isSecondImageVisible) {
-          setIsSecondImageVisible(false);
-          gsap.to(waveImage, {
-            opacity: 0,
-            duration: 0.5,
-            onComplete: () => {
-              if (rippleAnimationRef.current) {
-                rippleAnimationRef.current.pause();
-              }
-            },
-          });
-        }
       };
 
       container.addEventListener("scroll", handleScroll);
 
+      // Cleanup function
       return () => {
         container.removeEventListener("scroll", handleScroll);
+        window.removeEventListener("resize", handleTextScaling);
         if (rippleAnimationRef.current) {
           rippleAnimationRef.current.kill();
+        }
+        const filterToRemove = document.getElementById(filterId);
+        if (filterToRemove) {
+          filterToRemove.remove();
         }
       };
     };
 
     loadGSAP();
-  }, [isSecondImageVisible]);
+  }, []);
 
   return (
     <div
@@ -208,85 +181,79 @@ const ParallaxHero = () => {
         transformStyle: "preserve-3d",
       }}
     >
-      <div className="relative xl:min-h-[139vh] 2xl:min-h-[133vh] 3xl:min-h-[135vh] 4xl:min-h-[127vh]">
-        {/* Initial Image */}
-        <div
-          ref={initialImageRef}
-          className="absolute top-0 left-0 w-full"
-          style={{
-            backgroundImage: `url('/images/our-work/hero-img/our-work.png')`,
-            backgroundSize: "cover",
-            backgroundPosition: "top center",
-            backgroundRepeat: "no-repeat",
-            height: "150vh",
-            willChange: "transform",
-            zIndex: 1,
-          }}
+      {/* Hero section with images */}
+      <div ref={initialImageRef} className="relative w-full">
+        <img
+          src="/images/our-work/hero-img/our-work.png"
+          alt="Hero Background"
+          className="w-full h-full object-cover object-top"
+          style={{ willChange: "transform" }}
         />
 
-        {/* Black Overlay - Right Half */}
+        {/* Black Overlay - Now positioned before the wave image */}
         <div
           ref={overlayRef}
-          className="absolute bottom-0 right-0 w-full h-full  bg-black/30 z-10"
+          className="absolute top-0 right-0 w-full h-full bg-black/20"
           style={{
             opacity: 0,
             transition: "opacity 0.3s ease-out",
           }}
         />
 
-        {/* Text Overlay Wrapper */}
-        <div className="relative" style={{ height: "120vh" }}>
-          <div className="sticky top-0 z-20 h-screen">
-            <div className="h-full xl:max-w-6xl 2xl:max-w-screen-xl 3xl:max-w-screen-2xl 4xl:max-w-screen-4xl mx-auto px-4 sm:px-6 lg:px-16 flex flex-col md:flex-row md:items-center justify-center md:justify-between gap-8 md:gap-4">
-              <div
-                className="max-w-2xl"
-                style={{ transformOrigin: "left center" }}
-              >
-                <h1
-                  ref={headingRef}
-                  className="text-4xl md:text-6xl lg:text-7xl 4xl:text-110px font-light text-white leading-tight text-left"
-                  style={{ willChange: "transform" }}
-                >
-                  Your digital
-                  <br />
-                  odyssey
-                  <br />
-                  starts here
-                </h1>
-              </div>
-              <div
-                className="max-w-md"
-                style={{ transformOrigin: "left center" }}
-              >
-                <p
-                  ref={paragraphRef}
-                  className="text-lg md:text-xl 4xl:text-2xl text-gray-200 md:mt-40 text-left"
-                  style={{ willChange: "transform" }}
-                >
-                  Here are our standout projects that highlight the impactful
-                  digital marketing strategies we've implemented at ID8NXT.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Wave Image */}
+        {/* Wave Image positioned above the overlay */}
         <div
           ref={waveImageRef}
           className="absolute bottom-0 left-0 w-full"
           style={{
-            backgroundImage: `url('/images/our-work/hero-img/water.png')`,
-            backgroundSize: "contain",
-            backgroundPosition: "top center",
-            backgroundRepeat: "no-repeat",
-            height: "75vh",
             willChange: "transform",
             zIndex: 10,
             opacity: 0,
-            transform: "translateY(50%)",
+            transform: "translateY(-1%)",
           }}
-        />
+        >
+          <img
+            src="/images/our-work/hero-img/water.png"
+            alt="Wave Effect"
+            className="w-full h-full object-contain object-bottom"
+          />
+        </div>
+      </div>
+
+      {/* Text Overlay - Positioned independently */}
+      <div className="absolute top-0 left-0 w-full" style={{ height: "120vh" }}>
+        <div className="sticky top-0 z-20 h-screen">
+          <div className="h-full xl:max-w-6xl 2xl:max-w-screen-xl 3xl:max-w-screen-2xl 4xl:max-w-screen-4xl mx-auto px-4 sm:px-6 lg:px-16 flex flex-col md:flex-row md:items-center justify-center md:justify-between gap-8 md:gap-4">
+            <div
+              className="max-w-2xl"
+              style={{ transformOrigin: "left center" }}
+            >
+              <h1
+                ref={headingRef}
+                className="text-4xl md:text-6xl lg:text-7xl 4xl:text-110px font-light text-white leading-tight text-left"
+                style={{ willChange: "transform" }}
+              >
+                Your digital
+                <br />
+                odyssey
+                <br />
+                starts here
+              </h1>
+            </div>
+            <div
+              className="max-w-md"
+              style={{ transformOrigin: "left center" }}
+            >
+              <p
+                ref={paragraphRef}
+                className="text-lg md:text-xl 4xl:text-2xl text-gray-200 md:mt-40 text-left"
+                style={{ willChange: "transform" }}
+              >
+                Here are our standout projects that highlight the impactful
+                digital marketing strategies we've implemented at ID8NXT.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
