@@ -19,7 +19,7 @@ export default function TechSolutions() {
         initialService={"Web Personalization"}
         services_data={services_data}
       />
-      <div className="max-w-7xl mx-auto">
+      <div className="xl:max-w-6xl 2xl:max-w-screen-xl 3xl:max-w-screen-2xl 4xl:max-w-screen-4xl mx-auto lg:px-16">
         <ImageGrid data={tech_data} />
       </div>
       <Footer color={"white"} textColor={"black"} />

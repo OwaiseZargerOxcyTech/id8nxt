@@ -1,32 +1,32 @@
 export const brand_data = [
   {
-    id: "jonaki",
-    image: "/images/brand-solutions/paris-image.jpg",
+    id: 1,
+    image: "/images/our-work/jonaki.jpg",
     title: "Jonaki _ Perfume",
   },
   {
-    id: "me-and-tva",
-    image: "/images/brand-solutions/usa-image.jpg",
+    id: 2,
+    image: "/images/our-work/me&twa.png",
     title: "Me and TVA _ Children's brand",
   },
   {
-    id: "nutting-like-it",
-    image: "/images/brand-solutions/rome-image.jpg",
+    id: 3,
+    image: "/images/our-work/nutting.png",
     title: "Jonki _ Perfume",
   },
   {
-    id: "good-little-robots",
-    image: "/images/brand-solutions/paris-image.jpg",
+    id: 4,
+    image: "/images/our-work/robo_6-615x665.png",
     title: "Good Little Robots _ Logo Design | Brand Visualization",
   },
   {
-    id: "4ppo",
-    image: "/images/brand-solutions/usa-image.jpg",
-    title: "4ppo _ Dynamic salon",
+    id: 5,
+    image: "/images/our-work/appo_cover-3.png",
+    title: "Appo _ Dynamic salon",
   },
   {
-    id: "flightronics",
-    image: "/images/brand-solutions/rome-image.jpg",
+    id: 6,
+    image: "/images/our-work/rrtboard-1-copy-29.png",
     title: "Flightronics _ Perfume",
   },
 ];

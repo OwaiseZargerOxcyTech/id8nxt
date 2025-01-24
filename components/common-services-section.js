@@ -1,61 +1,41 @@
 "use client";
 import React, { useState } from "react";
-import { useMediaQuery } from "@/hooks/use-media-query";
 
-const CommonServicesSection = ({ initialService, services_data }) => {
-  const [selectedService, setSelectedService] = useState(initialService); // Default selected service
-  const isMobile = useMediaQuery("(max-width: 768px)");
-
-  const handleClick = (serviceName) => {
-    setSelectedService(serviceName);
-  };
+const ServicesSection = ({ initialService, services_data }) => {
+  const [selectedService, setSelectedService] = useState(initialService);
 
   return (
-    <div className="max-w-7xl mx-4 md:mx-auto">
-      <div className="relative">
-        {/* Separating Line */}
-        <div className="absolute top-0 left-0 w-full h-[1px] bg-black" />
-        <div className="grid grid-cols-1  gap-6 pt-12">
-          {services_data.map((service) => (
-            <div
-              key={service.name}
-              className="flex flex-col md:flex-row items-start md:items-center text-sm text-gray-900 relative"
-            >
-              {/* Service Name */}
-              <button
-                onClick={() => handleClick(service.name)}
-                className={` text-left ${
-                  service.name === selectedService
-                    ? "text-red-600 font-bold text-lg"
-                    : "text-lg"
-                }`}
-              >
-                {service.name}
-              </button>
+    <div className="max-w-6xl mx-auto">
+      <div className="relative border-t border-gray-200">
+        <div className="py-8">
+          <div className="relative">
+            {services_data.map((service) => (
+              <div key={service.name} className="mb-6">
+                <div className="flex flex-col md:flex-row md:items-center">
+                  <button
+                    onClick={() => setSelectedService(service.name)}
+                    className={`text-base font-semibold text-left transition-colors md:w-[250px] ${
+                      selectedService === service.name
+                        ? "text-red-600 font-medium"
+                        : "text-gray-800 hover:text-red-500"
+                    }`}
+                  >
+                    {service.name}
+                  </button>
 
-              {/* Service Description */}
-              <div
-                className={` ${
-                  service.name === selectedService ? "block" : "hidden"
-                } ${
-                  isMobile ? "mt-2" : "absolute -top-2 left-0"
-                } w-full  md:w-[830px] bg-red-600 text-white py-2 px-4 rounded text-lg`}
-                style={
-                  isMobile
-                    ? {}
-                    : {
-                        transform: "translateX(calc(25% + 13rem))",
-                      }
-                }
-              >
-                {service.description}
+                  {selectedService === service.name && service.description && (
+                    <div className="mt-2 md:mt-0 md:flex-1 bg-red-600 text-white py-4 px-8 rounded shadow-sm">
+                      {service.description}
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default CommonServicesSection;
+export default ServicesSection;

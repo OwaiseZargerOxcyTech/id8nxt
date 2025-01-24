@@ -4,7 +4,7 @@ import React from "react";
 export default function ServicesSection({ title, desc }) {
   return (
     <section className="w-full bg-white mb-8">
-      <section className="max-w-7xl mx-auto px-4 pt-8 md:pt-24 bg-white">
+      <section className="xl:max-w-6xl 2xl:max-w-screen-xl 3xl:max-w-screen-2xl 4xl:max-w-screen-4xl mx-auto lg:px-16 pt-8 md:pt-24 bg-white">
         {/* Header Section */}
         <div className="grid md:grid-cols-6 gap-8 items-center">
           {/* Left Section: Header */}
