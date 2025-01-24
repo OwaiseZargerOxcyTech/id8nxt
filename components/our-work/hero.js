@@ -9,7 +9,6 @@ const ParallaxHero = () => {
   const headingRef = useRef(null);
   const paragraphRef = useRef(null);
   const overlayRef = useRef(null);
-  const [isSecondImageVisible, setIsSecondImageVisible] = useState(true);
   const rippleAnimationRef = useRef(null);
 
   useEffect(() => {
@@ -52,7 +51,7 @@ const ParallaxHero = () => {
             <feDisplacementMap
               in="SourceGraphic"
               in2="noise"
-              scale="5"
+              scale="3"
               xChannelSelector="R"
               yChannelSelector="G"
             />
@@ -82,10 +81,9 @@ const ParallaxHero = () => {
 
         rippleAnimationRef.current.to("#turbulence", {
           attr: {
-            baseFrequency: "0.006 0.009",
+            baseFrequency: "0.009 0.003",
           },
           repeat: -1,
-          yoyo: true,
         });
 
         rippleAnimationRef.current.play();
