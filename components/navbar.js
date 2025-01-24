@@ -6,6 +6,7 @@ import Solutions from "./home/solutions";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeRoute, setActiveRoute] = useState("");
   const [isSolutionsOpen, setIsSolutionsOpen] = useState(false);
   const pathname = usePathname();
 
@@ -16,14 +17,27 @@ export default function Navbar() {
     setIsSolutionsOpen(false);
   }, [pathname]);
 
+  useEffect(() => {
+    if (
+      pathname.startsWith("/brand-solutions") ||
+      pathname.startsWith("/media-solutions") ||
+      pathname.startsWith("/tech-solutions")
+    ) {
+      setActiveRoute("solutions");
+    } else {
+      setActiveRoute(pathname);
+    }
+  }, [pathname]);
+
+  const toggleSolutions = () => {
+    setIsSolutionsOpen(!isSolutionsOpen);
+  };
+
   return (
     <>
-      <Solutions
-        isOpen={isSolutionsOpen}
-        onClose={() => setIsSolutionsOpen(false)}
-      />
+      <Solutions isOpen={isSolutionsOpen} />
 
-      <nav className="absolute top-0 left-0 bg-transparent w-full z-40">
+      <nav className="absolute top-0 left-0 bg-transparent w-full z-50">
         <div className="xl:max-w-6xl 2xl:max-w-screen-xl 3xl:max-w-screen-2xl 4xl:max-w-screen-4xl mx-auto px-4 sm:px-6 lg:px-16 flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
@@ -66,14 +80,15 @@ export default function Navbar() {
               </p>
             </Link>
             <button
-              onClick={() => setIsSolutionsOpen(true)}
+              onClick={toggleSolutions}
               className={`${
-                pathname.startsWith("/solutions")
+                activeRoute === "solutions"
                   ? "text-red-500 font-semibold"
                   : "text-white"
               } hover:text-red-500 focus:outline-none`}
             >
-              Solutions
+              Solutions{" "}
+              <span className="transform rotate-90 inline-block">&gt;</span>
             </button>
             <Link href="/blog">
               <p
@@ -167,14 +182,13 @@ export default function Navbar() {
               </p>
             </Link>
             <button
-              onClick={() => setIsSolutionsOpen(true)}
-              className={`block w-full text-left ${
-                pathname.startsWith("/solutions")
-                  ? "text-red-500 font-semibold"
-                  : ""
+              onClick={toggleSolutions}
+              className={`block w-full text-left items-center gap-2 ${
+                activeRoute === "solutions" ? "text-red-500 font-semibold" : ""
               } hover:text-red-500 focus:outline-none`}
             >
-              Solutions
+              Solutions{" "}
+              <span className="transform rotate-90 inline-block">&gt;</span>
             </button>
             <Link href="/blog">
               <p
