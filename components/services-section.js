@@ -9,9 +9,7 @@ export default function ServicesSection({ title, desc }) {
         <div className="grid md:grid-cols-6 gap-8 items-center">
           {/* Left Section: Header */}
           <div className="md:col-span-2">
-            <h2 className="text-5xl font-semibold text-black max-w-4">
-              {title}
-            </h2>
+            <h2 className="text-5xl font-light text-black max-w-4">{title}</h2>
           </div>
 
           {/* Right Section: Description */}
