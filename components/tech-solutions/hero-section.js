@@ -2,15 +2,36 @@ import React from "react";
 
 const HeroSection = () => {
   return (
-    <div className="w-full h-screen bg-[url('https://greekcitytimes.com/wp-content/uploads/2021/02/image001.jpg')] bg-cover bg-center bg-no-repeat">
-      <div className="w-full h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="h-full flex flex-col md:flex-row md:items-center justify-center md:justify-between gap-8 md:gap-4">
-          {/* Main Heading */}
-          <div className="max-w-2xl">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-light text-white leading-tight text-left">
-              Tech <br /> Solutions
-            </h1>
-          </div>
+    <div className="relative w-full h-screen overflow-hidden">
+      {/* Background video */}
+      <video
+        className="absolute top-0 left-0 w-full h-full object-cover "
+        autoPlay
+        muted
+        loop
+        playsInline
+      >
+        <source src="/images/tech-solutions/tech.mp4" type="video/mp4" />
+      </video>
+
+      {/* Image overlay */}
+      <img
+        src="/images/tech-solutions/tech-hero.png"
+        alt="Brand Solutions Hero"
+        className="absolute top-0 left-0 w-full h-full object-cover z-10"
+      />
+
+      {/* Dark overlay for better text readability */}
+      <div className="absolute inset-0 bg-black/30 z-20" />
+
+      {/* Title overlay */}
+      <div className="absolute left-16 top-1/3 z-30">
+        <div className="mx-auto px-4 sm:px-6 xl:px-16 2xl:px-20">
+          <h1 className="text-white text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-thin leading-tight">
+            Tech
+            <br />
+            Solutions
+          </h1>
         </div>
       </div>
     </div>
