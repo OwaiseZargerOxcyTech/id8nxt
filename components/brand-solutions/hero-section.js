@@ -1,20 +1,27 @@
 import React from "react";
 
-const HeroSection = () => {
+const Hero = () => {
   return (
-    <div className="w-full h-screen bg-[url('https://npf-prod.imgix.net/uploads/shutterstock_56386615.jpg?auto=compress%2Cformat&fit=max&q=80&w=1600')] bg-cover bg-center bg-no-repeat">
-      <div className="w-full h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="h-full flex flex-col md:flex-row md:items-center justify-center md:justify-between gap-8 md:gap-4">
-          {/* Main Heading */}
-          <div className="max-w-2xl">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-light text-white leading-tight text-left">
-              Brand <br /> Solutions
-            </h1>
-          </div>
+    <div className="relative w-full h-screen">
+      {/* Background image */}
+      <img
+        src="/images/brand-solutions/brand-hero.png"
+        alt="Brand Solutions Hero"
+        className="w-full h-full object-cover"
+      />
+
+      {/* Title overlay */}
+      <div className="absolute left-16 top-1/3">
+        <div className="xl:max-w-6xl 2xl:max-w-screen-xl 3xl:max-w-screen-2xl 4xl:max-w-screen-4xl mx-auto px-4 sm:px-6 lg:px-16">
+          <h1 className="text-white xl:text-72px 2xl:text-80px 3xl:text-86px 4xl:text-110px font-thin leading-tight">
+            Brand
+            <br />
+            Solutions
+          </h1>
         </div>
       </div>
     </div>
   );
 };
 
-export default HeroSection;
+export default Hero;

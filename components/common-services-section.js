@@ -5,7 +5,7 @@ const ServicesSection = ({ initialService, services_data }) => {
   const [selectedService, setSelectedService] = useState(initialService);
 
   return (
-    <div className="max-w-6xl mx-auto">
+    <div className="xl:max-w-6xl 2xl:max-w-screen-xl 3xl:max-w-screen-2xl 4xl:max-w-screen-4xl mx-auto lg:px-16">
       <div className="relative border-t border-gray-200">
         <div className="py-8">
           <div className="relative">
