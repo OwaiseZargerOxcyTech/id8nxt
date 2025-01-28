@@ -218,7 +218,7 @@ const ParallaxHero = () => {
       </div>
 
       {/* Text Overlay - Positioned independently */}
-      <div className="absolute top-0 left-0 w-full" style={{ height: "120vh" }}>
+      <div className="absolute top-0 left-0 w-full" style={{ height: "135vh" }}>
         <div className="sticky top-0 z-20 h-screen">
           <div className="h-full xl:max-w-6xl 2xl:max-w-screen-xl 3xl:max-w-screen-2xl 4xl:max-w-screen-4xl mx-auto px-4 sm:px-6 lg:px-16 flex flex-col md:flex-row md:items-center justify-center md:justify-between gap-8 md:gap-4">
             <div

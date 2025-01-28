@@ -42,7 +42,7 @@ const Solutions = ({ isOpen }) => {
               alt="Background 1"
               className="absolute right-0 top-0 h-full w-auto object-contain"
             />
-            <div className="absolute inset-0 bg-black/10" />
+            <div className="absolute inset-0 bg-black/30" />
           </div>
         </div>
 

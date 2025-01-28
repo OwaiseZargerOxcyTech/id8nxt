@@ -112,7 +112,7 @@ export default function Navbar() {
                 ID8&#123;DEVHUB&#125;
               </p>
             </Link>
-            <Link href="/contact">
+            <Link href="/contact-us">
               <p
                 className={`${
                   isActive("/contact")
@@ -208,7 +208,7 @@ export default function Navbar() {
                 ID8&#123;DEVHUB&#125;
               </p>
             </Link>
-            <Link href="/contact">
+            <Link href="/contact-us">
               <p
                 className={`block ${
                   isActive("/contact") ? "text-red-500 font-semibold" : ""
