@@ -214,6 +214,19 @@ const ParallaxHero = () => {
             alt="Wave Effect"
             className="w-full h-full object-contain object-bottom"
           />
+          {/* <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover"
+          >
+            <source
+              src="/images/our-work/hero-img/vide0-water.mp4"
+              type="video/mp4"
+            />
+            Your browser does not support the video tag.
+          </video> */}
         </div>
       </div>
 
