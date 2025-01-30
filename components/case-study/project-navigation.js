@@ -8,7 +8,7 @@ export default function ProjectNavigation() {
   if (isMobile) {
     // Mobile Layout
     return (
-      <nav className="bg-[#33371a] text-white p-4">
+      <nav className="text-white p-4">
         <div className="flex flex-col items-center space-y-4">
           {/* Column 2: Me & TVA - Brand Identity */}
           <div className="text-sm text-center">Me & TVA - Brand Identity</div>
@@ -36,7 +36,7 @@ export default function ProjectNavigation() {
 
   // Web Layout
   return (
-    <nav className="bottom-0 left-0 right-0 bg-[#33371a] text-white p-4 md:px-6 md:pt-32 md:pb-16">
+    <nav className="bottom-0 left-0 right-0  text-white p-4 md:px-6 md:pt-32 md:pb-16">
       <div className="container mx-auto">
         <div className="grid grid-cols-4 items-center">
           {/* Column 1: Next Project */}

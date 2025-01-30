@@ -1,24 +1,11 @@
 import React from "react";
-
-const MetadataItem = ({ label, value }) => (
-  <div className="flex items-center gap-4">
-    <h2 className="text-lg font-medium w-1/3">{label}</h2>
-    <p className="text-sm text-gray-300 w-2/3">{value}</p>
-  </div>
-);
-
-const ContentSection = ({ title, text }) => (
-  <div>
-    <h2 className="text-xl font-semibold mb-6">{title}</h2>
-    <p className="text-sm text-gray-300 leading-relaxed">{text}</p>
-  </div>
-);
+import { ContentSection, MetadataItem } from "../content-section";
 
 export default function ProjectDetails() {
   const metadataItems = [
     { label: "Year", value: "2022" },
     { label: "Filter by solution", value: "Brand launch. Relaunch. Repeat." },
-    { label: "Areas", value: "Branding | Packaging | Communication" },
+    { label: "Areas", value: "Brand Visualization | Packaging" },
   ];
 
   const contentSections = [
@@ -33,7 +20,7 @@ export default function ProjectDetails() {
   ];
 
   return (
-    <section className="relative bg-red-500 text-white px-6 md:px-12 lg:px-24">
+    <section className="relative text-white px-6 md:px-12 lg:px-24 pt-20">
       {/* Gradient Overlay */}
       <div className="absolute inset-0 " />
 
@@ -50,7 +37,7 @@ export default function ProjectDetails() {
           {/* Right Column: The Request */}
           <div className="md:pl-16">
             <ContentSection
-              title="The request"
+              title="The Brief"
               text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim."
             />
           </div>

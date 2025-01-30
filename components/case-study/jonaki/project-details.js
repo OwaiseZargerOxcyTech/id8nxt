@@ -1,7 +1,18 @@
 import React from "react";
-import { ContentSection, contentSections } from "./content-section";
+import { ContentSection } from "../content-section";
 
 export default function ProjectDetails() {
+  const contentSections = [
+    {
+      title: "The challenge",
+      text: "The fragrance brand Jonaki makes magnificent stories with smell and aroma, drawing motivation from the interest of fireflies. Jonaki's branding creates a vibe of style and charm while capturing the stunning beauty of flies through a moderate plan approach. We use this dynamic approach to boost organic visualisation.",
+    },
+    {
+      title: "The insight",
+      text: "The fragrance brand Jonaki makes magnificent stories with smell and aroma, drawing motivation from the interest of fireflies. Jonaki's branding creates a vibe of style and charm while capturing the stunning beauty of flies through a moderate plan approach. We use this dynamic approach to boost organic visualisation.",
+    },
+  ];
+
   return (
     <section className="relative bg-[#33371a] text-white">
       {/* Gradient Overlay */}

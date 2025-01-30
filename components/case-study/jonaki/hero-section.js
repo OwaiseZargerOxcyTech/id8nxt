@@ -1,9 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import { ContentSection, MetadataItem, metadataItems } from "./content-section";
+import { ContentSection, MetadataItem } from "../content-section";
 
 export default function HeroSection() {
+  const metadataItems = [
+    { label: "Year", value: "2022" },
+    { label: "Filter by solution", value: "Brand launch. Relaunch. Repeat." },
+    { label: "Areas", value: "Branding | Packaging | Communication" },
+  ];
+
   return (
     <div className="relative min-h-[140vh]">
       {/* Background Image */}
