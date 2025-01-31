@@ -5,9 +5,7 @@ export default function Results({ title, text }) {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-12">
           {/* Heading */}
           <div className="md:col-span-1">
-            <h2 className="text-3xl md:text-4xl text-white font-light">
-              {title}
-            </h2>
+            <h2 className="text-3xl text-white font-light">{title}</h2>
           </div>
 
           {/* Content */}

@@ -1,7 +1,7 @@
 import BrandSymbol from "@/components/case-study/brand-symbol";
+import FeatureImages from "@/components/case-study/feature-images";
 import { HeroLayout } from "@/components/case-study/hero-layout";
 import BrandShowcase from "@/components/case-study/jonaki/brand-showcase";
-import InspirationSection from "@/components/case-study/jonaki/inspiration-section";
 import JonakiShowcase from "@/components/case-study/jonaki/jonaki-showcase";
 import ProjectNavigation from "@/components/case-study/project-navigation";
 import Results from "@/components/case-study/results";
@@ -31,11 +31,15 @@ export default function Jonaki() {
         title="Branding"
         subtitle="Jonaki"
         metadataItems={metadataItems}
-        requestText="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim."
+        contentTitle="The request"
+        contentText="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim."
         backgroundColor="#33371a"
         contentSections={contentSections}
       />
-      <InspirationSection />
+      <FeatureImages
+        img1="/images/case-study/jonaki/jonaki-tagore.png"
+        img2="/images/case-study/jonaki/artboard-3-2.png"
+      />
       <Results
         title="Results"
         text="The new branding successfully brought Jonaki’s story to

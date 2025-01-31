@@ -1,6 +1,6 @@
 import BrandSymbol from "@/components/case-study/brand-symbol";
+import FeatureImages from "@/components/case-study/feature-images";
 import BrandShowcase from "@/components/case-study/nutting-like-it/brand-showcase";
-import Element from "@/components/case-study/nutting-like-it/element";
 import HeroSection from "@/components/case-study/nutting-like-it/hero-section";
 import ProjectDetails from "@/components/case-study/nutting-like-it/project-details";
 import ProjectNavigation from "@/components/case-study/project-navigation";
@@ -8,10 +8,13 @@ import Results from "@/components/case-study/results";
 
 export default function NuttingLikeIt() {
   return (
-    <main className="bg-[#4A2735]">
+    <main className="bg-[#54253a]">
       <HeroSection />
       <ProjectDetails />
-      <Element />
+      <FeatureImages
+        img1="/images/nutting-like-it/artboard-1-copy-12.png"
+        img2="/images/nutting-like-it/artboard-1-copy-15.png"
+      />
       <Results
         title="Results"
         text=" The new branding and packaging made a significant impact,creating
