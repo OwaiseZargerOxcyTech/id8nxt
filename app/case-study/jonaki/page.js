@@ -25,7 +25,7 @@ export default function Jonaki() {
   ];
 
   return (
-    <main className=" bg-[#33371a]">
+    <main className=" bg-[#434a23]">
       <HeroLayout
         backgroundImage="/images/case-study/jonaki/jonaki.png"
         title="Branding"
@@ -33,7 +33,7 @@ export default function Jonaki() {
         metadataItems={metadataItems}
         contentTitle="The request"
         contentText="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim."
-        backgroundColor="#33371a"
+        backgroundColor="#434a23"
         contentSections={contentSections}
       />
       <FeatureImages
