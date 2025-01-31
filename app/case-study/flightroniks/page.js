@@ -23,7 +23,7 @@ export default function flightroniks() {
   ];
 
   return (
-    <main className=" bg-[#2f2f2f]">
+    <main className=" bg-[#39535f]">
       <HeroLayout
         backgroundImage="/images/flightroniks/drone-hovering-just-surface-body-water.png"
         title="Naming, Branding, Communcation"
@@ -31,7 +31,7 @@ export default function flightroniks() {
         metadataItems={metadataItems}
         contentTitle="The brief"
         contentText="Flightroniks, a pioneering drone company, sought to establish a distinctive and modern brand identity that reflected its focus on minimalism, innovation and contemporary design. The goal was to create a clean, forward-thinking brand that resonated with both drone enthusiasts and industry professionals."
-        backgroundColor="#2f2f2f"
+        backgroundColor="#39535f"
         contentSections={contentSections}
       />
       <FeatureImages
