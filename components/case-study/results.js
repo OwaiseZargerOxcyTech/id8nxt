@@ -12,7 +12,7 @@ export default function Results({ title, text }) {
 
           {/* Content */}
           <div className="md:col-span-3">
-            <p className="text-white text-lg md:text-xl leading-relaxed font-light">
+            <p className="text-white text-lg md:text-lg leading-relaxed font-light">
               {text}
             </p>
           </div>
