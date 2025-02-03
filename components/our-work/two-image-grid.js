@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const TwoTwoGrid = ({ data }) => {
@@ -12,14 +13,16 @@ const TwoTwoGrid = ({ data }) => {
             {/* First two close images */}
             {data.slice(0, 2).map((image) => (
               <div key={image.id} className="w-full">
-                <p className="text-sm text-gray-600 mt-2">{image.title}</p>
-                <div className="relative w-full overflow-hidden aspect-square">
-                  <img
-                    src={image.image}
-                    alt={image.title}
-                    className="object-cover w-full h-80 4xl:h-[28rem]"
-                  />
-                </div>
+                <Link href={image.link} className="group">
+                  <p className="text-sm text-gray-600 mt-2">{image.title}</p>
+                  <div className="relative w-full overflow-hidden aspect-square">
+                    <img
+                      src={image.image}
+                      alt={image.title}
+                      className="object-cover w-full h-80 4xl:h-[28rem]"
+                    />
+                  </div>
+                </Link>
               </div>
             ))}
           </div>
@@ -28,24 +31,28 @@ const TwoTwoGrid = ({ data }) => {
         {/* Second row - two images with gap in middle */}
         <div className="flex flex-col md:flex-row justify-between space-y-8 md:space-y-0">
           <div className="w-full md:w-1/3">
-            <p className="text-sm text-gray-600 truncate">{data[2].title}</p>
-            <div className="relative aspect-square w-full overflow-hidden">
-              <img
-                src={data[2].image}
-                alt={data[2].title}
-                className="object-cover w-full xl:h-[18.5rem] 2xl:h-80 4xl:h-[28rem] border"
-              />
-            </div>
+            <Link href={data[2].link} className="group">
+              <p className="text-sm text-gray-600 truncate">{data[2].title}</p>
+              <div className="relative aspect-square w-full overflow-hidden">
+                <img
+                  src={data[2].image}
+                  alt={data[2].title}
+                  className="object-cover w-full xl:h-[18.5rem] 2xl:h-80 4xl:h-[28rem] border"
+                />
+              </div>
+            </Link>
           </div>
           <div className="w-full md:w-1/3">
-            <p className="text-sm text-gray-600 truncate">{data[3].title}</p>
-            <div className="relative aspect-square w-full overflow-hidden">
-              <img
-                src={data[3].image}
-                alt={data[3].title}
-                className="object-cover w-full xl:h-[18.5rem] 2xl:h-80 4xl:h-[28rem] border"
-              />
-            </div>
+            <Link href={data[3].link} className="group">
+              <p className="text-sm text-gray-600 truncate">{data[3].title}</p>
+              <div className="relative aspect-square w-full overflow-hidden">
+                <img
+                  src={data[3].image}
+                  alt={data[3].title}
+                  className="object-cover w-full xl:h-[18.5rem] 2xl:h-80 4xl:h-[28rem] border"
+                />
+              </div>
+            </Link>
           </div>
         </div>
       </div>
