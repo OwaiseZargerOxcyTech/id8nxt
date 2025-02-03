@@ -1,12 +1,12 @@
 import React from "react";
 
-const ImageGrid = ({ data }) => {
-  if (!data || data.length < 6) return null;
+const TwoTwoGrid = ({ data }) => {
+  if (!data || data.length < 4) return null;
 
   return (
-    <div className="xl:max-w-6xl 2xl:max-w-screen-xl 3xl:max-w-screen-2xl 4xl:max-w-screen-4xl mx-auto my-4 md:my-20">
+    <div className="xl:max-w-6xl 2xl:max-w-screen-xl 3xl:max-w-screen-2xl 4xl:max-w-screen-4xl mx-auto">
       <div className="flex flex-col space-y-16">
-        {/* First row */}
+        {/* First row - two images */}
         <div className="flex flex-col md:flex-row space-y-8 md:space-y-0 md:space-x-20">
           <div className="flex flex-col md:flex-row md:space-x-4 md:w-2/3">
             {/* First two close images */}
@@ -23,22 +23,20 @@ const ImageGrid = ({ data }) => {
               </div>
             ))}
           </div>
-          {/* Third image with gap */}
+        </div>
+
+        {/* Second row - two images with gap in middle */}
+        <div className="flex flex-col md:flex-row justify-between space-y-8 md:space-y-0">
           <div className="w-full md:w-1/3">
-            <p className="text-sm text-gray-600">{data[2].title}</p>
+            <p className="text-sm text-gray-600 truncate">{data[2].title}</p>
             <div className="relative aspect-square w-full overflow-hidden">
               <img
                 src={data[2].image}
                 alt={data[2].title}
-                className="object-cover w-full h-80 4xl:h-[28rem]"
+                className="object-cover w-full xl:h-[18.5rem] 2xl:h-80 4xl:h-[28rem] border"
               />
             </div>
           </div>
-        </div>
-
-        {/* Second row */}
-        <div className="flex flex-col md:flex-row space-y-8 md:space-y-0 md:space-x-20">
-          {/* First image */}
           <div className="w-full md:w-1/3">
             <p className="text-sm text-gray-600 truncate">{data[3].title}</p>
             <div className="relative aspect-square w-full overflow-hidden">
@@ -49,25 +47,10 @@ const ImageGrid = ({ data }) => {
               />
             </div>
           </div>
-          {/* Last two close images */}
-          <div className="flex flex-col md:flex-row md:space-x-4 md:w-2/3">
-            {data.slice(4, 6).map((image) => (
-              <div key={image.id} className="w-full md:w-1/2">
-                <p className="text-sm text-gray-600">{image.title}</p>
-                <div className="relative aspect-square w-full overflow-hidden">
-                  <img
-                    src={image.image}
-                    alt={image.title}
-                    className="object-cover w-full h-80 4xl:h-[28rem]"
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default ImageGrid;
+export default TwoTwoGrid;

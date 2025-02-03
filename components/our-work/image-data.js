@@ -43,24 +43,14 @@ export const data2 = [
     title: "Microsoft _ Azure society of excellence",
   },
   {
-    id: 3,
-    image: "/images/our-work/pepsodent_3-662x665.png",
-    title: "Pepsodent Toothpaste _ Print Ads",
-  },
-  {
     id: 4,
     image: "/images/our-work/bayer-1600x900px-01.png",
     title: "Bayer _ ",
   },
   {
-    id: 5,
-    image: "/images/our-work/msblogathon.png",
-    title: "Blogathon _ Microsoft",
-  },
-  {
-    id: 6,
-    image: "/images/our-work/robo_6-615x665.png",
-    title: "Good Little Robots _ Logo Design",
+    id: 3,
+    image: "/images/our-work/pepsodent_3-662x665.png",
+    title: "Pepsodent Toothpaste _ Print Ads",
   },
 ];
 
@@ -77,22 +67,26 @@ export const data3 = [
   },
   {
     id: 3,
-    image: "/images/our-work/nutting.png",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1KxMYTZsglqNsFrcrHVteyXOlbYGqjDy2NQ&s",
     title: "",
   },
   {
     id: 4,
-    image: "/images/our-work/robo_6-615x665.png",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1KxMYTZsglqNsFrcrHVteyXOlbYGqjDy2NQ&s",
     title: "",
   },
   {
     id: 5,
-    image: "/images/our-work/appo_cover-3.png",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1KxMYTZsglqNsFrcrHVteyXOlbYGqjDy2NQ&s",
     title: "",
   },
   {
     id: 6,
-    image: "/images/our-work/rrtboard-1-copy-29.png",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1KxMYTZsglqNsFrcrHVteyXOlbYGqjDy2NQ&s",
     title: "",
   },
 ];
