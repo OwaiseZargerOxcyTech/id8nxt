@@ -3,6 +3,7 @@ import FeatureImages from "@/components/case-study/feature-images";
 import { HeroLayout } from "@/components/case-study/hero-layout";
 import ProjectNavigation from "@/components/case-study/project-navigation";
 import Results from "@/components/case-study/results";
+import ScrollAnimation from "@/hooks/scroll-effect";
 
 export default function flightroniks() {
   const metadataItems = [
@@ -34,18 +35,24 @@ export default function flightroniks() {
         backgroundColor="#39535f"
         contentSections={contentSections}
       />
-      <FeatureImages
-        img1={"/images/flightroniks/artboard-1-copy-29.png"}
-        img2={"/images/flightroniks/artboard-1-copy-28.png"}
-      />
-      <Results
-        title="Results"
-        text="The brand launch of Flightroniks created a strong market presence, with its sleek and innovative identity resonating with both drone enthusiasts and tech professionals. The cohesive brand identity, paired with strategic communication, positioned Flightroniks as a leader in the robotics and drone industry, setting a new standard for minimalistic yet impactful design."
-      />
+      <ScrollAnimation>
+        <FeatureImages
+          img1={"/images/flightroniks/artboard-1-copy-29.png"}
+          img2={"/images/flightroniks/artboard-1-copy-28.png"}
+        />
+      </ScrollAnimation>
+      <ScrollAnimation>
+        <Results
+          title="Results"
+          text="The brand launch of Flightroniks created a strong market presence, with its sleek and innovative identity resonating with both drone enthusiasts and tech professionals. The cohesive brand identity, paired with strategic communication, positioned Flightroniks as a leader in the robotics and drone industry, setting a new standard for minimalistic yet impactful design."
+        />
+      </ScrollAnimation>
       <div className="mb-24">
         <BrandSymbol imgUrl={"/images/flightroniks/artboard-1-copy-30.png"} />
       </div>
-      <BrandSymbol imgUrl={"/images/flightroniks/artboard-1-copy-31.png"} />
+      <ScrollAnimation>
+        <BrandSymbol imgUrl={"/images/flightroniks/artboard-1-copy-31.png"} />
+      </ScrollAnimation>
       <ProjectNavigation />
     </main>
   );

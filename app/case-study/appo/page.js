@@ -3,6 +3,7 @@ import FeatureImages from "@/components/case-study/feature-images";
 import { HeroLayout } from "@/components/case-study/hero-layout";
 import ProjectNavigation from "@/components/case-study/project-navigation";
 import Results from "@/components/case-study/results";
+import ScrollAnimation from "@/hooks/scroll-effect";
 
 export default function Appo() {
   const metadataItems = [
@@ -34,18 +35,24 @@ export default function Appo() {
         backgroundColor="#76372a"
         contentSections={contentSections}
       />
-      <FeatureImages
-        img1={"/images/appo/Artboard-1-copy-54.png"}
-        img2={"/images/appo/Artboard-1-copy-53.png"}
-      />
-      <Results
-        title="Results"
-        text="The new branding and UX/UI design transformed Appo into a user-friendly, engaging platform that reduced appointment scheduling time and improved client satisfaction. The app's playful, creative branding increased user engagement, while its streamlined features enabled salon owners to build stronger client relationships. The result was a comprehensive solution that elevated the salon experience and positioned Appo as a key player in the industry."
-      />
+      <ScrollAnimation>
+        <FeatureImages
+          img1={"/images/appo/Artboard-1-copy-54.png"}
+          img2={"/images/appo/Artboard-1-copy-53.png"}
+        />
+      </ScrollAnimation>
+      <ScrollAnimation>
+        <Results
+          title="Results"
+          text="The new branding and UX/UI design transformed Appo into a user-friendly, engaging platform that reduced appointment scheduling time and improved client satisfaction. The app's playful, creative branding increased user engagement, while its streamlined features enabled salon owners to build stronger client relationships. The result was a comprehensive solution that elevated the salon experience and positioned Appo as a key player in the industry."
+        />
+      </ScrollAnimation>
       <div className="mb-24">
         <BrandSymbol imgUrl={"/images/appo/Artboard-1-copy-51.png"} />
       </div>
-      <BrandSymbol imgUrl={"/images/appo/Artboard-1-copy-52.png"} />
+      <ScrollAnimation>
+        <BrandSymbol imgUrl={"/images/appo/Artboard-1-copy-52.png"} />
+      </ScrollAnimation>
       <ProjectNavigation />
     </main>
   );

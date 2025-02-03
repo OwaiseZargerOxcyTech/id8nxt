@@ -3,6 +3,7 @@ import FeatureImages from "@/components/case-study/feature-images";
 import { HeroLayout } from "@/components/case-study/hero-layout";
 import ProjectNavigation from "@/components/case-study/project-navigation";
 import Results from "@/components/case-study/results";
+import ScrollAnimation from "@/hooks/scroll-effect";
 
 export default function Pepsodent() {
   const metadataItems = [
@@ -34,18 +35,24 @@ export default function Pepsodent() {
         backgroundColor="#543831"
         contentSections={contentSections}
       />
-      <FeatureImages
-        img1={"/images/pepsodent/Artboard-1-copy-19.png"}
-        img2={"/images/pepsodent/Artboard-1-copy-20.png"}
-      />
-      <Results
-        title="Results"
-        text="The campaign successfully captured the audience's attention with its unique and relatable approach. The eye-catching illustrations and creative storytelling resonated with viewers, prompting them to rethink their nighttime brushing habits. The campaign drove increased awareness of Pepsodent's nighttime oral care message, enhancing brand recall and engagement while fostering stronger brand loyalty."
-      />
+      <ScrollAnimation>
+        <FeatureImages
+          img1={"/images/pepsodent/Artboard-1-copy-19.png"}
+          img2={"/images/pepsodent/Artboard-1-copy-20.png"}
+        />
+      </ScrollAnimation>
+      <ScrollAnimation>
+        <Results
+          title="Results"
+          text="The campaign successfully captured the audience's attention with its unique and relatable approach. The eye-catching illustrations and creative storytelling resonated with viewers, prompting them to rethink their nighttime brushing habits. The campaign drove increased awareness of Pepsodent's nighttime oral care message, enhancing brand recall and engagement while fostering stronger brand loyalty."
+        />
+      </ScrollAnimation>
       <div className="mb-24">
         <BrandSymbol imgUrl={"/images/pepsodent/cover-fish.png"} />
       </div>
-      <BrandSymbol imgUrl={"/images/pepsodent/Artboard-1-copy-23.png"} />
+      <ScrollAnimation>
+        <BrandSymbol imgUrl={"/images/pepsodent/Artboard-1-copy-23.png"} />
+      </ScrollAnimation>
       <ProjectNavigation />
     </main>
   );
