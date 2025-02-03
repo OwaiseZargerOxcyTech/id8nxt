@@ -10,8 +10,8 @@ export default function BrandSymbol({ imgUrl }) {
           <Image
             src={imgUrl}
             alt="First image"
-            width={400}
-            height={300}
+            width={800}
+            height={600}
             className="w-full h-auto"
           />
         </div>
