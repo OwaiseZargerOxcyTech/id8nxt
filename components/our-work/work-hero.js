@@ -248,11 +248,11 @@ const WorkHero = () => {
         transformStyle: "preserve-3d",
       }}
     >
-      <div className="relative w-full h-[150vh]">
+      <div className="relative w-full">
         <img
           src="/images/our-work/hero-img/our-work.png"
           alt="Hero Background"
-          className="absolute top-0 left-0 w-full h-full object-cover object-top"
+          className=" w-full h-full object-cover object-top"
         />
         <div
           ref={overlayRef}
@@ -264,8 +264,7 @@ const WorkHero = () => {
         />
         <canvas
           ref={canvasRef}
-          className="absolute bottom-0 left-0 w-full h-[36%]"
-          style={{ transform: "translateY(0%)" }}
+          className="absolute bottom-0 left-0 w-full h-[40%]"
         />
       </div>
 
