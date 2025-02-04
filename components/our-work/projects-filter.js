@@ -22,7 +22,7 @@ export default function ProjectsFilter() {
       </h2>
 
       {/* Sticky Container */}
-      <div className="sticky top-0 bg-white z-10 py-4">
+      <div className="sticky top-0 bg-transparent z-10 py-4">
         {/* Filters Row */}
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           {/* Tabs */}

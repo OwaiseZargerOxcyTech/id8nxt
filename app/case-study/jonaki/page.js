@@ -64,7 +64,7 @@ export default function Jonaki() {
         <JonakiShowcase />
       </ScrollAnimation>
 
-      <ProjectNavigation />
+      <ProjectNavigation currentProject="jonaki" />
     </main>
   );
 }

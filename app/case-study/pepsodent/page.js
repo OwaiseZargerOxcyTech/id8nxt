@@ -53,7 +53,7 @@ export default function Pepsodent() {
       <ScrollAnimation>
         <BrandSymbol imgUrl={"/images/pepsodent/Artboard-1-copy-23.png"} />
       </ScrollAnimation>
-      <ProjectNavigation />
+      <ProjectNavigation currentProject="pepsodent" />
     </main>
   );
 }

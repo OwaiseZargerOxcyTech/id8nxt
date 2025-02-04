@@ -53,7 +53,7 @@ export default function Appo() {
       <ScrollAnimation>
         <BrandSymbol imgUrl={"/images/appo/Artboard-1-copy-52.png"} />
       </ScrollAnimation>
-      <ProjectNavigation />
+      <ProjectNavigation currentProject="appo" />
     </main>
   );
 }

@@ -43,7 +43,7 @@ export default function NuttingLikeIt() {
           imgUrl={"/images/nutting-like-it/artboard-1-copy-18.png"}
         />
       </ScrollAnimation>
-      <ProjectNavigation />
+      <ProjectNavigation currentProject="nutting-like-it" />
     </main>
   );
 }

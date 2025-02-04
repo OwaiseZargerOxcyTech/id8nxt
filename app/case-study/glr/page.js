@@ -57,7 +57,7 @@ export default function Glr() {
       <ScrollAnimation>
         <BrandSymbol imgUrl={"/images/glr/artboard-1-copy-5.png"} />
       </ScrollAnimation>
-      <ProjectNavigation />
+      <ProjectNavigation currentProject="glr" />
     </main>
   );
 }

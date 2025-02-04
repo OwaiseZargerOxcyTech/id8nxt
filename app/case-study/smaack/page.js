@@ -53,7 +53,7 @@ export default function Smaack() {
       <ScrollAnimation>
         <BrandShowcase />
       </ScrollAnimation>
-      <ProjectNavigation />
+      <ProjectNavigation currentProject="smaack" />
     </main>
   );
 }

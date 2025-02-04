@@ -53,7 +53,7 @@ export default function flightroniks() {
       <ScrollAnimation>
         <BrandSymbol imgUrl={"/images/flightroniks/artboard-1-copy-31.png"} />
       </ScrollAnimation>
-      <ProjectNavigation />
+      <ProjectNavigation currentProject="flightroniks" />
     </main>
   );
 }

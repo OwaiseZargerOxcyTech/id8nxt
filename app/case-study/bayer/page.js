@@ -49,7 +49,7 @@ export default function Bayer() {
       <ScrollAnimation>
         <BrandSymbol imgUrl={"/images/bayer/bayer-1600x900px-03.png"} />
       </ScrollAnimation>
-      <ProjectNavigation />
+      <ProjectNavigation currentProject="bayer" />
     </main>
   );
 }
