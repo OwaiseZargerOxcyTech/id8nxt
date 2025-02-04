@@ -47,7 +47,7 @@ export default function Navbar() {
           </div>
 
           {/* Menu Items */}
-          <div className="hidden md:flex space-x-12 items-center">
+          <div className="hidden md:flex space-x-12 4xl:space-x-24 items-center">
             <Link href="/">
               <p
                 className={`${

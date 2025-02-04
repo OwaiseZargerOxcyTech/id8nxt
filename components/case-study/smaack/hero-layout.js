@@ -41,11 +41,11 @@ export const HeroLayout = ({
           <div className="">
             <div className="mx-auto px-4 xl:px-0 2xl:px-16 xl:max-w-screen-lg 2xl:max-w-screen-xl 3xl:max-w-screen-2xl 4xl:max-w-screen-4xl">
               {/* Title Section - Just above metadata */}
-              <div className="xl:mb-10 2xl:mb-20 4xl:mb-40">
+              <div className="xl:mb-8">
                 <h3 className="text-white text-xl 3xl:text-3xl md:text-lg tracking-[0.2em] font-light mb-2">
                   {subtitle}
                 </h3>
-                <h1 className="text-white text-4xl 3xl:text-6xl font-normal leading-tight tracking-wide">
+                <h1 className="text-white text-4xl 3xl:text-6xl font-normal leading-tight tracking-wide w-1/2">
                   {title}
                 </h1>
               </div>
