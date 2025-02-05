@@ -1,5 +1,6 @@
 import BrandSymbol from "@/components/case-study/brand-symbol";
 import FeatureImages from "@/components/case-study/feature-images";
+import { FooterCase } from "@/components/case-study/footer-case";
 import { HeroLayout } from "@/components/case-study/hero-layout";
 import BrandShowcase from "@/components/case-study/jonaki/brand-showcase";
 import JonakiShowcase from "@/components/case-study/jonaki/jonaki-showcase";
@@ -26,7 +27,7 @@ export default function Jonaki() {
   ];
 
   return (
-    <main className="bg-[#434a23]">
+    <main className="bg-[#434a23] pb-12">
       <HeroLayout
         backgroundImage="/images/case-study/jonaki/jonaki.png"
         title="Branding"
@@ -45,16 +46,12 @@ export default function Jonaki() {
         />
       </ScrollAnimation>
 
-      <ScrollAnimation>
-        <Results
-          title="Results"
-          text="The new branding successfully brought Jonaki's story to life, enhancing its market appeal and customer engagement. The minimalistic design and captivating narrative around fireflies boosted organic visibility and created a unique, sensory-driven experience for the brand's audience. The revitalised packaging and communication generated a strong emotional connection, leading to increased customer interest and brand loyalty."
-        />
-      </ScrollAnimation>
+      <Results
+        title="Results"
+        text="The new branding successfully brought Jonaki's story to life, enhancing its market appeal and customer engagement. The minimalistic design and captivating narrative around fireflies boosted organic visibility and created a unique, sensory-driven experience for the brand's audience. The revitalised packaging and communication generated a strong emotional connection, leading to increased customer interest and brand loyalty."
+      />
 
-      <ScrollAnimation>
-        <BrandSymbol imgUrl={"/images/case-study/jonaki/artboard-4-2.png"} />
-      </ScrollAnimation>
+      <BrandSymbol imgUrl={"/images/case-study/jonaki/artboard-4-2.png"} />
 
       <ScrollAnimation>
         <BrandShowcase />
@@ -65,6 +62,8 @@ export default function Jonaki() {
       </ScrollAnimation>
 
       <ProjectNavigation currentProject="jonaki" />
+
+      <FooterCase textColor="#fff" />
     </main>
   );
 }

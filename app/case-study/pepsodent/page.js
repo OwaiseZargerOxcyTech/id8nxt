@@ -1,5 +1,6 @@
 import BrandSymbol from "@/components/case-study/brand-symbol";
 import FeatureImages from "@/components/case-study/feature-images";
+import { FooterCase } from "@/components/case-study/footer-case";
 import { HeroLayout } from "@/components/case-study/hero-layout";
 import ProjectNavigation from "@/components/case-study/project-navigation";
 import Results from "@/components/case-study/results";
@@ -24,7 +25,7 @@ export default function Pepsodent() {
   ];
 
   return (
-    <main className=" bg-[#543831]">
+    <main className=" bg-[#543831] pb-12">
       <HeroLayout
         backgroundImage="/images/pepsodent/Artboard-1-copy-25.png"
         title="Concept, Illustration"
@@ -41,12 +42,12 @@ export default function Pepsodent() {
           img2={"/images/pepsodent/Artboard-1-copy-20.png"}
         />
       </ScrollAnimation>
-      <ScrollAnimation>
-        <Results
-          title="Results"
-          text="The campaign successfully captured the audience's attention with its unique and relatable approach. The eye-catching illustrations and creative storytelling resonated with viewers, prompting them to rethink their nighttime brushing habits. The campaign drove increased awareness of Pepsodent's nighttime oral care message, enhancing brand recall and engagement while fostering stronger brand loyalty."
-        />
-      </ScrollAnimation>
+
+      <Results
+        title="Results"
+        text="The campaign successfully captured the audience's attention with its unique and relatable approach. The eye-catching illustrations and creative storytelling resonated with viewers, prompting them to rethink their nighttime brushing habits. The campaign drove increased awareness of Pepsodent's nighttime oral care message, enhancing brand recall and engagement while fostering stronger brand loyalty."
+      />
+
       <div className="mb-24">
         <BrandSymbol imgUrl={"/images/pepsodent/cover-fish.png"} />
       </div>
@@ -54,6 +55,7 @@ export default function Pepsodent() {
         <BrandSymbol imgUrl={"/images/pepsodent/Artboard-1-copy-23.png"} />
       </ScrollAnimation>
       <ProjectNavigation currentProject="pepsodent" />
+      <FooterCase textColor="#fff" />
     </main>
   );
 }

@@ -1,5 +1,6 @@
 import BrandSymbol from "@/components/case-study/brand-symbol";
 import FeatureImages from "@/components/case-study/feature-images";
+import { FooterCase } from "@/components/case-study/footer-case";
 import { HeroLayout } from "@/components/case-study/glr/hero-layout";
 import ProjectNavigation from "@/components/case-study/project-navigation";
 import Results from "@/components/case-study/results";
@@ -24,7 +25,7 @@ export default function Glr() {
   ];
 
   return (
-    <main className=" bg-[#2f2f2f]">
+    <main className=" bg-[#2f2f2f] pb-12">
       <h1 className="text-7xl text-transparent">glr</h1>
       <HeroLayout
         backgroundImage="/images/glr/artboard-1-copy-6.png"
@@ -42,12 +43,12 @@ export default function Glr() {
           img2={"/images/glr/artboard-1-copy-3.png"}
         />
       </ScrollAnimation>
-      <ScrollAnimation>
-        <Results
-          title="Results"
-          text="The new brand identity successfully conveyed Good Little Robots' ethos, creating an emotional connection with audiences. The simple yet powerful visual design enhanced brand recognition and clearly communicated the company's mission of using technology for good."
-        />
-      </ScrollAnimation>
+
+      <Results
+        title="Results"
+        text="The new brand identity successfully conveyed Good Little Robots' ethos, creating an emotional connection with audiences. The simple yet powerful visual design enhanced brand recognition and clearly communicated the company's mission of using technology for good."
+      />
+
       <div className="mb-24">
         <BrandSymbol imgUrl={"/images/glr/artboard-1-copy-2.png"} />
       </div>
@@ -58,6 +59,7 @@ export default function Glr() {
         <BrandSymbol imgUrl={"/images/glr/artboard-1-copy-5.png"} />
       </ScrollAnimation>
       <ProjectNavigation currentProject="glr" />
+      <FooterCase textColor="#fff" />
     </main>
   );
 }

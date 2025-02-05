@@ -1,5 +1,6 @@
 import BrandSymbol from "@/components/case-study/brand-symbol";
 import FeatureImages from "@/components/case-study/feature-images";
+import { FooterCase } from "@/components/case-study/footer-case";
 import { HeroLayout } from "@/components/case-study/hero-layout";
 import ProjectNavigation from "@/components/case-study/project-navigation";
 import Results from "@/components/case-study/results";
@@ -24,7 +25,7 @@ export default function Appo() {
   ];
 
   return (
-    <main className=" bg-[#76372a]">
+    <main className=" bg-[#76372a] pb-12">
       <HeroLayout
         backgroundImage="/images/appo/appo_cover-1-scaled.png"
         title="Branding, UX UI Design"
@@ -41,12 +42,12 @@ export default function Appo() {
           img2={"/images/appo/Artboard-1-copy-53.png"}
         />
       </ScrollAnimation>
-      <ScrollAnimation>
-        <Results
-          title="Results"
-          text="The new branding and UX/UI design transformed Appo into a user-friendly, engaging platform that reduced appointment scheduling time and improved client satisfaction. The app's playful, creative branding increased user engagement, while its streamlined features enabled salon owners to build stronger client relationships. The result was a comprehensive solution that elevated the salon experience and positioned Appo as a key player in the industry."
-        />
-      </ScrollAnimation>
+
+      <Results
+        title="Results"
+        text="The new branding and UX/UI design transformed Appo into a user-friendly, engaging platform that reduced appointment scheduling time and improved client satisfaction. The app's playful, creative branding increased user engagement, while its streamlined features enabled salon owners to build stronger client relationships. The result was a comprehensive solution that elevated the salon experience and positioned Appo as a key player in the industry."
+      />
+
       <div className="mb-24">
         <BrandSymbol imgUrl={"/images/appo/Artboard-1-copy-51.png"} />
       </div>
@@ -54,6 +55,7 @@ export default function Appo() {
         <BrandSymbol imgUrl={"/images/appo/Artboard-1-copy-52.png"} />
       </ScrollAnimation>
       <ProjectNavigation currentProject="appo" />
+      <FooterCase textColor="#fff" />
     </main>
   );
 }

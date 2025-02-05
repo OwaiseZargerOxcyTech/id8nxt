@@ -1,4 +1,5 @@
 import BrandSymbol from "@/components/case-study/brand-symbol";
+import { FooterCase } from "@/components/case-study/footer-case";
 import { HeroLayout } from "@/components/case-study/hero-layout";
 import ProjectNavigation from "@/components/case-study/project-navigation";
 import Results from "@/components/case-study/results";
@@ -23,7 +24,7 @@ export default function Bayer() {
   ];
 
   return (
-    <main className=" bg-[#755c42]">
+    <main className=" bg-[#755c42] pb-12">
       <HeroLayout
         backgroundImage="/images/bayer/bayer-1600x900px-04.png .png"
         title="Marketing, Website Development, Video Production"
@@ -37,12 +38,12 @@ export default function Bayer() {
       <ScrollAnimation>
         <BrandSymbol imgUrl={"/images/bayer/bayer-1600x900px-01.png"} />
       </ScrollAnimation>
-      <ScrollAnimation>
-        <Results
-          title="The solution"
-          text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim."
-        />
-      </ScrollAnimation>
+
+      <Results
+        title="The solution"
+        text="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim."
+      />
+
       <div className="mb-24">
         <BrandSymbol imgUrl={"/images/bayer/bayer-1600x900px-02.png"} />
       </div>
@@ -50,6 +51,7 @@ export default function Bayer() {
         <BrandSymbol imgUrl={"/images/bayer/bayer-1600x900px-03.png"} />
       </ScrollAnimation>
       <ProjectNavigation currentProject="bayer" />
+      <FooterCase textColor="#fff" />
     </main>
   );
 }
