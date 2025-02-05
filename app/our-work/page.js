@@ -6,8 +6,8 @@ import WorkHero from "@/components/our-work/work-hero";
 export default function OurWork() {
   return (
     <main>
-      <WorkHero />
-      {/* <ParallaxHero /> */}
+      {/* <WorkHero /> */}
+      <ParallaxHero />
       <ProjectsFilter />
       <Footer color={"white"} textColor={"black"} />
     </main>

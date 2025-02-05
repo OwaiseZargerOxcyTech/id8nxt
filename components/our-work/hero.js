@@ -1,172 +1,269 @@
 "use client";
-import ScrollTrigger from "gsap/ScrollTrigger";
 import React, { useEffect, useRef, useState } from "react";
 
-const ParallaxHero = () => {
+// WebGL utilities remain the same
+const createShader = (gl, type, source) => {
+  const shader = gl.createShader(type);
+  gl.shaderSource(shader, source);
+  gl.compileShader(shader);
+  if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+    console.error("Shader compile error:", gl.getShaderInfoLog(shader));
+    gl.deleteShader(shader);
+    return null;
+  }
+  return shader;
+};
+
+const createProgram = (gl, vertexShader, fragmentShader) => {
+  const program = gl.createProgram();
+  gl.attachShader(program, vertexShader);
+  gl.attachShader(program, fragmentShader);
+  gl.linkProgram(program);
+  if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+    console.error("Program link error:", gl.getProgramInfoLog(program));
+    return null;
+  }
+  return program;
+};
+
+const ParallaxHero = ({
+  waterImageSrc = "/images/our-work/hero-img/our-work-water.png",
+}) => {
   const containerRef = useRef(null);
-  const initialImageRef = useRef(null);
-  const waveImageRef = useRef(null);
+  const canvasRef = useRef(null);
   const headingRef = useRef(null);
   const paragraphRef = useRef(null);
   const overlayRef = useRef(null);
-  const rippleAnimationRef = useRef(null);
+  const animationFrameRef = useRef(null);
+  const [textureLoaded, setTextureLoaded] = useState(false);
 
   useEffect(() => {
-    const loadGSAP = async () => {
-      const gsap = (await import("gsap")).default;
-      await import("gsap/ScrollTrigger");
-      gsap.registerPlugin(ScrollTrigger);
+    const canvas = canvasRef.current;
+    const gl = canvas.getContext("webgl", { alpha: true });
+    if (!gl) {
+      console.error("WebGL not supported");
+      return;
+    }
 
-      const container = containerRef.current;
-      const initialImage = initialImageRef.current;
-      const waveImage = waveImageRef.current;
-      const heading = headingRef.current;
-      const paragraph = paragraphRef.current;
-      const overlay = overlayRef.current;
-
-      if (
-        !container ||
-        !initialImage ||
-        !waveImage ||
-        !heading ||
-        !paragraph ||
-        !overlay
-      )
-        return;
-
-      // Add SVG filter for ripple effect
-      const filterId = "ripple-effect";
-      const svgFilter = `
-        <svg xmlns="http://www.w3.org/2000/svg" class="absolute w-0 h-0">
-          <filter id="${filterId}">
-            <feTurbulence
-              id="turbulence"
-              type="fractalNoise"
-              baseFrequency="0.003 0.001"
-              numOctaves="1"
-              seed="2"
-              stitchTiles="stitch"
-              result="noise"
-            />
-            <feDisplacementMap
-              in="SourceGraphic"
-              in2="noise"
-              scale="3"
-              xChannelSelector="R"
-              yChannelSelector="G"
-            />
-          </filter>
-        </svg>
-      `;
-
-      // Remove existing filter if it exists
-      const existingFilter = document.getElementById(filterId);
-      if (existingFilter) {
-        existingFilter.remove();
+    // Shader sources remain the same
+    const vertexShaderSource = `
+      attribute vec2 position;
+      varying vec2 vUv;
+      void main() {
+        vUv = vec2(position.x * 0.5 + 0.5, 0.5 - position.y * 0.5);
+        gl_Position = vec4(position, 0.0, 1.0);
       }
+    `;
 
-      document.body.insertAdjacentHTML("beforeend", svgFilter);
-      waveImage.style.filter = `url(#${filterId})`;
+    const fragmentShaderSource = `
+      precision mediump float;
+      uniform sampler2D uTexture;
+      uniform float uTime;
+      varying vec2 vUv;
 
-      // Create and start ripple animation immediately
-      const createRippleAnimation = () => {
-        if (rippleAnimationRef.current) {
-          rippleAnimationRef.current.kill();
-        }
+      void main() {
+        vec2 uv = vUv;
+        float wave = 0.0;
+        float frequency = 20.0;
+        float speed = 3.0;
+        float amplitude = 0.05;
 
-        rippleAnimationRef.current = gsap.timeline({
-          repeat: -1,
-          defaults: { ease: "sine.inOut" },
-        });
+        // Bottom wave effect (stronger)
+        vec2 direction = vec2(-1.0, 0.15);
+        
+        // Add vertical movement
+        float verticalMove = sin(uTime * 1.0) * 0.02;
+        uv.y += verticalMove * (1.0 - uv.y);  // More movement at bottom
+        
+        float pattern1 = dot(uv, direction);
+        float pattern2 = dot(uv + vec2(0.5, 0.5), direction);
+        float pattern3 = dot(uv + vec2(0.25, 0.75), direction);
+        
+        float bottomWave = sin(pattern1 * frequency + uTime * speed) * amplitude;
+        bottomWave += sin(pattern2 * frequency * 1.2 + uTime * speed * 0.7) * amplitude * 0.5;
+        bottomWave += sin(pattern3 * frequency * 0.7 - uTime * speed * 1.1) * amplitude * 0.3;
+        
+        // Upper wave effect (subtler)
+        float upperFrequency = frequency * 0.5;
+        float upperSpeed = speed * 0.2;
+        float upperAmplitude = amplitude * 0.04;
+        
+        float upperWave = sin(pattern1 * upperFrequency + uTime * upperSpeed) * upperAmplitude;
+        upperWave += sin(pattern2 * upperFrequency * 1.2 + uTime * upperSpeed * 0.7) * upperAmplitude * 0.5;
+        
+        // Combine waves with masks
+        float bottomMask = smoothstep(0.7, 0.3, uv.y);
+        float upperMask = 1.0 - bottomMask;
+        
+        wave = bottomWave * bottomMask + upperWave * upperMask;
 
-        rippleAnimationRef.current.to("#turbulence", {
-          attr: {
-            baseFrequency: "0.009 0.003",
-          },
-          repeat: -1,
-        });
+        uv += wave;
+        
+        vec4 color = texture2D(uTexture, uv);
+        gl_FragColor = color;
+       
+      }
+    `;
 
-        rippleAnimationRef.current.play();
-      };
+    // Create and compile shaders
+    const vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
+    const fragmentShader = createShader(
+      gl,
+      gl.FRAGMENT_SHADER,
+      fragmentShaderSource
+    );
+    if (!vertexShader || !fragmentShader) {
+      console.error("Failed to create shaders");
+      return;
+    }
 
-      createRippleAnimation();
+    // Create and link program
+    const program = createProgram(gl, vertexShader, fragmentShader);
+    if (!program) {
+      console.error("Failed to create program");
+      return;
+    }
 
-      // Show wave image immediately with animation
-      gsap.to(waveImage, {
-        opacity: 1,
-        duration: 0.5,
-      });
+    gl.useProgram(program);
 
-      // Text scaling animation based on scroll
-      const handleTextScaling = () => {
-        const scrolled = container.scrollTop;
-        const maxScroll = container.scrollHeight - container.clientHeight;
-        const scrollProgress = Math.min(scrolled / maxScroll, 1);
+    // Set up vertex buffer
+    const positions = new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]);
+    const buffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+    gl.bufferData(gl.ARRAY_BUFFER, positions, gl.STATIC_DRAW);
 
-        // Calculate scale factor (from 1 to 0.5)
-        const scaleFactor = 1 - scrollProgress * 0.5;
+    const positionLocation = gl.getAttribLocation(program, "position");
+    gl.enableVertexAttribArray(positionLocation);
+    gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
 
-        // Apply scaling to heading and paragraph
-        heading.style.transform = `scale(${scaleFactor})`;
-        paragraph.style.transform = `scale(${Math.max(scaleFactor, 0.7)})`;
+    // Create and set up texture
+    const texture = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, texture);
 
-        const windowWidth = window.innerWidth;
-        const xlBreakpoint = 1280;
-        const xxlBreakpoint = 1440;
+    // Set texture parameters
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
 
-        let maxMargin = 0;
+    // Load water overlay image with error handling
+    const image = new Image();
+    image.crossOrigin = "anonymous"; // Add this if loading from external sources
 
-        if (windowWidth >= xxlBreakpoint) {
-          maxMargin = 150;
-        } else if (windowWidth >= xlBreakpoint) {
-          maxMargin = 220;
-        }
-
-        // Calculate margins based on screen size
-        if (maxMargin > 0) {
-          const marginValue = scrollProgress * maxMargin;
-          paragraph.style.marginLeft = `${marginValue}px`;
-          paragraph.style.marginTop = `${marginValue}px`;
-          heading.style.marginTop = `${marginValue}px`;
-        } else {
-          paragraph.style.marginLeft = "0px";
-          paragraph.style.marginTop = "0px";
-          heading.style.marginTop = "0px";
-        }
-
-        // Handle overlay opacity - now only applies to the main image
-        const overlayStartThreshold = 0.2;
-        const overlayOpacity = Math.max(
-          0,
-          Math.min(1, (scrollProgress - overlayStartThreshold) / 0.3)
-        );
-        overlay.style.opacity = overlayOpacity;
-      };
-
-      window.addEventListener("resize", handleTextScaling);
-
-      // Handle scroll animation
-      const handleScroll = () => {
-        handleTextScaling();
-      };
-
-      container.addEventListener("scroll", handleScroll);
-
-      // Cleanup function
-      return () => {
-        container.removeEventListener("scroll", handleScroll);
-        window.removeEventListener("resize", handleTextScaling);
-        if (rippleAnimationRef.current) {
-          rippleAnimationRef.current.kill();
-        }
-        const filterToRemove = document.getElementById(filterId);
-        if (filterToRemove) {
-          filterToRemove.remove();
-        }
-      };
+    image.onload = () => {
+      gl.bindTexture(gl.TEXTURE_2D, texture);
+      gl.texImage2D(
+        gl.TEXTURE_2D,
+        0,
+        gl.RGBA,
+        gl.RGBA,
+        gl.UNSIGNED_BYTE,
+        image
+      );
+      setTextureLoaded(true);
     };
 
-    loadGSAP();
+    image.onerror = (e) => {
+      console.error("Error loading texture image:", e);
+      setTextureLoaded(false);
+    };
+
+    image.src = waterImageSrc;
+
+    // Enable transparency
+    gl.enable(gl.BLEND);
+    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
+    const timeLocation = gl.getUniformLocation(program, "uTime");
+    let startTime = performance.now();
+
+    const animate = () => {
+      if (!textureLoaded) return;
+
+      const time = (performance.now() - startTime) * 0.001;
+      gl.uniform1f(timeLocation, time);
+
+      // Update canvas size if needed
+      const displayWidth = canvas.clientWidth;
+      const displayHeight = canvas.clientHeight;
+
+      if (canvas.width !== displayWidth || canvas.height !== displayHeight) {
+        canvas.width = displayWidth;
+        canvas.height = displayHeight;
+        gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+      }
+
+      gl.clearColor(0, 0, 0, 0);
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+
+      animationFrameRef.current = requestAnimationFrame(animate);
+    };
+
+    if (textureLoaded) {
+      animate();
+    }
+
+    return () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+      gl.deleteProgram(program);
+      gl.deleteShader(vertexShader);
+      gl.deleteShader(fragmentShader);
+      gl.deleteTexture(texture);
+    };
+  }, [waterImageSrc, textureLoaded]);
+
+  // Text scaling logic remains the same
+  useEffect(() => {
+    const container = containerRef.current;
+    const heading = headingRef.current;
+    const paragraph = paragraphRef.current;
+    const overlay = overlayRef.current;
+
+    const handleTextScaling = () => {
+      const scrolled = container.scrollTop;
+      const maxScroll = container.scrollHeight - container.clientHeight;
+      const scrollProgress = Math.min(scrolled / maxScroll, 1);
+
+      const scaleFactor = 1 - scrollProgress * 0.5;
+      heading.style.transform = `scale(${scaleFactor})`;
+      paragraph.style.transform = `scale(${Math.max(scaleFactor, 0.7)})`;
+
+      const windowWidth = window.innerWidth;
+      const xlBreakpoint = 1280;
+      const xxlBreakpoint = 1440;
+
+      let maxMargin =
+        windowWidth >= xxlBreakpoint
+          ? 150
+          : windowWidth >= xlBreakpoint
+          ? 220
+          : 0;
+
+      if (maxMargin > 0) {
+        const marginValue = scrollProgress * maxMargin;
+        paragraph.style.marginLeft = `${marginValue}px`;
+        paragraph.style.marginTop = `${marginValue}px`;
+        heading.style.marginTop = `${marginValue}px`;
+      }
+
+      const overlayStartThreshold = 0.2;
+      const overlayOpacity = Math.max(
+        0,
+        Math.min(1, (scrollProgress - overlayStartThreshold) / 0.3)
+      );
+      overlay.style.opacity = overlayOpacity;
+    };
+
+    window.addEventListener("resize", handleTextScaling);
+    container.addEventListener("scroll", handleTextScaling);
+
+    return () => {
+      container.removeEventListener("scroll", handleTextScaling);
+      window.removeEventListener("resize", handleTextScaling);
+    };
   }, []);
 
   return (
@@ -179,16 +276,12 @@ const ParallaxHero = () => {
         transformStyle: "preserve-3d",
       }}
     >
-      {/* Hero section with images */}
-      <div ref={initialImageRef} className="relative w-full">
+      <div className="relative w-full">
         <img
           src="/images/our-work/hero-img/our-work.png"
           alt="Hero Background"
           className="w-full h-full object-cover object-top"
-          style={{ willChange: "transform" }}
         />
-
-        {/* Black Overlay - Now positioned before the wave image */}
         <div
           ref={overlayRef}
           className="absolute top-0 right-0 w-full h-full bg-black/20"
@@ -197,40 +290,12 @@ const ParallaxHero = () => {
             transition: "opacity 0.3s ease-out",
           }}
         />
-
-        {/* Wave Image positioned above the overlay */}
-        <div
-          ref={waveImageRef}
-          className="absolute bottom-0 left-0 w-full"
-          style={{
-            willChange: "transform",
-            zIndex: 10,
-            opacity: 0,
-            transform: "translateY(-1%)",
-          }}
-        >
-          <img
-            src="/images/our-work/hero-img/water.png"
-            alt="Wave Effect"
-            className="w-full h-full object-contain object-bottom"
-          />
-          {/* <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="w-full h-full object-cover"
-          >
-            <source
-              src="/images/our-work/hero-img/vide0-water.mp4"
-              type="video/mp4"
-            />
-            Your browser does not support the video tag.
-          </video> */}
-        </div>
+        <canvas
+          ref={canvasRef}
+          className="absolute bottom-0 left-0 w-full h-full"
+        />
       </div>
 
-      {/* Text Overlay - Positioned independently */}
       <div className="absolute top-0 left-0 w-full" style={{ height: "135vh" }}>
         <div className="sticky top-0 z-20 h-screen">
           <div className="h-full xl:max-w-6xl 2xl:max-w-screen-xl 3xl:max-w-screen-2xl 4xl:max-w-screen-4xl mx-auto px-4 sm:px-6 lg:px-16 flex flex-col md:flex-row md:items-center justify-center md:justify-between gap-8 md:gap-4">
