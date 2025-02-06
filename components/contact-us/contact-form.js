@@ -70,9 +70,9 @@ export default function ContactForm() {
           <div className="space-y-4">
             <label
               htmlFor="name"
-              className="block text-lg font-medium text-black"
+              className="block 2xl:text-lg font-medium text-black"
             >
-              1/ Name & Surname*
+              Name & Surname*
             </label>
             <input
               id="name"
@@ -80,15 +80,15 @@ export default function ContactForm() {
               onChange={handleChange}
               placeholder="Enter your full name"
               required
-              className="w-full px-4 py-3 border border-black bg-white text-lg text-black focus:outline-none focus:border-black focus:ring-0"
+              className="w-full px-4 py-3 border border-black bg-white 2xl:text-lg text-black focus:outline-none focus:border-black focus:ring-0"
             />
           </div>
           <div className="space-y-4">
             <label
               htmlFor="email"
-              className="block text-lg font-medium text-black"
+              className="block 2xl:text-lg font-medium text-black"
             >
-              2/ Email*
+              Email*
             </label>
             <input
               id="email"
@@ -97,7 +97,7 @@ export default function ContactForm() {
               onChange={handleChange}
               placeholder="Enter your email address"
               required
-              className="w-full px-4 py-3 border border-black bg-white text-lg text-black focus:outline-none focus:border-black focus:ring-0"
+              className="w-full px-4 py-3 border border-black bg-white 2xl:text-lg text-black focus:outline-none focus:border-black focus:ring-0"
             />
           </div>
         </div>
@@ -107,9 +107,9 @@ export default function ContactForm() {
           <div className="space-y-4">
             <label
               htmlFor="phone"
-              className="block text-lg font-medium text-black"
+              className="block 2xl:text-lg font-medium text-black"
             >
-              3/ Phone number*
+              Phone number*
             </label>
             <input
               id="phone"
@@ -118,30 +118,30 @@ export default function ContactForm() {
               onChange={handleChange}
               placeholder="Enter your phone number"
               required
-              className="w-full px-4 py-3 border border-black bg-white text-lg text-black focus:outline-none focus:border-black focus:ring-0"
+              className="w-full px-4 py-3 border border-black bg-white 2xl:text-lg text-black focus:outline-none focus:border-black focus:ring-0"
             />
           </div>
           <div className="space-y-4">
             <label
               htmlFor="company"
-              className="block text-lg font-medium text-black"
+              className="block 2xl:text-lg font-medium text-black"
             >
-              4/ Company
+              Company
             </label>
             <input
               id="company"
               value={formData.company}
               onChange={handleChange}
               placeholder="Enter the name of the company you work for"
-              className="w-full px-4 py-3 border border-black bg-white text-lg text-black focus:outline-none focus:border-black focus:ring-0"
+              className="w-full px-4 py-3 border border-black bg-white 2xl:text-lg text-black focus:outline-none focus:border-black focus:ring-0"
             />
           </div>
         </div>
 
         {/* Services */}
         <div className="space-y-4">
-          <label className="block text-lg font-medium text-black">
-            5/ Which services are you interested in?
+          <label className="block 2xl:text-lg font-medium text-black">
+            Which services are you interested in?
           </label>
           <div className="flex flex-wrap gap-4">
             {services.map((service) => (
@@ -149,7 +149,7 @@ export default function ContactForm() {
                 key={service}
                 type="button"
                 onClick={() => handleServiceToggle(service)}
-                className={`px-4 py-2 text-lg border border-black transition-colors ${
+                className={`px-4 py-2 2xl:text-lg border border-black transition-colors ${
                   selectedServices.includes(service)
                     ? "bg-black text-white"
                     : "bg-white text-gray-500 hover:bg-black hover:text-white"
@@ -165,9 +165,9 @@ export default function ContactForm() {
         <div className="space-y-4">
           <label
             htmlFor="message"
-            className="block text-lg font-medium text-black"
+            className="block 2xl:text-lg font-medium text-black"
           >
-            6/ Leave a message*
+            Leave a message*
           </label>
           <textarea
             id="message"
@@ -175,7 +175,7 @@ export default function ContactForm() {
             onChange={handleChange}
             placeholder="Your message"
             required
-            className="w-full px-4 py-3 border border-black bg-white text-lg text-black min-h-[150px] focus:outline-none focus:border-black focus:ring-0"
+            className="w-full px-4 py-3 border border-black bg-white 2xl:text-lg text-black min-h-[150px] focus:outline-none focus:border-black focus:ring-0"
           />
         </div>
 
@@ -188,7 +188,7 @@ export default function ContactForm() {
               required
               className="h-4 w-4 border focus:outline-none"
             />
-            <label htmlFor="consent" className="text-lg text-black">
+            <label htmlFor="consent" className="2xl:text-lg text-black">
               I give my consent, in accordance with the Privacy Policy*
             </label>
           </div>
@@ -198,7 +198,7 @@ export default function ContactForm() {
               type="checkbox"
               className="h-4 w-4 border focus:outline-none"
             />
-            <label htmlFor="updates" className="text-lg text-black">
+            <label htmlFor="updates" className="2xl:text-lg text-black">
               I want to receive regular updates on Playground activities
             </label>
           </div>
@@ -208,7 +208,7 @@ export default function ContactForm() {
         <div className="flex justify-end">
           <button
             type="submit"
-            className="bg-black text-white hover:bg-black/90 px-6 py-2 text-lg border border-black"
+            className="bg-black text-white hover:bg-black/90 px-6 py-2 2xl:text-lg border border-black"
           >
             Get Started
           </button>

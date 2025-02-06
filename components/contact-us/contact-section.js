@@ -51,7 +51,7 @@ export default function ContactSection() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
             <div className="text-gray-800 text-xl md:text-2xl">Let's Meet</div>
-            <address className="not-italic text-black text-xl md:text-2xl">
+            <address className="not-italic text-black text-xl ">
               ID8NXT I LP, 1016, 1st floor,
               <br />
               DTC Building Sitaram Mills Compound,
