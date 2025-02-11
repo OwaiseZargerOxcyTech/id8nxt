@@ -10,33 +10,15 @@ export default function ContactHero() {
   useEffect(() => {
     const tl = gsap.timeline();
 
-    // Left hand animation
-    tl.from(leftHandRef.current, {
-      x: "-100%",
+    // Animate hands and bulb together
+    tl.from([leftHandRef.current, rightHandRef.current, bulbRef.current], {
+      x: (index) => (index === 0 ? "-100%" : index === 1 ? "100%" : 0),
+      y: (index) => (index === 2 ? 200 : 0),
       opacity: 0,
-      rotate: -45,
-      duration: 1.5,
+      rotate: (index) => (index === 0 ? -45 : index === 1 ? 45 : 0),
+      duration: 2.5,
       ease: "power3.out",
     })
-      // Right hand animation
-      .from(
-        rightHandRef.current,
-        {
-          x: "100%",
-          opacity: 0,
-          rotate: 45,
-          duration: 1.5,
-          ease: "power3.out",
-        },
-        "-=1.5" // Start at the same time as left hand
-      )
-      // Bulb animation
-      .from(bulbRef.current, {
-        y: 100,
-        opacity: 0,
-        duration: 1,
-        ease: "power2.out",
-      })
       // Continuous floating animation for the bulb
       .to(bulbRef.current, {
         y: -15,
@@ -46,7 +28,6 @@ export default function ContactHero() {
         ease: "power1.inOut",
       });
 
-    // Clean up animation on unmount
     return () => tl.kill();
   }, []);
 
