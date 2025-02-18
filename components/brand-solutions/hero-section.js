@@ -12,13 +12,14 @@ const Hero = () => {
   const bgElementsRef = useRef(null);
 
   const startOngoingAnimations = () => {
-    // Continuous statue animation
+    // Create a timeline for the zoom animation
     gsap.to(statueRef.current, {
-      scale: 1.08,
+      scale: 1.1,
       duration: 5,
       repeat: -1,
       yoyo: true,
-      ease: "sine.inOut",
+      ease: "power1.inOut",
+      transformOrigin: "center center",
     });
   };
 
@@ -36,10 +37,10 @@ const Hero = () => {
       gsap.set(statueRef.current, {
         opacity: 0,
         y: "100%",
-        transformOrigin: "bottom center",
+        scale: 1,
+        transformOrigin: "center center",
       });
 
-      // Animate everything at once
       gsap.to(
         [
           rectangleRef.current,
@@ -50,8 +51,8 @@ const Hero = () => {
         {
           y: "0%",
           opacity: 1,
-          duration: duration,
-          ease: ease,
+          duration,
+          ease,
           onComplete: () => {
             setIsInitialLoad(false);
             startOngoingAnimations();
@@ -74,15 +75,16 @@ const Hero = () => {
       });
     };
 
-    // Add hover event listeners
     const statue = statueRef.current;
-    statue.addEventListener("mouseenter", handleStatueHover);
+    if (statue) {
+      statue.addEventListener("mouseenter", handleStatueHover);
 
-    // Cleanup
-    return () => {
-      statue.removeEventListener("mouseenter", handleStatueHover);
-      gsap.killTweensOf(statueRef.current);
-    };
+      return () => {
+        statue.removeEventListener("mouseenter", handleStatueHover);
+        // Only kill the hover tweens, not the ongoing zoom animation
+        gsap.killTweensOf(statue, { x: true });
+      };
+    }
   }, [isInitialLoad]);
 
   return (
