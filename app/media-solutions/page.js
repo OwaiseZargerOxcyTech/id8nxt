@@ -1,6 +1,5 @@
 import ImageGrid from "@/components/common-image-grid";
 import { Footer } from "@/components/footer/footer";
-import HeroSection from "@/components/media-solutions/hero-section";
 import { media_data } from "@/components/media-solutions/image-data";
 import ServicesSection from "@/components/services-section";
 import {
@@ -9,11 +8,12 @@ import {
   media_solutions_title,
 } from "@/components/media-solutions/services-data";
 import CommonServicesSection from "@/components/common-services-section";
+import HeroMedia from "@/components/media-solutions/hero";
 
 export default function MediaSolutions() {
   return (
     <main>
-      <HeroSection />
+      <HeroMedia />
       <ServicesSection
         title={media_solutions_title}
         desc={media_solutions_desc}
