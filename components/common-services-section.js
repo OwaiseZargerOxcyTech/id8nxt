@@ -14,7 +14,7 @@ const ServicesSection = ({ initialService, services_data }) => {
                 <div className="flex flex-col md:flex-row md:items-center">
                   <button
                     onClick={() => setSelectedService(service.name)}
-                    className={`text-base font-semibold text-left transition-colors md:w-[250px] ${
+                    className={`text-base font-semibold text-left transition-colors md:w-1/3 ${
                       selectedService === service.name
                         ? "text-red-600 font-medium"
                         : "text-gray-800 hover:text-red-500"

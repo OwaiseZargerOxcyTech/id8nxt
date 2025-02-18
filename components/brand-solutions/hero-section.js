@@ -35,7 +35,7 @@ const Hero = () => {
       });
       gsap.set(titleRef.current, { opacity: 0, y: "100%" });
       gsap.set(statueRef.current, {
-        opacity: 0,
+        opacity: 1,
         y: "100%",
         scale: 1,
         transformOrigin: "center center",
