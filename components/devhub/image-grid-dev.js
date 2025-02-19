@@ -21,7 +21,7 @@ const ImageGridDev = ({ data }) => {
                       className="object-cover w-full h-80 4xl:h-[28rem] transition-transform duration-300 group-hover:scale-105"
                     />
                   </div>
-                  <p className="text-sm text-gray-600 group-hover:text-gray-900">
+                  <p className="text-sm text-gray-600 mt-4 2xl:mt-0 4xl:text-lg group-hover:text-gray-900">
                     {image.title}
                   </p>
                 </Link>
@@ -38,7 +38,7 @@ const ImageGridDev = ({ data }) => {
                   className="object-cover w-full h-80 4xl:h-[28rem] transition-transform duration-300 group-hover:scale-105"
                 />
               </div>
-              <p className="text-sm text-gray-600 -mt-2 mb-16 group-hover:text-gray-900">
+              <p className="text-sm text-gray-600 mt-4 2xl:-mt-2 mb-16 4xl:text-lg group-hover:text-gray-900">
                 {data[2].title}
               </p>
             </Link>
