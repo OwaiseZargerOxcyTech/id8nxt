@@ -1,12 +1,15 @@
 "use client";
 import React, { useState } from "react";
 
-const CommonServicesSection = ({ initialService, services_data }) => {
+const DevServicesSection = ({ initialService, services_data }) => {
   const [selectedService, setSelectedService] = useState(initialService);
 
   return (
     <div className="xl:max-w-6xl 2xl:max-w-screen-xl 3xl:max-w-screen-2xl 4xl:max-w-screen-4xl mx-auto lg:px-16">
-      <div className="relative border-t border-gray-200">
+      <div className="relative border-t-2 border-gray-900">
+        <h1 className="text-4xl font-thin mt-16">
+          What's <br /> Inside?
+        </h1>
         <div className="py-8">
           <div className="relative">
             {services_data.map((service) => (
@@ -14,7 +17,7 @@ const CommonServicesSection = ({ initialService, services_data }) => {
                 <div className="flex flex-col md:flex-row md:items-center">
                   <button
                     onClick={() => setSelectedService(service.name)}
-                    className={`text-base font-semibold text-left transition-colors md:w-1/3 ${
+                    className={`text-base font-normal text-left transition-colors md:w-1/3 ${
                       selectedService === service.name
                         ? "text-red-600 font-medium"
                         : "text-gray-800 hover:text-red-500"
@@ -38,4 +41,4 @@ const CommonServicesSection = ({ initialService, services_data }) => {
   );
 };
 
-export default CommonServicesSection;
+export default DevServicesSection;
