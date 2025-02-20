@@ -63,43 +63,6 @@ const HeroAbout = () => {
   };
 
   const startOngoingAnimations = () => {
-    //----------------------------- Scroll animation for revealing effect with bottom anchoring
-    // gsap.to(statuesRef.current.children, {
-    //   scrollTrigger: {
-    //     trigger: headerRef.current,
-    //     start: "top top",
-    //     end: "bottom center",
-    //     scrub: 1,
-    //   },
-    //   scale: 1.1,
-    //   ease: "none",
-    // });
-    //------------------------------------ Create floating animation for leaf
-    // const floatingTl = gsap.timeline({
-    //   repeat: -1,
-    //   yoyo: true,
-    //   ease: "power1.inOut",
-    // });
-    // floatingTl
-    //   .to(bgElementsRef.current, {
-    //     y: -20,
-    //     duration: 6,
-    //     ease: "sine.inOut",
-    //   })
-    //   .to(bgElementsRef.current, {
-    //     y: 0,
-    //     duration: 6,
-    //     ease: "sine.inOut",
-    //   });
-    // // Add subtle rotation for more natural movement
-    // gsap.to(bgElementsRef.current, {
-    //   rotate: 2,
-    //   duration: 6,
-    //   repeat: -1,
-    //   yoyo: true,
-    //   ease: "sine.inOut",
-    // });
-
     //------------------------------------ statues zoom
 
     const zoomTl = gsap.timeline({
@@ -170,7 +133,7 @@ const HeroAbout = () => {
           <div className="relative h-full w-full" ref={statuesRef}>
             {/* First statue */}
             <div
-              className="absolute -bottom-12 right-[70%] 4xl:right-[75%] w-[25rem] 4xl:w-[40rem]"
+              className="absolute xl:-bottom-12 2xl:bottom-0 right-[70%] 4xl:right-[75%] w-[25rem] 4xl:w-[40rem]"
               ref={(el) => (statueRefs.current[0] = el)}
               onMouseEnter={() => handleStatueHover(0, true)}
               onMouseLeave={() => handleStatueHover(0, false)}
@@ -187,7 +150,7 @@ const HeroAbout = () => {
 
             {/* Middle statue */}
             <div
-              className="absolute bottom-0 right-[28%] 4xl:right-[30%] w-[32rem] 4xl:w-[53rem] z-20"
+              className="absolute bottom-0 right-[28%] 4xl:right-[30%] w-[32rem] 2xl:w-[34rem] 4xl:w-[53rem] z-20"
               ref={(el) => (statueRefs.current[1] = el)}
               onMouseEnter={() => handleStatueHover(1, true)}
               onMouseLeave={() => handleStatueHover(1, false)}

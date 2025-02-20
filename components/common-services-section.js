@@ -10,24 +10,30 @@ const CommonServicesSection = ({ initialService, services_data }) => {
         <div className="py-8">
           <div className="relative">
             {services_data.map((service) => (
-              <div key={service.name} className="mb-6">
-                <div className="flex flex-col md:flex-row md:items-center">
-                  <button
-                    onClick={() => setSelectedService(service.name)}
-                    className={`xl:text-sm 2xl:text-base font-semibold text-left transition-colors md:w-1/3 ${
-                      selectedService === service.name
-                        ? "text-red-600 font-medium"
-                        : "text-gray-800 hover:text-red-500"
-                    }`}
-                  >
-                    {service.name}
-                  </button>
+              <div key={service.name} className="mb-4">
+                <div className="flex flex-col md:flex-row md:items-start">
+                  <div className="md:w-1/3 h-full">
+                    <span
+                      onMouseEnter={() => setSelectedService(service.name)}
+                      onMouseLeave={() => setSelectedService(null)}
+                      className={`text-base font-semibold text-left transition-colors cursor-pointer inline-block ${
+                        selectedService === service.name
+                          ? "text-red-600 font-medium"
+                          : "text-gray-800 hover:text-red-500"
+                      }`}
+                    >
+                      {service.name}
+                    </span>
+                  </div>
 
-                  {selectedService === service.name && service.description && (
-                    <div className="mt-2 md:mt-0 md:flex-1 bg-red-600 text-white py-4 px-8 rounded shadow-sm">
-                      {service.description}
-                    </div>
-                  )}
+                  <div className="mt-2 md:-mt-3 md:flex-1 min-h-[60px] transition-all duration-200 ease-in-out">
+                    {selectedService === service.name &&
+                      service.description && (
+                        <div className="bg-red-600 text-white py-3 px-8 rounded shadow-sm">
+                          {service.description}
+                        </div>
+                      )}
+                  </div>
                 </div>
               </div>
             ))}
