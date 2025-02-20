@@ -6,7 +6,7 @@ export const teamData = {
       email: "attul@id8nxt.com",
       mobile: "+1234567890",
       hoverImg: "/images/about/about-team/atul-s.png",
-      img: "/images/about/about-team/atul-s-1.png",
+      img: "/images/about/about-team/atul-new.png",
     },
     {
       name: "Asif Akbar",
@@ -22,7 +22,7 @@ export const teamData = {
       email: "madhav.barve@id8nxt.com",
       mobile: "+1234567892",
       hoverImg: "/images/about/about-team/madhav.png",
-      img: "/images/about/about-team/madhav-1.png",
+      img: "/images/about/about-team/madhav-new.png",
     },
     {
       name: "Amina Sayed",
