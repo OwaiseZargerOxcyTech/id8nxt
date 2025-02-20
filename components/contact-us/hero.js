@@ -33,13 +33,20 @@ export default function ContactHero() {
 
   return (
     <section className="relative h-screen flex items-center justify-center bg-black overflow-hidden">
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: "url('/images/contact/contact-bg.png')" }}
-      ></div>
+      {/* Background Video */}
+      <video
+        className="absolute inset-0 w-full h-full object-cover"
+        src="/images/contact/leaf_live.mp4"
+        autoPlay
+        loop
+        muted
+        playsInline
+      ></video>
+
       <h1 className="absolute top-1/4 xl:left-24 2xl:left-28 text-white text-7xl 4xl:text-90px font-thin text-left px-6">
         Ready to embark on <br />a digital adventure?
       </h1>
+
       <div className="relative flex items-center justify-center w-full h-full">
         <img
           ref={leftHandRef}

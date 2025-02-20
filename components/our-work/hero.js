@@ -228,8 +228,8 @@ const ParallaxHero = ({
       const scrollProgress = Math.min(scrolled / maxScroll, 1);
 
       const scaleFactor = 1 - scrollProgress * 0.5;
-      heading.style.transform = `scale(${scaleFactor})`;
-      paragraph.style.transform = `scale(${Math.max(scaleFactor, 0.7)})`;
+      heading.style.transform = `scale(${(scaleFactor, 0.8)})`;
+      paragraph.style.transform = `scale(${Math.max(scaleFactor, 0.9)})`;
 
       const windowWidth = window.innerWidth;
       const xlBreakpoint = 1280;
