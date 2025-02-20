@@ -6,11 +6,12 @@ export default function ContactHero() {
   const leftHandRef = useRef(null);
   const rightHandRef = useRef(null);
   const bulbRef = useRef(null);
+  const titleRef = useRef(null);
 
   useEffect(() => {
     const tl = gsap.timeline();
 
-    // Animate hands and bulb together
+    // Animate hands, bulb, and title together
     tl.from([leftHandRef.current, rightHandRef.current, bulbRef.current], {
       x: (index) => (index === 0 ? "-100%" : index === 1 ? "100%" : 0),
       y: (index) => (index === 2 ? 200 : 0),
@@ -19,6 +20,17 @@ export default function ContactHero() {
       duration: 2.5,
       ease: "power3.out",
     })
+      // Slide in animation for title text
+      .from(
+        titleRef.current,
+        {
+          y: 100,
+          opacity: 0,
+          duration: 1,
+          ease: "power3.out",
+        },
+        "-=2.0"
+      ) // Overlapping the animations
       // Continuous floating animation for the bulb
       .to(bulbRef.current, {
         y: -15,
@@ -43,7 +55,10 @@ export default function ContactHero() {
         playsInline
       ></video>
 
-      <h1 className="absolute top-1/4 xl:left-24 2xl:left-28 text-white text-7xl 4xl:text-90px font-thin text-left px-6">
+      <h1
+        ref={titleRef}
+        className="absolute top-1/4 xl:left-24 2xl:left-28 text-white text-7xl 4xl:text-90px font-thin text-left px-6"
+      >
         Ready to embark on <br />a digital adventure?
       </h1>
 
