@@ -22,4 +22,4 @@ export const dev_services_data = [
 ];
 export const dev_solutions_title = "Where Developers Thrive";
 export const dev_solutions_desc =
-  "Welcome to ID8DEVHUB, a platform built by developers, fordevelopers. We’reapassionate community of innovators, problem-solvers, and tech enthusiasts turning ideas into reality.";
+  "Welcome to ID8DEVHUB, a platform built by developers, for developers. We’re a passionate community of innovators, problem-solvers, and tech enthusiasts turning ideas into reality.";
