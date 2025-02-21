@@ -1,12 +1,15 @@
-// Solutions.jsx
 "use client";
 
+import { useRouter } from "next/navigation";
+
 const Solutions = ({ isOpen }) => {
+  const router = useRouter();
+
   const menuItems = [
-    { text: "Brand Solutions", href: "brand-solutions" },
-    { text: "Tech Solutions", href: "tech-solutions" },
-    { text: "Media Solutions", href: "media-solutions" },
-    { text: "Community build", href: "#community" },
+    { text: "Brand Solutions", href: "/brand-solutions" },
+    { text: "Tech Solutions", href: "/tech-solutions" },
+    { text: "Media Solutions", href: "/media-solutions" },
+    { text: "Community build", href: "/#community" },
   ];
 
   const projectCards = [
@@ -14,16 +17,27 @@ const Solutions = ({ isOpen }) => {
       id: 1,
       image: "/images/solutions/metva.png",
       title: `"Me & Tva" is a children's brand dedicated to preserving the magic of childhood`,
-      href: "#me-and-tva",
+      href: "/#me-and-tva",
     },
     {
       id: 2,
       image: "/images/solutions/jonaki.png",
       title:
         "The fragrance brand Jonaki makes magnificent stories with smell and aroma, drawing motivation from the interest of fireflies.",
-      href: "#jonaki",
+      href: "/#jonaki",
     },
   ];
+
+  const handleNavigation = (e, href) => {
+    e.preventDefault();
+    if (href.includes("#")) {
+      // For hash links, use window.location to properly handle the scroll
+      window.location.href = href;
+    } else {
+      // For regular routes, use the router
+      router.push(href);
+    }
+  };
 
   return (
     <div
@@ -49,13 +63,13 @@ const Solutions = ({ isOpen }) => {
         {/* Content container */}
         <div className="relative z-10 xl:max-w-6xl 2xl:max-w-screen-xl 3xl:max-w-screen-2xl 4xl:max-w-screen-4xl mx-auto px-4 lg:px-16 xl:pt-10 2xl:pt-20">
           {/* Menu Items */}
-          <nav className=" pt-8">
-            {/* Added pt-16 to account for navbar height */}
+          <nav className="pt-8">
             <ul className="xl:space-y-4 4xl:space-y-8">
               {menuItems.map((item, index) => (
                 <li key={index}>
                   <a
                     href={item.href}
+                    onClick={(e) => handleNavigation(e, item.href)}
                     className="text-3xl 3xl:text-4xl 4xl:text-6xl font-light hover:text-gray-300 transition-colors duration-300"
                   >
                     {item.text}
@@ -69,7 +83,12 @@ const Solutions = ({ isOpen }) => {
           {/* Project Cards Grid */}
           <div className="grid md:grid-cols-2 xl:max-w-3xl 2xl:max-w-screen-lg 4xl:max-w-screen-xl gap-8 mt-8 4xl:mt-16">
             {projectCards.map((card) => (
-              <a key={card.id} href={card.href} className="group block">
+              <a
+                key={card.id}
+                href={card.href}
+                onClick={(e) => handleNavigation(e, card.href)}
+                className="group block"
+              >
                 <div className="relative overflow-hidden">
                   <img
                     src={card.image}

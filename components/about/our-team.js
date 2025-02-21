@@ -27,6 +27,7 @@ export default function OurTeam() {
   return (
     <main className="w-full min-h-screen bg-white py-16">
       <div className="xl:max-w-6xl 2xl:max-w-screen-xl 3xl:max-w-screen-2xl 4xl:max-w-screen-4xl mx-auto px-4 sm:px-6 lg:px-16">
+        {/* Header section remains the same */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-black">
           <div className="text-3xl md:text-6xl font-normal text-black">
             Our
@@ -39,18 +40,12 @@ export default function OurTeam() {
             <p className="text-gray-600 text-base md:text-lg leading-relaxed">
               Our dynamic blend of creative thinkers, tech enthusiasts, and
               strategic innovators are dedicated to transforming ideas into
-              impactful digital experiences. From our visionary designers to our
-              data-driven marketers, each member brings a unique perspective
-              that fuels our collaborative spirit.
-            </p>
-            <p className="text-gray-600 text-base md:text-lg leading-relaxed">
-              Join us on this wild ride, where our caffeine-fueled brainstorms
-              often lead to brilliant ideas—and a few friendly debates over the
-              best pizza toppings!
+              impactful digital experiences.
             </p>
           </div>
         </div>
 
+        {/* Category buttons */}
         <div className="flex flex-col sm:flex-row flex-wrap max-w-4xl my-16 border border-gray-700">
           {categories.map((cat) => (
             <button
@@ -65,63 +60,49 @@ export default function OurTeam() {
           ))}
         </div>
 
+        {/* Team member cards */}
         <Swiper
           slidesPerView={1.2}
           spaceBetween={20}
           freeMode={true}
           modules={[FreeMode]}
           breakpoints={{
-            0: {
-              slidesPerView: 1.2,
-            },
-            640: {
-              slidesPerView: 2.2,
-              spaceBetween: 20,
-            },
-            768: {
-              slidesPerView: 3.2,
-              spaceBetween: 30,
-            },
-            1024: {
-              slidesPerView: 3.7,
-              spaceBetween: 40,
-            },
+            0: { slidesPerView: 1.2 },
+            640: { slidesPerView: 2.2, spaceBetween: 20 },
+            768: { slidesPerView: 3.2, spaceBetween: 30 },
+            1024: { slidesPerView: 3.7, spaceBetween: 40 },
           }}
         >
           {teamData[category].map((member, index) => (
             <SwiperSlide key={index}>
               <div className="flex flex-col items-start h-full">
                 <div
-                  className="flex justify-center items-center h-[28rem] bg-[#EAEAEA] w-full relative overflow-hidden"
+                  className="flex justify-center items-center h-[28rem] bg-gray-100 w-full relative overflow-hidden"
                   onMouseEnter={() => setHoveredMember(index)}
                   onMouseLeave={() => setHoveredMember(null)}
                 >
-                  <div className="relative w-full h-full">
+                  {/* Video layer - appears on hover */}
+                  {hoveredMember === index && (
+                    <video
+                      className="absolute inset-0 w-full h-full object-cover"
+                      autoPlay
+                      muted
+                      playsInline
+                      loop
+                      src={member.video}
+                    />
+                  )}
+
+                  {/* Image layer - always visible */}
+                  <div className="absolute inset-0 w-full h-full">
                     <Image
                       src={member.img}
                       alt={member.name}
-                      className="transition-opacity duration-300 object-cover"
+                      className="object-cover"
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      priority={index < 4} // Prioritize loading for first 4 members
-                      style={{
-                        opacity:
-                          hoveredMember === index && member.hoverImg ? 0 : 1,
-                      }}
+                      priority={index < 4}
                     />
-                    {member.hoverImg && (
-                      <Image
-                        src={member.hoverImg}
-                        alt={`${member.name} hover`}
-                        className="transition-opacity duration-300 object-cover"
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        priority={index < 4}
-                        style={{
-                          opacity: hoveredMember === index ? 1 : 0,
-                        }}
-                      />
-                    )}
                   </div>
                 </div>
 

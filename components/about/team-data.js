@@ -7,6 +7,7 @@ export const teamData = {
       mobile: "+1234567890",
       hoverImg: "/images/about/about-team/atul-s.png",
       img: "/images/about/about-team/atul-new.png",
+      video: "/images/about/pattern-vid.mp4",
     },
     {
       name: "Asif Akbar",
