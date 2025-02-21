@@ -10,10 +10,11 @@ const Hero = () => {
   const leafRef = useRef(null);
   const titleRef = useRef(null);
   const bgElementsRef = useRef(null);
+  const zoomAnimationRef = useRef(null);
 
   const startOngoingAnimations = () => {
-    // Create a timeline for the zoom animation
-    gsap.to(statueRef.current, {
+    // Create a timeline for the zoom animation and store its reference
+    zoomAnimationRef.current = gsap.to(statueRef.current, {
       scale: 1.1,
       duration: 5,
       repeat: -1,
@@ -21,6 +22,21 @@ const Hero = () => {
       ease: "power1.inOut",
       transformOrigin: "center center",
     });
+  };
+
+  const handleImageHover = (isEnter) => {
+    if (isEnter) {
+      gsap.to(statueRef.current, {
+        x: "2px",
+        duration: 0.7,
+        repeat: 3,
+        yoyo: true,
+        ease: "power1.inOut",
+        onComplete: () => {
+          gsap.set(statueRef.current, { x: 0 });
+        },
+      });
+    }
   };
 
   useEffect(() => {
@@ -61,31 +77,31 @@ const Hero = () => {
       );
     }
 
-    // Hover animation
-    const handleStatueHover = () => {
-      gsap.to(statueRef.current, {
-        x: "4px",
-        duration: 0.7,
-        repeat: 3,
-        yoyo: true,
-        ease: "power1.inOut",
-        onComplete: () => {
-          gsap.set(statueRef.current, { x: 0 });
-        },
-      });
-    };
-
     const statue = statueRef.current;
     if (statue) {
-      statue.addEventListener("mouseenter", handleStatueHover);
+      const handleMouseEnter = () => handleImageHover(true);
+      statue.addEventListener("mouseenter", handleMouseEnter);
 
       return () => {
-        statue.removeEventListener("mouseenter", handleStatueHover);
-        // Only kill the hover tweens, not the ongoing zoom animation
-        gsap.killTweensOf(statue, { x: true });
+        statue.removeEventListener("mouseenter", handleMouseEnter);
+        // Only kill the hover animation tweens (x property)
+        gsap.getTweensOf(statue).forEach((tween) => {
+          if (tween.vars.x) {
+            tween.kill();
+          }
+        });
       };
     }
   }, [isInitialLoad]);
+
+  // Cleanup zoom animation on component unmount
+  useEffect(() => {
+    return () => {
+      if (zoomAnimationRef.current) {
+        zoomAnimationRef.current.kill();
+      }
+    };
+  }, []);
 
   return (
     <div
@@ -97,7 +113,7 @@ const Hero = () => {
           ref={statueRef}
           src="/images/brand-solutions/brand-statue.png"
           alt="Brand Solutions Hero"
-          className="absolute top-10 w-full h-full object-contain z-20 cursor-pointer"
+          className="absolute top-10 w-full h-full object-contain z-20 "
         />
         <div ref={bgElementsRef}>
           <img

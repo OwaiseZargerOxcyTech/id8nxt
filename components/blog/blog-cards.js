@@ -11,7 +11,10 @@ const BlogCards = ({ data = [] }) => {
             {/* First two close images */}
             {data.slice(0, 2).map((image) => (
               <div key={image.id} className="w-full">
-                <Link href={image.link || "#"} className="group">
+                <Link
+                  href={image.link || "#"}
+                  className="group flex flex-col h-full"
+                >
                   <div className="relative w-full overflow-hidden aspect-square">
                     <img
                       src={image.image || "/placeholder.jpg"}
@@ -19,15 +22,17 @@ const BlogCards = ({ data = [] }) => {
                       className="object-cover w-full h-80 4xl:h-[28rem] transition-transform duration-300 group-hover:scale-105"
                     />
                   </div>
-                  <p className="text-sm text-black group-hover:text-gray-900 font-bold my-2">
-                    {image.title || "Untitled"}
-                  </p>
-                  <p className="text-sm text-gray-600 group-hover:text-gray-900">
-                    {image.description || "No description available."}
-                  </p>
-                  <button className="group-hover:text-gray-900 text-sm border border-black p-1 mt-2">
-                    Read More
-                  </button>
+                  <div className="flex flex-col flex-grow">
+                    <p className="text-sm text-black group-hover:text-gray-900 font-bold my-2">
+                      {image.title || "Untitled"}
+                    </p>
+                    <p className="text-sm text-gray-600 group-hover:text-gray-900 flex-grow">
+                      {image.description || "No description available."}
+                    </p>
+                    <button className="group-hover:text-gray-900 text-sm border border-black p-1 mt-4 self-start">
+                      Read More
+                    </button>
+                  </div>
                 </Link>
               </div>
             ))}
@@ -36,7 +41,10 @@ const BlogCards = ({ data = [] }) => {
           {/* Third image (only if data[2] exists) */}
           {data[2] && (
             <div className="w-full md:w-1/3">
-              <Link href={data[2]?.link || "#"} className="group">
+              <Link
+                href={data[2]?.link || "#"}
+                className="group flex flex-col h-full"
+              >
                 <div className="relative aspect-square w-full overflow-hidden">
                   <img
                     src={data[2]?.image || "/placeholder.jpg"}
@@ -44,15 +52,17 @@ const BlogCards = ({ data = [] }) => {
                     className="object-cover w-full h-80 4xl:h-[28rem] transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
-                <p className="text-sm text-black group-hover:text-gray-900 font-bold my-2 ">
-                  {data[2]?.title || "Untitled"}
-                </p>
-                <p className="text-sm text-gray-600 group-hover:text-gray-900">
-                  {data[2]?.description || "No description available."}
-                </p>
-                <button className="group-hover:text-gray-900 text-sm border border-black p-1 mt-2">
-                  Read More
-                </button>
+                <div className="flex flex-col flex-grow">
+                  <p className="text-sm text-black group-hover:text-gray-900 font-bold my-2">
+                    {data[2]?.title || "Untitled"}
+                  </p>
+                  <p className="text-sm text-gray-600 group-hover:text-gray-900 flex-grow">
+                    {data[2]?.description || "No description available."}
+                  </p>
+                  <button className="group-hover:text-gray-900 text-sm border border-black p-1 mt-4 self-start">
+                    Read More
+                  </button>
+                </div>
               </Link>
             </div>
           )}
@@ -64,7 +74,10 @@ const BlogCards = ({ data = [] }) => {
             {/* First image (only if data[3] exists) */}
             {data[3] && (
               <div className="w-full md:w-1/3">
-                <Link href={data[3]?.link || "#"} className="group">
+                <Link
+                  href={data[3]?.link || "#"}
+                  className="group flex flex-col h-full"
+                >
                   <div className="relative aspect-square w-full overflow-hidden">
                     <img
                       src={data[3]?.image || "/placeholder.jpg"}
@@ -72,15 +85,17 @@ const BlogCards = ({ data = [] }) => {
                       className="object-cover w-full xl:h-[18.5rem] 2xl:h-80 4xl:h-[28rem] border transition-transform duration-300 group-hover:scale-105"
                     />
                   </div>
-                  <p className="text-sm text-black group-hover:text-gray-900 font-bold my-2">
-                    {data[3]?.title || "Untitled"}
-                  </p>
-                  <p className="text-sm text-gray-600 group-hover:text-gray-900">
-                    {data[3]?.description || "No description available."}
-                  </p>
-                  <button className="group-hover:text-gray-900 text-sm border border-black p-1 mt-2">
-                    Read More
-                  </button>
+                  <div className="flex flex-col flex-grow">
+                    <p className="text-sm text-black group-hover:text-gray-900 font-bold my-2">
+                      {data[3]?.title || "Untitled"}
+                    </p>
+                    <p className="text-sm text-gray-600 group-hover:text-gray-900 flex-grow">
+                      {data[3]?.description || "No description available."}
+                    </p>
+                    <button className="group-hover:text-gray-900 text-sm border border-black p-1 mt-4 self-start">
+                      Read More
+                    </button>
+                  </div>
                 </Link>
               </div>
             )}
@@ -89,7 +104,10 @@ const BlogCards = ({ data = [] }) => {
             <div className="flex flex-col md:flex-row md:space-x-4 md:w-2/3">
               {data.slice(4, 6).map((image) => (
                 <div key={image.id} className="w-full md:w-1/2">
-                  <Link href={image?.link || "#"} className="group">
+                  <Link
+                    href={image?.link || "#"}
+                    className="group flex flex-col h-full"
+                  >
                     <div className="relative aspect-square w-full overflow-hidden">
                       <img
                         src={image?.image || "/placeholder.jpg"}
@@ -97,15 +115,17 @@ const BlogCards = ({ data = [] }) => {
                         className="object-cover w-full h-80 4xl:h-[28rem] transition-transform duration-300 group-hover:scale-105"
                       />
                     </div>
-                    <p className="text-sm text-black group-hover:text-gray-900 font-bold my-2">
-                      {image?.title || "Untitled"}
-                    </p>
-                    <p className="text-sm text-gray-600 group-hover:text-gray-900">
-                      {image?.description || "No description available."}
-                    </p>
-                    <button className="group-hover:text-gray-900 text-sm border border-black p-1 mt-2">
-                      Read More
-                    </button>
+                    <div className="flex flex-col flex-grow">
+                      <p className="text-sm text-black group-hover:text-gray-900 font-bold my-2">
+                        {image?.title || "Untitled"}
+                      </p>
+                      <p className="text-sm text-gray-600 group-hover:text-gray-900 flex-grow">
+                        {image?.description || "No description available."}
+                      </p>
+                      <button className="group-hover:text-gray-900 text-sm border border-black p-1 mt-4 self-start">
+                        Read More
+                      </button>
+                    </div>
                   </Link>
                 </div>
               ))}

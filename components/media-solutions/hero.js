@@ -12,8 +12,8 @@ const HeroMedia = () => {
   const titleRef = useRef(null);
   const statuesRef = useRef(null);
   const bgElementsRef = useRef(null);
-
   const statueRefs = useRef([]);
+  const zoomAnimationRef = useRef(null);
 
   useEffect(() => {
     if (isInitialLoad) {
@@ -45,12 +45,33 @@ const HeroMedia = () => {
         }
       );
     }
+
+    // Setup hover events
+    const statues = statueRefs.current;
+    if (statues.length > 0) {
+      const handleMouseEnter = () => handleStatueHover(0, true);
+      const statue = statues[0];
+
+      if (statue) {
+        statue.addEventListener("mouseenter", handleMouseEnter);
+
+        return () => {
+          statue.removeEventListener("mouseenter", handleMouseEnter);
+          // Only kill hover-related tweens (x property)
+          gsap.getTweensOf(statue).forEach((tween) => {
+            if (tween.vars.x) {
+              tween.kill();
+            }
+          });
+        };
+      }
+    }
   }, [isInitialLoad]);
 
   const handleStatueHover = (index, isEnter) => {
     if (isEnter) {
       gsap.to(statueRefs.current[index], {
-        x: "4px",
+        x: "2px",
         duration: 0.7,
         repeat: 3,
         yoyo: true,
@@ -63,35 +84,25 @@ const HeroMedia = () => {
   };
 
   const startOngoingAnimations = () => {
-    //------------------------------------ statues zoom
-
-    const zoomTl = gsap.timeline({
+    // Create and store the zoom animation reference
+    zoomAnimationRef.current = gsap.to(statuesRef.current, {
+      scale: 1.1,
+      duration: 5,
       repeat: -1,
       yoyo: true,
-      ease: "none",
-    });
-    zoomTl.to(statuesRef.current, {
-      y: 0,
-      duration: 5,
-      ease: "none",
-      scale: 1.1,
+      ease: "power1.inOut",
+      transformOrigin: "center center",
     });
   };
 
-  // Cleanup function
+  // Cleanup zoom animation on unmount
   useEffect(() => {
     return () => {
-      // Kill all GSAP animations for specific elements
-      gsap.killTweensOf([
-        bgElementsRef.current,
-        titleRef.current,
-        statuesRef.current?.children,
-        statuesRef.current,
-      ]);
-      // Kill all ScrollTrigger instances
+      if (zoomAnimationRef.current) {
+        zoomAnimationRef.current.kill();
+      }
+      // Kill any ScrollTrigger instances
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-      // Kill any remaining animations in case we missed any
-      gsap.killTweensOf(headerRef.current, true);
     };
   }, []);
 
