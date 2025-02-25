@@ -47,7 +47,7 @@ export default function Navbar() {
           </div>
 
           {/* Menu Items */}
-          <div className="hidden md:flex space-x-12 4xl:space-x-24 items-center">
+          <div className="hidden md:flex space-x-12 4xl:space-x-16 items-center text-sm 2xl:text-base 4xl:text-lg">
             <Link href="/">
               <p
                 className={`${
@@ -153,7 +153,7 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="md:hidden bg-black text-white space-y-4 px-4 py-4">
+          <div className="md:hidden bg-black text-white space-y-0 px-4 py-4 h-screen text-4xl">
             <Link href="/">
               <p
                 className={`block ${
